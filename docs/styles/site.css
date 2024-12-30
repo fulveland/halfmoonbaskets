@@ -20,7 +20,7 @@ a {
 #info-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-areas: ". . photo photo photo photo info info info info info .";
+    grid-template-areas: ". . p p p p i i i i i .";
     place-items: center;
 
     --peek: 0em; /* Make this bigger to have something peek in at the bottom */
@@ -28,7 +28,7 @@ a {
 }
 
 .info-card-img-box {
-    grid-area: photo;
+    grid-area: p;
 }
 
 .info-card-img-box img {
@@ -36,7 +36,7 @@ a {
 }
 
 .info-card-info-box {
-    grid-area: info;
+    grid-area: i;
     margin: 3rem 3rem 3rem 1rem;
     align-self: center;
 }
@@ -44,21 +44,26 @@ a {
 @media (max-width: 800px) {
     #info-card {
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(12, 1fr);
         grid-template-areas:
-            "photo"
-            "info";
+            ". p p p p p p p p p p ."
+            ". i i i i i i i i i i .";
         align-content: center;
         margin: 0;
-        padding: 3em 6em 0em 6em;
+        padding: 3em 0em 0em 0em;
     }
-
     .info-card-img-box img {
+        width: 100%;
         margin: 0;
     }
+    .info-card-img-box img {
+        margin: 0;
+        width: 100%;
+    }
     .info-card-info-box {
-        grid-area: info;
-        margin: 2rem 3rem 3rem 1rem;
+        grid-area: i;
+        margin: 2rem 0rem 0rem 0rem;
         align-self: center;
+        width: 100%;
     }
 }
