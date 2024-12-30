@@ -2,12 +2,19 @@ h1,
 h2,
 h3,
 p {
-    color: #1f1f1f;
-    font-size: 1.1em;
+    font-family: vollkorn;
+    color: #323140;
+    font-size: 1em;
 }
 h1 {
+    font-family: vollkorn;
     margin: 0;
     font-size: 1.3em;
+    color: #232226;
+}
+
+a {
+    color: #2c3673;
 }
 
 #info-card {
@@ -34,7 +41,7 @@ h1 {
     align-self: center;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 800px) {
     #info-card {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
@@ -43,7 +50,7 @@ h1 {
             "info";
         align-content: center;
         margin: 0;
-        padding: 3em 3em 0em 3em;
+        padding: 3em 6em 0em 6em;
     }
 
     .info-card-img-box img {
