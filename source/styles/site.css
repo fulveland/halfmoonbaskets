@@ -13,7 +13,7 @@ h1 {
 #info-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-areas: ". . photo photo photo photo info info info info info info";
+    grid-template-areas: ". . photo photo photo photo info info info info info .";
     align-content: center;
     margin-top: 5rem;
 }
@@ -31,4 +31,26 @@ h1 {
     grid-area: info;
     margin: 3rem 3rem 3rem 1rem;
     align-self: center;
+}
+
+@media (max-width: 450px) {
+    #info-card {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas:
+            "photo"
+            "info";
+        align-content: center;
+        margin: 0;
+    }
+
+    .info-card-img-box img {
+        padding: 0;
+        margin: 0;
+    }
+    .info-card-info-box {
+        grid-area: info;
+        margin: 1rem 3rem 3rem 1rem;
+        align-self: center;
+    }
 }
