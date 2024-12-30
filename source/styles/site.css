@@ -13,7 +13,7 @@ h1 {
 #info-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-areas: ". . . . photo photo info info info info info info";
+    grid-template-areas: ". . photo photo photo photo info info info info info info";
     align-content: center;
     margin-top: 5rem;
 }
@@ -23,7 +23,7 @@ h1 {
 }
 
 .info-card-img-box img {
-    border-radius: 50%;
+    /* border-radius: 50%; */
     padding: 6rem 0 6rem 0;
 }
 
@@ -32,59 +32,3 @@ h1 {
     margin: 3rem 3rem 3rem 1rem;
     align-self: center;
 }
-
-/* .luma-featured {
-    margin: 0 auto;
-} */
-
-/* .iluma {
-    width: 600px;
-    height: 1000px;
-    margin: 1rem;
-    padding: 0;
-    border-radius: 8px;
-    margin-top: 11rem;
-} */
-
-.upcoming {
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: wrap; */
-    background-color: #f4f5f6;
-}
-.upcoming-img-box {
-    flex-shrink: 3;
-    /* flex-grow: 1; */
-    align-items: center;
-}
-
-.upcoming-img-box img {
-    height: auto;
-}
-
-.upcoming-calendar-box {
-    background-color: #f4f5f6;
-    /* flex-grow: 2; */
-    /* display: flex;
-    justify-content: center; */
-    margin-top: 3em;
-}
-
-.iluma-calendar {
-    width: 750px;
-    height: 1500px;
-    margin: 0;
-    padding: 0;
-}
-/*
-
-        "repeat(12, info-card)"
-        "repeat(6, left)";
-
-grid-template-rows: 2em 2em repeat(19, 2em);
-grid-row-gap: 0.5em;
-grid-column-gap: 0.18em;
-}
-
-grid-template-columns: repeat(18, minmax(100px, 1fr));
-*/
