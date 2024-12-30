@@ -3,11 +3,11 @@ h2,
 h3,
 p {
     color: #1f1f1f;
-    font-size: 0.8em;
+    font-size: 1.1em;
 }
 h1 {
     margin: 0;
-    font-size: 1em;
+    font-size: 1.3em;
 }
 
 #info-card {
@@ -34,7 +34,7 @@ h1 {
     align-self: center;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 750px) {
     #info-card {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
@@ -43,15 +43,15 @@ h1 {
             "info";
         align-content: center;
         margin: 0;
+        padding: 3em 3em 0em 3em;
     }
 
     .info-card-img-box img {
-        padding: 0;
         margin: 0;
     }
     .info-card-info-box {
         grid-area: info;
-        margin: 1rem 3rem 3rem 1rem;
+        margin: 2rem 3rem 3rem 1rem;
         align-self: center;
     }
 }
