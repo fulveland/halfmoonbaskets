@@ -30,8 +30,10 @@ h1 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas: ". . photo photo photo photo info info info info info .";
-    align-content: center;
-    margin-top: 5rem;
+    place-items: center;
+
+    --peek: 0em; /* Make this bigger to have something peek in at the bottom */
+    min-height: calc(100vh - var(--peek));
 }
 
 .info-card-img-box {
@@ -40,7 +42,6 @@ h1 {
 
 .info-card-img-box img {
     /* border-radius: 50%; */
-    padding: 6rem 0 6rem 0;
 }
 
 .info-card-info-box {
