@@ -57,10 +57,6 @@ a.basic-button {
     grid-area: p;
 }
 
-.info-card-img-box img {
-    /* border-radius: 50%; */
-}
-
 .info-card-info-box {
     grid-area: i;
     margin: 3rem 3rem 3rem 1rem;
@@ -78,6 +74,7 @@ a.basic-button {
         margin: 0;
         padding: 3em 0em 0em 0em;
     }
+
     .info-card-img-box img {
         width: 100%;
         margin: 0;
