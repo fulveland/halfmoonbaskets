@@ -27,6 +27,10 @@ h2.second-line {
     color: #232226;
 }
 
+.center {
+    text-align: center;
+}
+
 a {
     color: #2c3673;
 }
