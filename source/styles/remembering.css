@@ -1,7 +1,28 @@
+.fest-logo {
+    text-align: center;
+}
+
+/* Full-width banner */
+.banner {
+    width: 100%;
+    height: auto;
+    background-color: #241e1e; /* Optional: Change background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0; /* Adds some vertical padding */
+}
+
+/* Centered image */
+.banner-fest-logo {
+    width: 100%;
+    max-width: 250px; /* Controls maximum image width */
+    height: auto;
+}
+
 #remembering-the-village {
     margin-top: 5em;
 }
-
 .remembering-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -55,7 +76,20 @@
     /* margin: 0; */
 }
 
+.content {
+    padding-top: 7em;
+}
+
 @media (max-width: 800px) {
+    .banner {
+        padding: 10px 0; /* Less padding on smaller screens */
+    }
+
+    .banner-fest-logo {
+        width: 90%; /* Slightly smaller on mobile */
+        max-width: 250px; /* Controls maximum image width */
+    }
+
     .remembering-card {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -91,5 +125,8 @@
     }
     .remembering-d-box p {
         /* margin: 0; */
+    }
+    .content {
+        padding-top: 0;
     }
 }
