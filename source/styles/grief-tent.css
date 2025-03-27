@@ -19,7 +19,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 800px; /* Adjust width as needed */
+    max-width: 850px; /* Adjust width as needed */
     min-width: 500px;
 }
 
