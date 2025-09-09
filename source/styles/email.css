@@ -1,0 +1,89 @@
+#email {
+  background-color: #090c0d;
+  #banner {
+    position: absolute;
+    inset: 10em 8em;
+    font-size: min(2vw, 24px);
+    font-family: garamond;
+    color: rgba(255, 255, 255, 0.595);
+  }
+
+  h1 {
+    font: 100 4em / 0.5 garamond;
+  }
+
+  p {
+    font-weight: 100;
+    font-family: garamond;
+    margin: 1em 0 0.2em 0;
+    font-size: max(17px, 1.2em);
+  }
+
+  form {
+    padding-top: 1em;
+    width: 32rem;
+    max-width: calc(100% - 6em);
+    font-size: max(17px, 1.2em);
+    --bg: #090c0d33;
+    --bg-active: hsl(30, 14%, 97%);
+    --outline: #fff;
+    --shadow: 0 3px 6px #0004;
+  }
+
+  form div {
+    display: flex;
+    box-shadow: var(--shadow);
+    border-radius: 0.3em; /* we need this for the box shadow… */
+  }
+
+  /* and these for the focus outline… */
+  form div > :first-child {
+    border-top-left-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
+  }
+  form div > :last-child {
+    border-top-right-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+  }
+
+  input {
+    padding: 0.3em 0.4em 0.2em;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    background: var(--bg);
+  }
+
+  input:focus-visible {
+    outline: 2px solid var(--outline);
+    outline-offset: -2px;
+  }
+
+  input[type="email"] {
+    width: 100%;
+  }
+
+  input[type="submit"] {
+    width: auto;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover,
+  input[type="submit"]:focus-within,
+  input[type="submit"]:active {
+    background: var(--bg-active);
+    box-shadow: 0 0.1em 1em hsl(350, 33%, 70%);
+    color: #090c0dad;
+  }
+
+  input[type="submit"]:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  @media (max-width: 575px) {
+    form {
+      padding-top: 0.7em;
+      --bg: #090c0dad;
+    }
+  }
+}

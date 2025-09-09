@@ -1,41 +1,42 @@
-#roses-card {
+#wild-roses {
+  #roses-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas:
-        ". .  p p p p i i i i . ."
-        ". . p2 p2 p2 p2 d d d d . .";
+      ". .  p p p p i i i i . ."
+      ". . p2 p2 p2 p2 d d d d . .";
     place-items: center;
-}
-#roses-card p {
+  }
+  #roses-card p {
     font-size: clamp(16px, 1.3vw, 24px);
-}
+  }
 
-.roses-p-box {
+  .roses-p-box {
     grid-area: p;
     margin: 1em 0 1em 0;
-}
-.roses-p2-box {
+  }
+  .roses-p2-box {
     grid-area: p2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     height: 100%;
-}
-.roses-p2-box img {
+  }
+  .roses-p2-box img {
     margin: 0 0 2em 0;
     width: 100%; /* Adjust as needed */
     height: auto;
     display: block;
-}
+  }
 
-.roses-i-box {
+  .roses-i-box {
     grid-area: i;
     margin: 3rem 3rem 3rem 1rem;
     align-self: center;
-}
+  }
 
-.roses-d-box {
+  .roses-d-box {
     grid-area: d;
     display: flex;
     flex-direction: column;
@@ -44,47 +45,48 @@
     height: 100%;
     margin: 0rem 0rem 0rem 1rem;
     padding: 3rem 0rem 8rem 0rem;
-}
+  }
 
-.roses-d-box p {
+  .roses-d-box p {
     /* margin: 0; */
-}
+  }
 
-@media (max-width: 800px) {
+  @media (max-width: 800px) {
     #roses-card {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-areas:
-            ". p p p p p p p p p p ."
-            ". i i i i i i i i i i ."
-            ". d d d d d d d d d d ."
-            ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 .";
-        align-content: center;
-        margin: 0;
-        padding: 3em 0em 0em 0em;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        ". p p p p p p p p p p ."
+        ". i i i i i i i i i i ."
+        ". d d d d d d d d d d ."
+        ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 .";
+      align-content: center;
+      margin: 0;
+      padding: 3em 0em 0em 0em;
     }
 
     .roses-p-box img {
-        width: 100%;
-        margin: 0;
+      width: 100%;
+      margin: 0;
     }
     .roses-p2-box img {
-        margin: 1em 0em 1em 0em;
-        width: 100%;
+      margin: 1em 0em 1em 0em;
+      width: 100%;
     }
     .roses-i-box {
-        margin: 0rem 0rem 0rem 0rem;
-        align-self: center;
-        width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      align-self: center;
+      width: 100%;
     }
     .roses-d-box {
-        display: inline-block;
-        /* align-self: center; */
-        width: 100%;
-        margin: 0rem 0rem 0rem 0rem;
-        padding: 0;
+      display: inline-block;
+      /* align-self: center; */
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
     }
     .roses-d-box p {
-        /* margin: 0; */
+      /* margin: 0; */
     }
+  }
 }

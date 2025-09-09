@@ -1,74 +1,130 @@
-/* Container for layout */
-.container {
+#grief-tent {
+  font-family: garamond, serif;
+  background-color: #141619;
+
+  /* Container for layout */
+  .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-}
+  }
 
-.responsive-image {
+  .responsive-image {
     width: 100%;
     max-width: 400px;
     height: auto;
     min-width: 350px; /* Ensures the image does not shrink below 100px */
-}
+  }
 
-/* Content divs */
-.content {
+  /* Content divs */
+  .content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
     max-width: 850px; /* Adjust width as needed */
     min-width: 500px;
-}
+    padding-top: 7em;
+  }
 
-/* Individual divs */
-.box {
+  /* Individual divs */
+  .box {
     padding: 3em 2em 0 2em;
     margin: 0 1em 0 1em;
-}
+  }
 
-/* Larger screens - two divs to the right */
-@media (min-width: 768px) {
+  /* Larger screens - two divs to the right */
+  @media (min-width: 768px) {
     .container {
-        flex-wrap: nowrap;
-        align-items: flex-start;
+      flex-wrap: nowrap;
+      align-items: flex-start;
     }
 
     .responsive-image {
-        width: 10%; /* Adjust width for image */
-        height: auto;
+      width: 10%; /* Adjust width for image */
+      height: auto;
     }
 
     .content {
-        padding: 0;
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .box {
-        flex: 1;
+      flex: 1;
     }
-}
+  }
 
-/* Smaller screens - image above divs */
-@media (max-width: 767px) {
+  /* Smaller screens - image above divs */
+  @media (max-width: 767px) {
     .responsive-image {
-        width: 10%;
+      width: 10%;
     }
 
     .content {
-        justify-content: center;
-        min-width: fit-content;
-        margin-bottom: 2em;
+      justify-content: center;
+      min-width: fit-content;
+      margin-bottom: 2em;
     }
     .box {
-        margin-top: 2em;
-        margin-bottom: 0;
-        padding: 1em 1em 0 1em;
+      margin-top: 2em;
+      margin-bottom: 0;
+      padding: 1em 1em 0 1em;
     }
+  }
+
+  p,
+  h2 {
+    color: #a8a5a0;
+  }
+  p {
+    font-size: 0.8em;
+    font-family: lato;
+  }
+  h2 {
+    font-family: garamond;
+    font-weight: 400;
+    font-size: 1.1em;
+  }
+
+  p.move-right {
+    padding: 0 3em 0 2em;
+  }
+
+  /* Full-width banner */
+  .banner {
+    width: 100%;
+    height: auto;
+    background-color: #241e1e; /* Optional: Change background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0; /* Adds some vertical padding */
+  }
+
+  /* Centered image */
+  .banner-fest-logo {
+    width: 100%;
+    max-width: 250px; /* Controls maximum image width */
+    height: auto;
+  }
+
+  @media (max-width: 800px) {
+    .banner {
+      padding: 10px 0; /* Less padding on smaller screens */
+    }
+
+    .banner-fest-logo {
+      width: 90%; /* Slightly smaller on mobile */
+      max-width: 250px; /* Controls maximum image width */
+    }
+
+    .content {
+      padding-top: 0;
+    }
+  }
 }

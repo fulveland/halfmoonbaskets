@@ -12,6 +12,7 @@ task "build", "Compile everything", ()->
     copy path, replace path, "source/": "public/"
 
   template = read "source/pages/_template.html"
+  
   compile "pages", "source/pages/**/[!_]*.html", (path)->
     content = read path
     dest = replace path,
