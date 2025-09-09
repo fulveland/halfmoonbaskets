@@ -1,5 +1,12 @@
 #email {
   background-color: #090c0d;
+
+  picture,
+  img,
+  source {
+    width: 100%;
+  }
+
   #banner {
     position: absolute;
     inset: 10em 8em;
