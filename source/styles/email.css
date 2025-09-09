@@ -27,8 +27,18 @@
   }
 
   @media (max-width: 575px) {
+    #banner {
+      position: absolute;
+      inset: 10em 3em;
+      font-size: min(2vw, 24px);
+      font-family: garamond;
+      color: rgba(255, 255, 255, 0.595);
+    }
+    p {
+      margin: 0.6em 0 0.6em 0;
+    }
     form {
-      padding-top: 0.7em;
+      padding-top: 0;
       --bg: #090c0dad;
     }
   }
