@@ -1,51 +1,62 @@
 #index {
-  h1,
-  h2 {
-    color: #232226;
+  background: url("/images/half-moon-baskets-moon-stars.jpg");
+
+  /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */
+  --bg: hsl(0, 0%, 2%);
+  background-color: var(--bg);
+
+  /* The background will always fill the full window. */
+  background-size: cover;
+
+  /* Anchor the top left corner of the photo to the top left corner of the screen. */
+  /* This doesn't matter (because background-size: cover), except we fine-tune the position to control how it's cropped. */
+  /* The 15% and 30% crop could be applied in Pixelmator, but this is fine. */
+  background-position: top 15% left 30%;
+
+  /* We sometimes see the bottom edge of the image, and we don't want it to tile. */
+  background-repeat: no-repeat;
+
+  /* This controls where the text is situated. Adjust it in small amounts. */
+  /* Using percentage means the text will squash and stretch similar to how background-size: cover works. */
+  padding: 17% 10% 1em 45%;
+  /* This tiny bit ^ is for when the text runs all the way to the bottom of the screen */
+
+  /* These were just tuned by eye to roughly match how Figma looks (which is using a thinner version of Garamond, and bad antialiasing) */
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.595);
+  /* color: hsl(339, 15%, 81%); */
+
+  h1 {
+    font-weight: 100;
+    font-size: 1.6em;
+  }
+  p {
+    font-family: garamond;
+    font-weight: 10;
   }
 
-  #info-card {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-areas: ". . p p p p i i i i i .";
-    place-items: center;
-
-    --peek: 0em; /* Make this bigger to have something peek in at the bottom */
-    min-height: calc(100vh - var(--peek));
+  /* _site.css sets a link color, which is annoying, so we strip that out. */
+  a {
+    color: inherit;
   }
 
-  .info-card-img-box {
-    grid-area: p;
-  }
+  /* Note: if you change this breakpoint, you also need to redo the background-size and position. */
+  @media (max-width: 500px) {
+    /* Keep the photo at a fixed size, and we'll just crop as the screen shrinks */
+    background-size: 1650px;
 
-  .info-card-info-box {
-    grid-area: i;
-    margin: 3rem 3rem 3rem 1rem;
-    align-self: center;
-  }
+    /* Anchor the top right corner of the photo to the top right corner of the screen. */
+    /* This means we crop the left and bottom, and keep your head in the corner. */
+    background-position: top -350px right -1150px;
+    /*    more negative = up ^            ^ more negative = right */
 
-  @media (max-width: 800px) {
-    #info-card {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-areas:
-        ". p p p p p p p p p p ."
-        ". i i i i i i i i i i .";
-      align-content: center;
-      margin: 0;
-      padding: 3em 0em 0em 0em;
-    }
+    /* Space between the text and the left, top, and bottom edges of the screen */
+    padding: 5em 0.5em;
 
-    .info-card-img-box img {
-      margin: 0;
-      width: 100%;
-    }
+    /* Keep the text away from the photo */
+    padding-right: 8em;
 
-    .info-card-info-box {
-      grid-area: i;
-      margin: 2rem 0rem 0rem 0rem;
-      align-self: center;
-      width: 100%;
-    }
+    /* This helps make the text more readable when it overlaps the photo */
+    text-shadow: 0 0 0.5em var(--bg);
   }
 }
