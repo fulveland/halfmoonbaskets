@@ -40,6 +40,15 @@
     color: inherit;
   }
 
+  /* FORM */
+  form {
+    padding-top: 0.1em;
+    /* --bg: #3a419f7e; */
+    --bg: #3a419f36;
+    /* --bg: #22288033; */
+    /* --bg: #181d5c33; */
+  }
+
   /* Note: if you change this breakpoint, you also need to redo the background-size and position. */
   @media (max-width: 500px) {
     /* Keep the photo at a fixed size, and we'll just crop as the screen shrinks */
@@ -58,13 +67,13 @@
 
     /* This helps make the text more readable when it overlaps the photo */
     text-shadow: 0 0 0.5em var(--bg);
-  }
 
-  /* FORM */
-  form {
-    padding-top: 0.1em;
-    --bg: #3a419f1e;
-    /* --bg: #22288033; */
-    /* --bg: #181d5c33; */
+    /* FORM */
+    form {
+      --bg: #3a419f7e;
+      /* --bg: #3a419f36; */
+      /* --bg: #22288033; */
+      /* --bg: #181d5c33; */
+    }
   }
 }
