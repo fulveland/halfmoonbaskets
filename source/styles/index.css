@@ -1,5 +1,5 @@
 #index {
-  background: url("/images/half-moon-baskets-moon-stars.jpg");
+  background: url("/images/half-moon-baskets-moon-stars.webp");
 
   /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */
   --bg: hsl(0, 0%, 2%);
@@ -58,5 +58,13 @@
 
     /* This helps make the text more readable when it overlaps the photo */
     text-shadow: 0 0 0.5em var(--bg);
+  }
+
+  /* FORM */
+  form {
+    padding-top: 0.1em;
+    --bg: #3a419f1e;
+    /* --bg: #22288033; */
+    /* --bg: #181d5c33; */
   }
 }

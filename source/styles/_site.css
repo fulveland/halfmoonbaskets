@@ -53,7 +53,7 @@ img {
 form {
   padding-top: 1em;
   width: 30rem;
-  max-width: calc(100%-1em);
+  max-width: 100%;
   font-size: max(17px, 0.5em);
   --bg: #090c0d33;
   --bg-active: hsl(30, 14%, 97%);
