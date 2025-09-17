@@ -21,7 +21,13 @@
 }
 
 @font-face {
-  font-family: "garamond";
+  font-family: "garamond-it";
   src: url("/fonts/garamond/Italic.woff2") format("woff2-variations");
+  font-weight: 400 800;
+}
+
+@font-face {
+  font-family: "fondamento";
+  src: url("/fonts/fondamento/Fondamento-Regular.woff2") format("woff2-variations");
   font-weight: 400 800;
 }

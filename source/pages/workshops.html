@@ -1,0 +1,236 @@
+<style>
+  #workshops {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  #workshops h2 {
+    grid-column: 1 / -1; /* make headings span full width */
+    font-family: fondamento;
+    font-size: 60px;
+    margin: 60px 0 0 0;
+  }
+
+  .workshop {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* default for desktop */
+  }
+
+  @media (max-width: 750px) {
+    .workshop {
+      max-width: 750px; /* wider workshops on tablet */
+    }
+  }
+
+  .workshop .words {
+    flex: 1; /* fill vertical space */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: auto; /* push to bottom */
+    padding: 0 10px 0 0;
+  }
+
+  .price-row p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  #workshops p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 25px;
+  }
+
+  #workshops h3 {
+    font-family: fondamento;
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+  }
+</style>
+<body id="workshops">
+  <div class="catalogue-grid">
+    <h2>3 hr</h2>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/wreaths.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Willow Wreath</h3>
+        <p>One of the hardest things to make with willow is a wreath. It takes time to develop the intuition needed to bend it from a straight whip into a perfect circle. Would you like to try your hand at this ancient holiday tradition?</p>
+        <p><b>Details: </b>Participants will recieve enought willow to make four 8-12” wreaths. We will make three in the workshop and they will have the opportunity to take the fourth bundle home if they would like.</p>
+        <p><b>Only avaliable from Nov 1 - March 31</b></p>
+        <div class="price-row">
+          <p><b>Price: </b>115</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>30</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/moon-star.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Moon or Star</h3>
+        <p>During this workshop, you will be invited to explore the many qualities of willow and how it can be worked with in basketry. We will talk about where to find willow in Alberta, how to harvest it responsibly, and ways to prepare it for weaving. You will also learn methods for drying, storing, and soaking willow so it is ready for future projects. By the end of the session, you will have created your own moon or star to take home and gained a deeper understanding of willow and its place in the weaving tradition.</p>
+        <p><b>Details: </b>You can choose to have participants make a moon or star, or you can run two consecutive workshops one after the other.</p>
+        <div class="price-row">
+          <p><b>Price: </b>115</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>15</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/berry-boat.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Berry Boat</h3>
+        <p>A boat of willow knows many voyages. It can wander into the brambles to gather berries, sit on the table holding crackers, or rest quietly on a shelf cradling tiny treasures. In this workshop, we will begin with a short tutorial to guide you in using a small jig to weave your own berry boat. Over two to three hours, your hands will coax the boat into shape, and by the end, you will hold a vessel that is both delicate and alive, ready for whatever adventures await you.</p>
+        <div class="price-row">
+          <p><b>Price: </b>115</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>15</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/bird-feeder-b.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Suet Bird Feeder</h3>
+        <p>Together we will craft a suet bird feeder from locally harvested willow. This workshop is perfect for anyone who is curious about weaving with natural materials but would like to start on a simple project. During this session you will learn all about willow and learn a weave called 'pairing'.</p>
+        <div class="price-row">
+          <p><b>Price: </b>115</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>12</p>
+        </div>
+        <p><b>Details: </b>Price includes two pieces of suet.</p>
+      </div>
+    </div>
+
+    <h2>5 hr</h2>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/tiny-trug.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Tiny Trug</h3>
+        <p>Together we will shape a tiny willow trug, a small basket made to cradle soft petals, fragrant herbs, and the delicate treasures that whisper from the forest floor.</p>
+        <div class="price-row">
+          <p><b>Price: </b>140</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>12</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/workshop.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Large Willow Trellis</h3>
+        <p></p>
+        <div class="price-row">
+          <p><b>Price: </b></p>
+          <p><b>Min: </b></p>
+          <p><b>Max: </b></p>
+        </div>
+        <p><b>Details: </b></p>
+      </div>
+    </div>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/flower-tray.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Willow tray</h3>
+        <p>This workshop will guide you through making a delicate willow tray. This is the perfect project for the short slender willows found in abundance in Alberta’s ditches. Using locally harvested willow, participants will weave a round tray approximately 14” wide. We will begin with a 3 x 3 slath base, practicing hidden staggered joins for strength and symmetry. Once we have completed the inner circle we will discuss different techniques to soften and bend willow without causing kinks. We will then finish our tray with a beautiful trac border.</p>
+        <div class="price-row">
+          <p><b>Price: </b>140</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>8</p>
+        </div>
+      </div>
+    </div> 
+    -->
+
+    <h2>8 hr</h2>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/textured-willow-bowl.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Textured Willow Bowl</h3>
+        <p>Learn to weave a textured bowl using a rope coil weave. We'll start with a 3x3 slath base, then weave a 4-rod drop-down wale to create a slight foot before moving up the sides with the rope coil weave. Once you get the hang of it, this weave moves quickly. The basket will be finished with a rod border.</p>
+        <div class="price-row">
+          <p><b>Price: </b>185</p>
+          <p><b>Min: </b>4</p>
+          <p><b>Max: </b>8</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/berry-basket.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Berry Basket</h3>
+        <p>A small round willow basket perfect for beginners. Learn the basics of stake and strand basketry: a slath base, waling, pairing, slewing and a rod border with an optional wrapped-core handle.</p>
+        <div class="price-row">
+          <p><b>Price: </b>155</p>
+          <p><b>Min: </b>6</p>
+          <p><b>Max: </b>9</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+    <h2>16hr</h2>
+    <div class="workshop">
+      <div class="picture">
+        <img src="/images/workshops/workshop.jpg" alt="Image description" class="responsive-image" />
+      </div>
+      <div class="words">
+        <h3>Round Willow Basket</h3>
+        <p>description</p>
+        <p>price</p>
+        <p>min</p>
+        <p>max></p>
+        <p>details</p>
+      </div>
+    </div>
+    -->
+  </div>
+  <!-- end catalogue-grid -->
+</body>
