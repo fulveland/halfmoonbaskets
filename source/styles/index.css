@@ -22,7 +22,6 @@
   /* This tiny bit ^ is for when the text runs all the way to the bottom of the screen */
 
   /* These were just tuned by eye to roughly match how Figma looks (which is using a thinner version of Garamond, and bad antialiasing) */
-  font-size: 17px;
   color: rgba(255, 255, 255, 0.595);
   /* color: hsl(339, 15%, 81%); */
 
