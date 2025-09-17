@@ -1,3 +1,70 @@
+<style>
+  #workshops {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  #workshops h2 {
+    grid-column: 1 / -1; /* make headings span full width */
+    font-family: fondamento;
+    font-size: 60px;
+    margin: 60px 0 0 0;
+  }
+
+  .workshop {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* default for desktop */
+  }
+
+  @media (max-width: 750px) {
+    .workshop {
+      max-width: 750px; /* wider workshops on tablet */
+    }
+  }
+
+  .workshop .words {
+    flex: 1; /* fill vertical space */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: auto; /* push to bottom */
+    padding: 0 10px 0 0;
+  }
+
+  .price-row p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  #workshops p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 25px;
+  }
+
+  #workshops h3 {
+    font-family: fondamento;
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+  }
+</style>
 <body id="workshops">
   <div class="catalogue-grid">
     <h2>3 hr</h2>
