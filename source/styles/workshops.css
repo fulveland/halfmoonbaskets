@@ -10,6 +10,19 @@
     margin: 60px 0 10px 0;
   }
 
+  p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 25px;
+  }
+
+  h3 {
+    font-family: fondamento;
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+  }
+
   .past-event-names {
     grid-column: 1 / -1;
     font-family: fondamento;
@@ -76,20 +89,22 @@
     white-space: nowrap;
   }
 
-  p {
-    margin: 0;
-    padding: 10px 0;
-    font-size: 25px;
-  }
-
-  h3 {
-    font-family: fondamento;
-    margin: 0;
-    padding: 30px 0 0 0;
-    font-size: 30px;
-  }
   .booked {
     background-color: rgb(101, 101, 227);
     text-decoration: line-through;
+  }
+
+  .past-event-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-content: start;
+    align-items: stretch;
+    gap: 70px 40px;
+    padding-top: 40px;
+  }
+
+  .past-event-images img {
+    max-width: 400px;
+    object-fit: contain;
   }
 }
