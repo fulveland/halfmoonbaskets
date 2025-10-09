@@ -93,6 +93,10 @@
     background-color: rgb(101, 101, 227);
     text-decoration: line-through;
   }
+  .hold {
+    background-color: rgb(224, 116, 234);
+    text-decoration: line-through;
+  }
 
   .past-event-images {
     display: grid;
