@@ -1,0 +1,39 @@
+#the-weave-continues {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h2 {
+    grid-column: 1 / -1; /* make headings span full width */
+    font-family: fondamento;
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 25px;
+  }
+
+  h3 {
+    font-family: fondamento;
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+  }
+
+  .past-event-names {
+    grid-column: 1 / -1;
+    font-family: fondamento;
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+  }
+
+  #intro {
+    max-width: 1000px;
+  }
+  #guide {
+    max-width: 1000px;
+  }
+}
