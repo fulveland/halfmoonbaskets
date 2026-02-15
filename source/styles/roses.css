@@ -1,4 +1,13 @@
 #wild-roses {
+  background-color: #ebebf2;
+  h2,
+  p {
+    color: #3c3a40;
+  }
+  a.basic-button {
+    background-color: #4d593c;
+  }
+
   #roses-card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
