@@ -13,7 +13,9 @@
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas:
       ". .  p p p p i i i i . ."
-      ". . p2 p2 p2 p2 d d d d . .";
+      ". . p2 p2 p2 p2 d d d d . ."
+      ". . n n n n n n n n . .";
+
     place-items: center;
   }
   #roses-card p {
@@ -56,6 +58,17 @@
     padding: 3rem 0rem 8rem 0rem;
   }
 
+  .roses-n-box {
+    grid-area: n;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    margin: 0rem 0rem 0rem 1rem;
+    padding: 3rem 0rem 8rem 0rem;
+  }
+
   .roses-d-box p {
     /* margin: 0; */
   }
@@ -68,6 +81,7 @@
         ". p p p p p p p p p p ."
         ". i i i i i i i i i i ."
         ". d d d d d d d d d d ."
+        ". n n n n n n n n n n ."
         ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 .";
       align-content: center;
       margin: 0;
@@ -96,6 +110,14 @@
     }
     .roses-d-box p {
       /* margin: 0; */
+    }
+
+    .roses-n-box {
+      display: inline-block;
+      /* align-self: center; */
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
     }
   }
 }
