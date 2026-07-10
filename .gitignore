@@ -2,5 +2,11 @@ node_modules
 package-lock.json
 public
 CLAUDE.md
-screenshots
+.screenshots
 .playwright-mcp
+
+# Safety net: no image should ever live loose at repo root — real assets live under source/.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
