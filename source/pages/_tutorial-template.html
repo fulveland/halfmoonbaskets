@@ -1,0 +1,197 @@
+
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Remove the noindex/nofollow above once the tutorial is finished and ready to publish. -->
+    <title>[Tutorial Title] | Half Moon Baskets</title>
+
+  </head>
+
+  <!--
+    TUTORIAL PAGE TEMPLATE
+    =======================
+    To start a new tutorial:
+      1. Copy this file to source/pages/tutorial-[slug].html (dropping the leading
+         underscore is what makes the Cakefile build it — files starting with _
+         are skipped, same as this one and _template.html).
+      2. Fill in every [placeholder]. Duplicate <section class="tutorial-section">
+         blocks and sidebar <li> entries for as many steps as the tutorial needs —
+         there's no fixed count, tutorial-berry-boat.html has 21.
+      3. Add real photos under /images/tutorials/[slug]/ and swap the img src
+         attributes and hero background in tutorials.css (search for
+         "berry-boat-hero-right.webp" for the pattern — each tutorial currently
+         sets its own hero image with a page-specific override; see note below).
+      4. Every class here (.tutorial-hero, .tutorial-section, .video-card,
+         .step-note, .rhythm-card, .materials-grid, etc.) is already styled in
+         tutorials.css and shared across all tutorial pages — no new CSS should
+         be needed for a standard tutorial.
+  -->
+
+  <body class="tutorial-page">
+    <header class="site-header site-header--overlay">
+      <a href="/" class="site-logo">Half Moon<br /><span>Baskets</span></a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <!-- <a href="/about">About</a>
+        <a href="/calendar">Calendar</a> -->
+        <a href="/wild-roses">Wild Roses</a>
+        <a href="/email">Newsletter</a>
+      </nav>
+    </header>
+
+    <main>
+      <!--
+        HERO
+        The background photo is set per-tutorial. tutorials.css currently hardcodes
+        it on .tutorial-hero for the berry boat page (see the "background:" line
+        under /* HERO */); the simplest path for a new tutorial is a page-scoped
+        override, e.g. `.tutorial-page.[slug]-page .tutorial-hero { background: ...
+        url("/images/tutorials/[slug]/hero.webp"); }`, with that class added to
+        <body> alongside .tutorial-page.
+      -->
+      <section class="tutorial-hero" aria-labelledby="page-title">
+        <div class="tutorial-hero-inner">
+          <p class="tutorial-kicker">[Category, e.g. Willow Basketry Tutorial]</p>
+
+          <h1 id="page-title">[Tutorial <span class="no-wrap">Title]</span></h1>
+
+          <p class="tutorial-hero-copy">[One or two sentences setting up what this is and why someone would want to make it.]</p>
+
+          <div class="tutorial-hero-actions">
+            <a class="tutorial-button" href="#materials">Gather Materials</a>
+            <a class="tutorial-button" href="#[first-step-id]">Start [Weaving/Making]</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="tutorial-shell">
+        <!--
+          SIDEBAR TABLE OF CONTENTS
+          One <li> per <section class="tutorial-section" id="..."> below. The
+          href on each link must match that section's id exactly, and the number
+          in <span> is just display text — update it if you reorder sections.
+        -->
+        <aside class="tutorial-sidebar" aria-label="Tutorial sections">
+          <h2>In this tutorial</h2>
+
+          <ol class="tutorial-nav">
+            <li>
+              <a href="#introduction"><span>1.</span> Introduction</a>
+            </li>
+            <li>
+              <a href="#materials"><span>2.</span> Materials</a>
+            </li>
+            <li>
+              <a href="#[step-3-id]"><span>3.</span> [Step 3 Title]</a>
+            </li>
+            <!-- Duplicate the <li> above for every additional step. -->
+          </ol>
+        </aside>
+
+        <article class="tutorial-main">
+          <!-- INTRO CARD — a short framing blurb + photo, above the first numbered section. -->
+          <section class="tutorial-intro-card" aria-label="About [the tutorial subject]">
+            <div>
+              <p class="lede">[One sentence describing what this is.]</p>
+
+              <p>[A short paragraph on what the reader will learn and roughly how, 2-3 sentences.]</p>
+            </div>
+
+            <img src="/images/tutorials/[slug]/intro.jpg" alt="[Describe the finished piece in the photo.]" />
+          </section>
+
+          <section class="tutorial-section" id="introduction">
+            <h2>1. Introduction</h2>
+
+            <div class="video-card">
+              <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" title="[Tutorial Title] Tutorial — Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <p>[Intro paragraph.]</p>
+          </section>
+
+          <section class="tutorial-section" id="materials">
+            <h2>2. Materials</h2>
+
+            <div class="video-card">
+              <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" title="[Tutorial Title] Tutorial — Materials" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <p>[What materials are needed and why.]</p>
+
+            <!--
+              MATERIALS GRID (optional) — a 2-up photo card for showing off key
+              materials side by side. Delete this block if a plain paragraph and
+              list below are enough.
+            -->
+            <div class="materials-grid">
+              <div class="material-card">
+                <h3>[Material 1]</h3>
+                <p>[Short description.]</p>
+
+                <img src="/images/tutorials/[slug]/material-1.jpg" alt="[Describe the photo.]" />
+              </div>
+
+              <div class="material-card">
+                <h3>[Material 2]</h3>
+                <p>[Short description.]</p>
+
+                <img src="/images/tutorials/[slug]/material-2.jpg" alt="[Describe the photo.]" />
+              </div>
+            </div>
+
+            <!-- MINI LIST (optional) — a plain checklist of everything needed. -->
+            <ul class="mini-list">
+              <li>[Material or tool]</li>
+              <li>[Material or tool]</li>
+            </ul>
+          </section>
+
+          <section class="tutorial-section" id="[step-3-id]">
+            <h2>3. [Step 3 Title]</h2>
+
+            <div class="video-card">
+              <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" title="[Tutorial Title] Tutorial — [Step 3 Title]" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <p>[Step instructions.]</p>
+
+            <!--
+              RHYTHM CARD (optional) — a short, large-type callout for a repeating
+              pattern the reader should keep in mind (e.g. "Behind, in front,
+              behind, in front."). Delete if this step has no such rhythm.
+            -->
+            <div class="rhythm-card">
+              <p>[Short repeating phrase or pattern.]</p>
+            </div>
+
+            <!--
+              STEP NOTE (optional) — an italic aside for a tip, warning, or
+              reassurance that doesn't belong in the main instructional flow.
+            -->
+            <div class="step-note">[Aside, tip, or reassurance for this step.]</div>
+
+            <!--
+              IMAGE BREAK (optional) — a full-width photo with caption, for a
+              single moment worth pausing on.
+              <figure class="image-break">
+                <img src="/images/tutorials/[slug]/[step].jpg" alt="[Describe the photo.]" />
+                <figcaption>[Caption.]</figcaption>
+              </figure>
+            -->
+
+            <!-- Repeat <section class="tutorial-section"> for every remaining step. -->
+          </section>
+
+          <!-- CLOSING PANEL — always the last thing in the article, wraps up the tutorial. -->
+          <section class="closing-panel" aria-labelledby="closing-title">
+            <h2 id="closing-title">[Closing Title, e.g. "Ready for Harvest"]</h2>
+
+            <p>[One or two closing sentences.]</p>
+
+            <a class="tutorial-button" href="#page-title">Back to top</a>
+          </section>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,2065 @@
+/* EMAIL */
+
+#email {
+  padding: 0;
+  margin: 0;
+  /* Predates the site-wide type system — restore this page's own font/color instead of inheriting var(--font-body)/var(--ink). */
+  background-color: #090c0d;
+
+  picture,
+  img,
+  source {
+    width: 100%;
+  }
+
+  #banner {
+    position: absolute;
+    inset: 10em 8em;
+    font-size: min(2vw, 1.2em);
+    font-family: garamond;
+    color: rgba(255, 255, 255, 0.595);
+  }
+
+  h1 {
+    font: 100 4em / 0.5 garamond;
+    /* The site-wide h1,h2,h3 rule sets color: var(--ink), which would render this near-invisible against the near-black background — restore the inherited cream. */
+    color: inherit;
+  }
+
+  p {
+    font-weight: 100;
+    font-family: garamond;
+    padding: 0;
+    margin: 1em 0 0.2em 0;
+    font-size: max(30px, 1.2em);
+  }
+
+  @media (max-width: 575px) {
+    #banner {
+      position: absolute;
+      inset: 10em 3em;
+      font-size: min(2vw, 24px);
+      font-family: garamond;
+      color: rgba(255, 255, 255, 0.595);
+    }
+    p {
+      padding: 0;
+      margin: 0.9em 0 0.9em 0;
+    }
+    form {
+      padding-top: 0;
+      --bg: #090c0dad;
+    }
+  }
+}
+
+/* INDEX */
+
+#index {
+  margin: 0;
+  background: url("/images/half-moon-baskets-moon-stars.webp");
+
+  /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */
+  --bg: hsl(0, 0%, 2%);
+  background-color: var(--bg);
+
+  /* The background will always fill the full window. */
+  background-size: cover;
+
+  /* Anchor the top left corner of the photo to the top left corner of the screen. */
+  /* This doesn't matter (because background-size: cover), except we fine-tune the position to control how it's cropped. */
+  /* The 15% and 30% crop could be applied in Pixelmator, but this is fine. */
+  background-position: top 15% left 30%;
+
+  /* We sometimes see the bottom edge of the image, and we don't want it to tile. */
+  background-repeat: no-repeat;
+
+  /* This controls where the text is situated. Adjust it in small amounts. */
+  /* Using percentage means the text will squash and stretch similar to how background-size: cover works. */
+  padding: 17% 10% 1em 45%;
+  /* This tiny bit ^ is for when the text runs all the way to the bottom of the screen */
+
+  /* These were just tuned by eye to roughly match how Figma looks (which is using a thinner version of Garamond, and bad antialiasing) */
+  color: rgba(255, 255, 255, 0.595);
+  /* Predates the site-wide type system (var(--font-body) is Source Sans 3) — restore garamond so the form/input inherit it correctly. */
+  font-family: garamond;
+
+  h1 {
+    font-weight: 100;
+    font-size: 1.6em;
+    /* The site-wide h1,h2,h3 rule sets color: var(--ink) and font-family: var(--font-display), which would break this page's dim night-sky heading — restore both. */
+    color: inherit;
+    font-family: garamond;
+  }
+  p {
+    font-family: garamond;
+    font-weight: 10;
+  }
+
+  /* _site.css sets a link color, which is annoying, so we strip that out. */
+  a {
+    color: inherit;
+  }
+
+  /* FORM */
+  form {
+    padding-top: 0.1em;
+    --bg: #3a419f36;
+  }
+
+  /* Note: if you change this breakpoint, you also need to redo the background-size and position. */
+  @media (max-width: 500px) {
+    /* Keep the photo at a fixed size, and we'll just crop as the screen shrinks */
+    background-size: 1650px;
+
+    /* Anchor the top right corner of the photo to the top right corner of the screen. */
+    /* This means we crop the left and bottom, and keep your head in the corner. */
+    background-position: top -350px right -1150px;
+    /*    more negative = up ^            ^ more negative = right */
+
+    /* Space between the text and the left, top, and bottom edges of the screen */
+    padding: 5em 0.5em;
+
+    /* Keep the text away from the photo */
+    padding-right: 8em;
+
+    /* This helps make the text more readable when it overlaps the photo */
+    text-shadow: 0 0 0.5em var(--bg);
+
+    /* FORM */
+    form {
+      --bg: #3a419f7e;
+    }
+  }
+}
+
+/* REMEMBERING THE VILLAGE */
+
+#remembering-the-village {
+  padding: 0;
+  margin: 0;
+  /* This page predates the site-wide type system and never had its own type rules — it fully relied on the old global body/heading/link defaults, which were near-white text on this light gray background: illegible. Dark ink instead. */
+  font-family: garamond;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  margin-top: 5em;
+
+  /* Nav defaults to cream (for pages with a dark hero) — override for this page's light background. */
+  .site-logo,
+  .site-nav a {
+    color: var(--ink);
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+    color: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.3em;
+    letter-spacing: normal;
+  }
+
+  a {
+    color: #2c3673;
+  }
+
+  .remembering-card {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      ". .  p p p p i i i i . ."
+      ". . p2 p2 p2 p2 d d d d . .";
+    place-items: center;
+    margin: 3em 0 0 0;
+  }
+
+  .remembering-p-box {
+    grid-area: p;
+    margin: 1em 0 1em 0;
+  }
+
+  .remembering-p2-box {
+    grid-area: p2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+  }
+
+  .remembering-p2-box img {
+    margin: 0 0 2em 0;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .remembering-i-box {
+    grid-area: i;
+    margin: 3rem 3rem 3rem 1rem;
+    align-self: center;
+  }
+
+  .remembering-d-box {
+    grid-area: d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    margin: 0rem 0rem 0rem 1rem;
+    padding: 3rem 0rem 8rem 0rem;
+  }
+
+  @media (max-width: 800px) {
+    .remembering-card {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        ". p p p p p p p p p p ."
+        ". i i i i i i i i i i ."
+        ". d d d d d d d d d d ."
+        ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 .";
+      align-content: center;
+      margin: 0;
+      padding: 3em 0em 0em 0em;
+    }
+
+    .remembering-p-box img {
+      width: 100%;
+      margin: 0;
+    }
+
+    .remembering-p2-box img {
+      margin: 1em 0em 1em 0em;
+      width: 100%;
+    }
+
+    .remembering-i-box {
+      margin: 0rem 0rem 0rem 0rem;
+      align-self: center;
+      width: 100%;
+    }
+
+    .remembering-d-box {
+      display: inline-block;
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
+    }
+  }
+}
+
+/* WILD ROSES */
+
+#wild-roses {
+  .site-logo,
+  .site-nav a {
+    color: var(--ink-soft);
+  }
+  h2,
+  h3,
+  p {
+    color: var(--ink-soft);
+  }
+  h2,
+  h3 {
+    font-weight: bold;
+  }
+  h2:not(.second-line) {
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  a.basic-button {
+    background-color: #4d593c;
+  }
+
+  /* Photos are one continuous column (all 4 images together) instead of split across rows.
+     Splitting them was the actual root cause of the "awkward gap" — a text box sharing a row
+     with just the tall hero photo forced that whole row to the photo's height regardless of how
+     short the text was, pushing the next row down by however much taller the photo was. Every
+     piece of text — header, quote, and each individual paragraph — is its own grid row here, so
+     no single row is ever forced taller than its own content, and they all stack with ordinary
+     spacing. The photo column spans all of them combined and stretches to match that total
+     height on its own side. */
+  #roses-card {
+    margin: 0;
+    padding: 1.3rem clamp(1rem, 5vw, 4rem);
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "p p p p p i i i i i i ."
+      "p p p p p q q q q q q ."
+      "p p p p p d1 d1 d1 d1 d1 . ."
+      "p p p p p d2 d2 d2 d2 d2 . ."
+      "p p p p p d3 d3 d3 d3 d3 . ."
+      "p p p p p d4 d4 d4 d4 d4 . ."
+      ". n n n n n n n n n n .";
+
+    place-items: center;
+  }
+
+  .roses-p-box {
+    grid-area: p;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+  .roses-p-box img {
+    margin: 0 0 2em 0;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* justify-self: start on every text-side box (below) — without it, #roses-card's
+     place-items: center centers each box within its whole column track instead of stretching or
+     left-aligning it. The photo column fills its track edge to edge, but these boxes are each
+     narrower than theirs and were floating independently centered, so the visible gap between
+     the photo and the text was actually "however much narrower than the track this box's content
+     happens to be," which grows and shrinks with viewport width instead of staying fixed. Fixed
+     25px margin-left now does the only job of creating that gap. */
+  .roses-i-box {
+    grid-area: i;
+    margin: clamp(1rem, 5vw, 4rem) 3rem 3rem 0rem;
+    align-self: start;
+    justify-self: start;
+  }
+  .roses-i-box p,
+  .roses-quote p {
+    /* margin: 0; */
+    /* padding: 0; */
+  }
+
+  /* The quote is its own grid item, not nested inside anything, specifically so it can be placed
+     in a completely different row at tablet widths (see the media query below) — reordering
+     within a single flex column can't move something to a different section of the page, only a
+     real grid reposition can. Here at the default width it sits directly between the header and
+     the other paragraphs, in the same column, reading as one continuous block. */
+  .roses-quote {
+    grid-area: q;
+    align-self: start;
+    justify-self: start;
+    margin: 0 0 1.2rem 0rem;
+  }
+
+  /* These are separate grid rows now, not flex children — a plain <p> no longer gets natural
+     stacking spacing from the browser's default paragraph margin, since grid doesn't collapse
+     or apply margins between rows the way normal flow would. The bottom margin here is what
+     actually creates the gap between one paragraph and the next. */
+  .roses-line {
+    align-self: start;
+    justify-self: start;
+    margin: 0 0 1.2rem 0rem;
+    max-width: 40rem;
+  }
+  .roses-line-1 {
+    grid-area: d1;
+  }
+  .roses-line-2 {
+    grid-area: d2;
+  }
+  .roses-line-3 {
+    grid-area: d3;
+  }
+  .roses-line-4 {
+    grid-area: d4;
+    margin-bottom: 8rem;
+  }
+  .roses-n-box {
+    grid-area: n;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: start;
+    justify-self: start;
+    width: 100%;
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 3rem 8rem 8rem 8rem;
+    background-color: var(--page-dark-highlight);
+  }
+
+  .roses-n-box p {
+  }
+
+  /* --page: #f6efe8;
+  --page-warm: #eadccb;
+  --paper: #fff9f1;
+  --paper-soft: rgba(255, 249, 241, 0.82);
+  --paper-strong: rgba(255, 249, 241, 0.94); */
+
+  @media (max-width: 800px) {
+    #roses-card {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        ". p1 p1 p1 p1 p1 p1 p1 p1 p1 p1 ."
+        ". i i i i i i i i i i ."
+        ". q q q q q q q q q q ."
+        ". d1 d1 d1 d1 d1 d1 d1 d1 d1 d1 ."
+        ". d2 d2 d2 d2 d2 d2 d2 d2 d2 d2 ."
+        ". d3 d3 d3 d3 d3 d3 d3 d3 d3 d3 ."
+        ". d4 d4 d4 d4 d4 d4 d4 d4 d4 d4 ."
+        ". n n n n n n n n n n ."
+        ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 ."
+        ". p3 p3 p3 p3 p3 p3 p3 p3 p3 p3 ."
+        ". p4 p4 p4 p4 p4 p4 p4 p4 p4 p4 .";
+      align-content: center;
+      margin: 0;
+      padding: 3em 0em 0em 0em;
+    }
+
+    /* display: contents removes .roses-p-box's own box, exposing its 4 <img> children as direct
+       grid items — so the hero photo can go back to the top and the other three can go to the
+       very bottom, on mobile only, with zero HTML changes and no effect on desktop/tablet, where
+       the wrapper stays a real flex box (all 4 photos as one stretching column). */
+    .roses-p-box {
+      display: contents;
+    }
+    .roses-p-box img:nth-child(1) {
+      grid-area: p1;
+    }
+    .roses-p-box img:nth-child(2) {
+      grid-area: p2;
+    }
+    .roses-p-box img:nth-child(3) {
+      grid-area: p3;
+    }
+    .roses-p-box img:nth-child(4) {
+      grid-area: p4;
+    }
+    .roses-p-box img {
+      width: 100%;
+      margin: 0 0 1em 0;
+    }
+    .roses-i-box {
+      margin: 0rem 0rem 0rem 0rem;
+      align-self: center;
+      width: 100%;
+    }
+    .roses-quote {
+      width: 100%;
+      margin: 0 0 1.2rem 0;
+    }
+    .roses-line {
+      width: 100%;
+      margin: 0 0 1.2rem 0;
+    }
+    .roses-line-4 {
+      margin-bottom: 0;
+    }
+
+    .roses-n-box {
+      display: inline-block;
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
+    }
+  }
+
+  /* Tablet range only (mobile stacks everything below 800px anyway; by ~1100px there's enough
+     room that the top-of-column quote reads fine again). A real grid reposition — the quote
+     gets its own row after .roses-n-box, at the very bottom of the page — not just a reorder
+     within one column, since the actual ask was to move it out of the photo+text pairing
+     entirely, not just to the end of that column. */
+  @media (min-width: 801px) and (max-width: 1100px) {
+    #roses-card {
+      grid-template-areas:
+        "p p p p p i i i i i i ."
+        "p p p p p d1 d1 d1 d1 d1 d1 ."
+        "p p p p p d2 d2 d2 d2 d2 d2 ."
+        "p p p p p d3 d3 d3 d3 d3 d3 ."
+        "p p p p p d4 d4 d4 d4 d4 d4 ."
+        ". n n n n n n n n n n ."
+        ". q q q q q q q q q q .";
+    }
+
+    .roses-quote {
+      margin: 3rem 0 0 1rem;
+    }
+  }
+}
+
+/* WEEKEND OF WEAVING — shared by the gateway page and both event pages. These were once scoped under .weekend-page; now that the system is the site default, the class is no longer load-bearing for CSS (left in the markup, but harmless either way). */
+
+/* CONTENT WIDTH — sections are full-width wrappers (so they can carry a background colour edge to edge); a .content div inside each one centers and caps the actual content at one of four widths. */
+
+.content {
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.content.standard {
+  max-width: var(--max);
+}
+
+.content.wide {
+  max-width: var(--wide);
+}
+
+.content.fat {
+  max-width: var(--fat);
+}
+
+.content.full {
+  max-width: none;
+}
+
+/* Poster-scale section headlines — big, tightly-set display type that reads as a headline, not a label. */
+.plant-copy h2,
+.path-copy h2,
+.level-section > .content > h2,
+.visitor-info-intro h2,
+.schedule-section > .content > h2,
+.workshop-detail-section > .content > h2,
+.policies-section > .content > h2,
+.bottom-cta h2 {
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.section-kicker {
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* HERO (gateway + event pages) */
+
+.gateway-hero,
+.event-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(22rem, 46rem) 1fr;
+  align-items: stretch;
+  gap: clamp(2rem, 5vw, 5rem);
+  width: 100vw;
+  max-width: none;
+  min-height: 100vh;
+  margin-inline: calc(50% - 50vw);
+  /* No vertical padding here — the photo column needs to run edge-to-edge top to bottom of the dark hero. Vertical clearance lives on .hero-copy instead. No right padding either — the photo runs flush to the right edge. */
+  padding-left: var(--wide-pad);
+  overflow: hidden;
+  background: var(--hero-dark);
+  color: color-mix(in srgb, var(--hero-cream) 84%, transparent);
+}
+
+.hero-copy,
+.event-hero-copy {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  max-width: 50rem;
+  /* Symmetric top/bottom so the block actually centers rather than skewing toward the nav clearance. */
+  padding: 6rem 0;
+}
+
+.gateway-hero .eyebrow,
+.event-hero .eyebrow {
+  margin-bottom: 1.1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+}
+
+.gateway-hero h1,
+.event-hero h1 {
+  color: var(--hero-cream);
+  font-size: clamp(3.6rem, 9vw, 10rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+}
+
+.hero-location {
+  margin: 0.9rem 0 0;
+  color: var(--hero-gold);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+}
+
+.hero-intro {
+  max-width: 36rem;
+  margin: 1.6rem 0 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(246, 239, 230, 0.25);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--hero-cream);
+}
+
+.hero-note {
+  margin: 1.1rem 0 0;
+  color: color-mix(in srgb, var(--hero-cream) 64%, transparent);
+  font-size: 0.85rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+.hero-media,
+.event-hero-image {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  min-height: 26rem;
+  /* .event-hero-image is a <figure>, which carries a default 1em/40px margin — zero it so the photo runs flush to every edge. */
+  margin: 0;
+  overflow: hidden;
+  /* Flush to the screen edge — a rounded corner here would show the hero background peeking through right at the edge. */
+  border-radius: 0;
+  /* --hero-photo is set inline on the .gateway-hero/.event-hero section and inherits down — a background image (rather than an <img>) so it can be repositioned as a full-bleed backdrop at narrow widths instead of a boxed column. */
+  background-image: var(--hero-photo);
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(0.15) brightness(0.75) contrast(1.05);
+}
+
+.hero-media::after,
+.event-hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--hero-dark) 0%, rgba(9, 12, 13, 0.5) 30%, transparent 65%);
+}
+
+/* Drop the decorative floating "field note" card from the gateway hero — one less bespoke component to maintain. */
+.field-note {
+  display: none;
+}
+
+/* Night sky torn away to reveal the daylight content below — the one seam in the page, kept deliberately singular rather than repeated at every section. */
+.quick-info {
+  position: relative;
+}
+
+.quick-info::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: -1.65rem;
+  height: 3.25rem;
+  pointer-events: none;
+  background: var(--page);
+  -webkit-mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
+  mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
+}
+
+/* QUICK INFO — the section breaks out to the viewport edge (so a future background colour can run edge to edge); .content.full inside carries the actual 4-column layout, just with the hero's wider side padding instead of the standard page-pad. */
+
+.quick-info {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.quick-info .content {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-block: 2rem;
+  padding-inline: var(--wide-pad);
+}
+
+.quick-info article {
+  padding: 0 1.5rem;
+  border-right: 1px solid var(--line);
+  text-align: center;
+}
+
+.quick-info article:last-child {
+  border-right: 0;
+}
+
+.quick-info .icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto 0.6rem;
+  background-color: var(--ink-soft);
+  -webkit-mask: var(--icon-src) center / contain no-repeat;
+  mask: var(--icon-src) center / contain no-repeat;
+}
+
+.quick-info h2 {
+  margin-bottom: 0.3rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.quick-info p {
+  max-width: 13rem;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* CHOOSE YOUR PATH / BUILD CONFIDENCE (gateway's plant-section is the same idea as event's path-section) */
+
+.path-section {
+  padding-block: 4rem;
+}
+
+.path-section .content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1.15fr);
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+/* Text, cards, and photo all in one row. */
+.plant-section {
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.plant-section .content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(17rem, 0.9fr) minmax(13rem, 0.7fr);
+  align-items: stretch;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.plant-copy {
+  align-self: center;
+}
+
+.path-copy,
+.plant-copy {
+  max-width: 34rem;
+}
+
+.path-copy > p,
+.plant-copy > p {
+  margin-top: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.path-cards,
+.expect-list {
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+}
+
+.path-cards article,
+.expect-list article {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+}
+
+.path-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--hero-gold);
+  font-size: 1.3rem;
+}
+
+.path-cards h3 {
+  grid-column: 2;
+  margin-bottom: 0.3rem;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.path-cards p {
+  grid-column: 2;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* "What to expect" feature cards — icon badge sits inline with its label, description flows full-width beneath. */
+.expect-list article {
+  grid-template-columns: 2.8rem 1fr;
+  align-items: center;
+  gap: 0.55rem 1rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 0.65rem;
+  box-shadow: 0 1px 2px rgba(44, 41, 37, 0.04);
+}
+
+.expect-list .icon {
+  grid-column: 1;
+  grid-row: 1;
+  display: block;
+  width: 2.8rem;
+  height: 2.8rem;
+  box-sizing: border-box;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background-color: rgba(255, 249, 241, 0.6);
+  background-clip: padding-box;
+}
+
+.expect-list .icon::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--ink-soft);
+  -webkit-mask: var(--icon-src) center / contain no-repeat;
+  mask: var(--icon-src) center / contain no-repeat;
+}
+
+.expect-list h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.expect-list p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.plant-photo {
+  overflow: hidden;
+  border-radius: 0.65rem;
+  box-shadow: 0 1rem 2.5rem rgba(44, 41, 37, 0.1);
+}
+
+.plant-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 20rem;
+  object-fit: cover;
+  filter: saturate(1.05) brightness(1.02);
+}
+
+/* BUTTONS */
+
+.primary-button,
+.secondary-button,
+.outline-button,
+.date-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.9rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--hero-gold);
+  border-radius: var(--pill);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.primary-button {
+  background: var(--hero-gold);
+  border-color: var(--hero-gold);
+  color: #1a1508;
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--hero-cream);
+}
+
+.outline-button {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.outline-button:hover,
+.date-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Appears both on the dark hero and in the daylight bottom-cta, so it carries its own fixed light chip rather than inheriting page colour. */
+.date-button {
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 14rem;
+  gap: 0.3rem;
+  background: var(--paper-soft);
+  color: var(--ink);
+}
+
+.date-button strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.date-button span {
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+/* September / November CTA chips get a border and label tint from the earthy palette so they read as distinct at a glance. */
+.date-button-green {
+  border-color: var(--cattail);
+}
+
+.date-button-green strong {
+  color: var(--cattail);
+}
+
+.date-button-clay {
+  border-color: var(--bark);
+}
+
+.date-button-clay strong {
+  color: var(--bark);
+}
+
+.text-button {
+  color: var(--warm-clay);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* CHOOSE A WORKSHOP LEVEL (gateway) */
+
+.level-section {
+  padding-top: 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.level-section > .content > h2 {
+  margin-bottom: 1.5rem;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 4rem;
+}
+
+.level-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+}
+
+.level-card img {
+  width: 100%;
+  height: 11rem;
+  object-fit: cover;
+  filter: saturate(1.05) brightness(1.02);
+}
+
+.level-card div {
+  padding: 1.1rem;
+}
+
+.level-card h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.level-card p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* VISITOR INFO (gateway) */
+
+.visitor-info {
+  padding-block: 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.visitor-info .content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.visitor-info p {
+  margin-top: 0.5rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.visitor-lodge-illustration {
+  max-width: 16rem;
+  margin: 1rem 0;
+}
+
+.visitor-lodge-illustration img {
+  filter: brightness(0) opacity(0.45);
+}
+
+.map-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.visitor-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.6rem;
+  margin-top: 1rem;
+}
+
+.visitor-info-grid article {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.visitor-info-grid ul,
+.details-grid ul,
+.practical-grid ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+}
+
+/* SCHEDULE / TIMELINE (event pages) */
+
+.schedule-section {
+  padding-block: 4rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.schedule-note {
+  margin-bottom: 2rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.schedule-days {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.schedule-day {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+}
+
+.schedule-day h3 {
+  margin-bottom: 0.75rem;
+  color: var(--hero-gold);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.timeline {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.timeline-hours {
+  position: relative;
+  height: 1rem;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+}
+
+.timeline-hours span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.timeline-hours span:nth-child(1) {
+  left: 0;
+  transform: translateX(0);
+}
+
+.timeline-hours span:nth-child(2) {
+  left: calc(100% / 13 * 1);
+}
+.timeline-hours span:nth-child(3) {
+  left: calc(100% / 13 * 2);
+}
+.timeline-hours span:nth-child(4) {
+  left: calc(100% / 13 * 3);
+}
+.timeline-hours span:nth-child(5) {
+  left: calc(100% / 13 * 4);
+}
+.timeline-hours span:nth-child(6) {
+  left: calc(100% / 13 * 5);
+}
+.timeline-hours span:nth-child(7) {
+  left: calc(100% / 13 * 6);
+}
+.timeline-hours span:nth-child(8) {
+  left: calc(100% / 13 * 7);
+}
+.timeline-hours span:nth-child(9) {
+  left: calc(100% / 13 * 8);
+}
+.timeline-hours span:nth-child(10) {
+  left: calc(100% / 13 * 9);
+}
+.timeline-hours span:nth-child(11) {
+  left: calc(100% / 13 * 10);
+}
+.timeline-hours span:nth-child(12) {
+  left: calc(100% / 13 * 11);
+}
+.timeline-hours span:nth-child(13) {
+  left: calc(100% / 13 * 12);
+}
+
+.timeline-hours span:nth-child(14) {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.timeline-events {
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  grid-auto-rows: minmax(4.4rem, auto);
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--line);
+}
+
+.timeline-event {
+  grid-column: var(--start) / span var(--span);
+  grid-row: var(--lane);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 0.3rem solid var(--hero-gold);
+  border-radius: 0.2rem;
+  background: var(--paper-soft);
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.timeline-event:hover {
+  transform: translateY(-1px);
+}
+
+.timeline-event time {
+  color: var(--ink-soft);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timeline-event strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.timeline-event span {
+  color: var(--hero-gold);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Material colour key: willow, cattail, bulrush, willow bark, gathered/mixed. */
+.timeline-event[href="#bird-feeder"],
+.timeline-event[href="#wreath-making"],
+.timeline-event[href="#berry-boat"],
+.timeline-event[href="#butt-cheek-basket"],
+.timeline-event[href="#tiny-willow-bowl"],
+.timeline-event[href="#tiny-trug"] {
+  border-left-color: var(--willow);
+}
+
+.timeline-event[href="#cattail-berry-basket"] {
+  border-left-color: var(--cattail);
+}
+
+.timeline-event[href="#random-weave-bulrush"] {
+  border-left-color: var(--bulrush);
+}
+
+.timeline-event[href="#random-weave-willow-bark"],
+.timeline-event[href="#twill-berry-basket-willow-bark"] {
+  border-left-color: var(--bark);
+}
+
+.timeline-event[href="#wild-foraged-basket"] {
+  border-left-color: var(--warm-clay);
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.schedule-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.schedule-legend span::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--dot, var(--hero-gold));
+}
+
+.schedule-legend .willow::before {
+  --dot: var(--willow);
+}
+.schedule-legend .cattail::before {
+  --dot: var(--cattail);
+}
+.schedule-legend .bulrush::before {
+  --dot: var(--bulrush);
+}
+.schedule-legend .bark::before {
+  --dot: var(--bark);
+}
+.schedule-legend .gathered::before {
+  --dot: var(--warm-clay);
+}
+
+/* PRACTICAL NOTES */
+
+.event-note-grid {
+  border-top: 1px solid var(--line);
+}
+
+/* Grid + gap + background live together on .content: the 1px gap reveals this background colour, drawing the hairline grid between article cells. */
+.event-note-grid .content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding-block: 3rem;
+  background: var(--line);
+}
+
+.event-note-grid article {
+  padding: 1.5rem;
+  background: var(--page);
+}
+
+.event-note-grid h3 {
+  margin-bottom: 0.5rem;
+  color: var(--moss);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.event-note-grid p {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* WORKSHOP DETAIL CARDS */
+
+.workshop-detail-section {
+  padding-block: 3rem 4rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.workshop-detail-section > .content > .eyebrow,
+.workshop-detail-intro {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.workshop-detail-intro {
+  margin-bottom: 2rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.workshop-detail-list {
+  display: grid;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.workshop-detail-card {
+  display: grid;
+  grid-template-columns: minmax(22rem, 32rem) minmax(0, 1fr);
+  align-items: start;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+}
+
+/* No photo yet for this workshop — let the copy run full-width instead of leaving a blank column. */
+.workshop-detail-card--no-image {
+  grid-template-columns: 1fr;
+}
+
+/* <figure> carries a default 1em/40px browser margin — zero it so the photo fills its grid column instead of floating in a narrower box. */
+.workshop-detail-media {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+}
+
+.workshop-detail-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, center);
+  filter: grayscale(0.1) saturate(0.95) brightness(0.98) contrast(1.03);
+}
+
+.workshop-detail-copy {
+  padding: 1.5rem 1.75rem;
+}
+
+.workshop-detail-level {
+  margin-bottom: 0.4rem;
+  color: var(--warm-clay);
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.workshop-detail-copy h3 {
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.workshop-detail-copy p {
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.workshop-date-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.25rem;
+  margin: 0.2rem 0 1rem;
+}
+
+.workshop-date-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.workshop-date-button:hover {
+  transform: translateY(-2px);
+}
+
+.register-label {
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--pill);
+  background: var(--cattail);
+  color: var(--page);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background 180ms ease;
+}
+
+.workshop-date-button:hover .register-label {
+  background: var(--moss);
+}
+
+.workshop-note,
+.skills-list {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.3rem;
+  background: color-mix(in srgb, var(--page) 52%, transparent);
+}
+
+.workshop-note h4,
+.skills-list h4 {
+  margin-bottom: 0.4rem;
+  color: var(--moss);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.workshop-note p,
+.skills-list li {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.skills-list ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/* PRACTICAL / DETAILS GRID (what to bring, location, policies) */
+
+.practical-grid,
+.details-grid {
+  padding-block: 3rem;
+  border-top: 1px solid var(--line);
+}
+
+.practical-grid .content,
+.details-grid .content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.practical-grid article,
+.details-grid article,
+.details-grid aside {
+  padding-right: 2rem;
+  border-right: 1px solid var(--line);
+}
+
+.practical-grid article:last-child,
+.details-grid .content > :last-child {
+  border-right: 0;
+}
+
+.practical-grid h2,
+.details-grid h2 {
+  margin-bottom: 0.75rem;
+  color: var(--moss);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.practical-grid p,
+.details-grid p,
+.practical-grid li,
+.details-grid li {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.quote-card {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+}
+
+.quote-card p {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+/* POLICIES (event pages) */
+
+.policies-section {
+  padding-block: 3rem 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.policies-section > .content > h2 {
+  margin-bottom: 1.25rem;
+  font-size: 1.8rem;
+}
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.policy-grid article {
+  padding-right: 2rem;
+  border-right: 1px solid var(--line);
+}
+
+.policy-grid article:last-child {
+  border-right: 0;
+}
+
+.policy-grid h3 {
+  margin-bottom: 0.5rem;
+  color: var(--moss);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.policy-grid p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* BOTTOM CTA */
+
+.bottom-cta {
+  border-top: 1px solid var(--line);
+}
+
+.bottom-cta .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-block: 2.5rem;
+  padding-inline: var(--wide-pad);
+}
+
+.bottom-cta h2 {
+  margin-bottom: 0.3rem;
+  font-size: 1.8rem;
+}
+
+.bottom-cta p {
+  color: var(--ink-soft);
+}
+
+.moon-mark {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--lavender-smoke);
+  font-size: 1.8rem;
+}
+
+/* The bottom CTA sits on the light page, not the dark hero — give its button a warm clay tone instead of inheriting the hero's gold. */
+.bottom-cta .primary-button {
+  background: linear-gradient(135deg, var(--rose-clay), var(--warm-clay));
+  border-color: var(--warm-clay);
+  color: var(--paper);
+}
+
+@media (max-width: 850px) {
+  .gateway-hero,
+  .event-hero {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    padding: 0 var(--page-pad);
+  }
+
+  /* Below the grid breakpoint, the photo drops out of the layout and becomes a full-bleed backdrop behind the copy instead of its own boxed column. */
+  .gateway-hero::before,
+  .event-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--hero-photo);
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0.15) brightness(0.5) contrast(1.05);
+  }
+
+  .hero-copy,
+  .event-hero-copy {
+    position: relative;
+    z-index: 2;
+    padding: 6.5rem 0 2.5rem;
+  }
+
+  .hero-media,
+  .event-hero-image {
+    display: none;
+  }
+
+  .quick-info .content,
+  .path-section .content,
+  .plant-section .content,
+  .level-grid,
+  .visitor-info .content,
+  .visitor-info-grid,
+  .event-note-grid .content,
+  .practical-grid .content,
+  .details-grid .content,
+  .policy-grid,
+  .workshop-detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-info article,
+  .practical-grid article,
+  .details-grid .content > *,
+  .policy-grid article {
+    padding-right: 0;
+    padding-bottom: 1.25rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Square on mobile instead of the desktop 4:5 portrait crop. object-position (via --focus, set per-image in the HTML) still anchors the crop to the subject regardless of aspect ratio. */
+  .workshop-detail-media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .bottom-cta .content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .timeline-hours {
+    display: none;
+  }
+
+  .timeline-events {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-event {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* WORKSHOPS (legacy standalone workshops.html page — scoped to body id so it can't collide with the <section id="workshops"> used on the event pages) */
+
+body#workshops {
+  /* Legacy standalone page — restore the old inherited font/color/background instead of the site-wide type system. Dark ink (not the old near-white): the calendar's city labels and plain (unbooked) date numbers have no color of their own and were inheriting this base value directly. */
+  font-family: garamond;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  /* No color: inherit on these headings — prose paragraphs now carry .easy-to-read (dark ink), so headings match rather than staying the page's old near-white default. */
+  h2 {
+    grid-column: 1 / -1; /* make headings span full width */
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Prose paragraphs (intro text, workshop descriptions) carry .easy-to-read in the HTML; this rule now only covers the calendar city-labels and price-row figures, which keep the old fixed size. */
+  p {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .workshop > p,
+  .price-row p {
+    font-size: 25px;
+  }
+
+  h3 {
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  .past-event-names {
+    grid-column: 1 / -1;
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  #intro {
+    max-width: 1000px;
+  }
+  #past {
+    max-width: 1000px;
+    margin-top: 60px;
+  }
+  #calendar {
+    margin-bottom: 20px;
+  }
+
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  .catalogue-grid img {
+    margin-top: 30px;
+  }
+
+  .catalogue-grid h2 {
+    font-size: 60px;
+    margin: 60px 0 -10px 0;
+  }
+  .workshop {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* default for desktop */
+  }
+
+  @media (max-width: 750px) {
+    .workshop {
+      max-width: 750px; /* wider workshops on tablet */
+    }
+  }
+
+  /* Calendar month blocks only (.words has its own catalogue-project paragraphs) — bigger, more spaced-out dates so booking status doesn't need zooming in to read. */
+  .workshop ul {
+    margin: 0.3em 0;
+    padding-left: 1.2em;
+  }
+
+  .workshop li {
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+
+  .workshop .words {
+    flex: 1; /* fill vertical space */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: auto; /* push to bottom */
+    padding: 0 10px 0 0;
+  }
+
+  .price-row p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .booked {
+    background-color: rgb(101, 101, 227);
+    text-decoration: line-through;
+  }
+  .hold {
+    background-color: rgb(224, 116, 234);
+    text-decoration: line-through;
+  }
+
+  .past-event-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-content: start;
+    align-items: stretch;
+    gap: 70px 40px;
+    padding-top: 40px;
+  }
+
+  .past-event-images img {
+    max-width: 400px;
+    object-fit: contain;
+  }
+}
+
+/* THE WEAVE CONTINUES */
+
+#the-weave-continues {
+  /* Legacy standalone page — restore the old inherited font/color/link/background instead of the site-wide type system. Dark ink (not the old near-white) since every visible paragraph/heading already carries an explicit dark color; this is just the base. */
+  font-family: garamond;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  max-width: 755px;
+  margin: 0 auto;
+  padding: 20px;
+
+  a {
+    color: #2c3673;
+  }
+
+  /* Nav defaults to cream (for pages with a dark hero); this page's own a{color:#2c3673} above would otherwise win by specificity and turn the nav blue instead. */
+  .site-logo,
+  .site-nav a {
+    color: var(--ink);
+  }
+
+  p {
+    margin: 10px 0 10px;
+    padding: 10px;
+  }
+
+  /* Warm paper tone instead of the old lavender/blue-purple tint, which read as off-brand against the rest of the site's earthy palette. Dark ink instead of color: inherit, since it no longer needs to work as light text on a saturated background. */
+  h2 {
+    background-color: var(--page-warm);
+    padding: 0.3em 0.6em;
+    border-radius: var(--radius);
+    font-family: "Cormorant Garamond";
+    font-size: 2.2em;
+    margin: 40px 0 20px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Unlike h2/h4, no color: inherit here — these headings now carry .easy-to-read in the HTML alongside the page's .dark paragraphs, so they share the same dark ink instead of the page's legacy near-white default. */
+  h3 {
+    font-family: "Cormorant Garamond";
+    padding: 0;
+    margin: 20px 0 10px 0;
+    font-size: 1.7em;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Explicit color: var(--ink) here (not just a removed color: inherit) — unlike h3, h4 isn't caught by the site-wide h1,h2,h3 rule, so without this it silently inherits the container's near-white legacy color. */
+  h4 {
+    font-family: "Cormorant Garamond";
+    font-size: 1.3em;
+    margin: 40px 0 0px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+  .past-event-names {
+    grid-column: 1 / -1;
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  #intro {
+    max-width: 1000px;
+  }
+  #guide {
+    max-width: 1000px;
+  }
+}
+
+/* GRIEF TENT */
+
+#grief-tent {
+  font-family: garamond, serif;
+  background-color: #141619;
+
+  .site-logo,
+  .site-nav a {
+    color: #a8a5a0;
+  }
+
+  /* Container for layout */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .responsive-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-width: 350px; /* Ensures the image does not shrink below 100px */
+  }
+
+  /* Content divs */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 850px; /* Adjust width as needed */
+    min-width: 500px;
+    padding-top: 7em;
+  }
+
+  /* Individual divs */
+  .box {
+    padding: 3em 2em 0 2em;
+    margin: 0 1em 0 1em;
+  }
+
+  /* Larger screens - two divs to the right */
+  @media (min-width: 768px) {
+    .container {
+      flex-wrap: nowrap;
+      align-items: flex-start;
+    }
+
+    .responsive-image {
+      width: 10%; /* Adjust width for image */
+      height: auto;
+    }
+
+    .content {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .box {
+      flex: 1;
+    }
+  }
+
+  /* Smaller screens - image above divs */
+  @media (max-width: 767px) {
+    .responsive-image {
+      width: 10%;
+    }
+
+    .content {
+      justify-content: center;
+      min-width: fit-content;
+      margin-bottom: 2em;
+    }
+    .box {
+      margin-top: 2em;
+      margin-bottom: 0;
+      padding: 1em 1em 0 1em;
+    }
+  }
+
+  p,
+  h2 {
+    color: #a8a5a0;
+  }
+  /* Size/line-height/max-width are now owned by .easy-to-read in the HTML; this just keeps the page's own sans-serif choice for body copy. */
+  p {
+    font-family: "Source Sans 3";
+  }
+  h2 {
+    font-family: garamond;
+    font-weight: 400;
+    font-size: 1.1em;
+    letter-spacing: normal;
+  }
+
+  p.move-right {
+    padding: 0 3em 0 2em;
+  }
+
+  /* Full-width banner */
+  .banner {
+    width: 100%;
+    height: auto;
+    background-color: #241e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  /* Centered image */
+  .banner-fest-logo {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+  }
+
+  @media (max-width: 800px) {
+    .banner {
+      padding: 10px 0;
+    }
+
+    .banner-fest-logo {
+      width: 90%;
+      max-width: 250px;
+    }
+
+    .content {
+      padding-top: 0;
+    }
+  }
+}

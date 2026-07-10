@@ -1,0 +1,552 @@
+// Berry Boat //
+
+/* ---------------------------------------------
+  Willow Berry Boat Tutorial Page
+  Uses global tokens from Half Moon Baskets CSS
+--------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.tutorial-page {
+  background: radial-gradient(circle at top left, rgba(210, 190, 149, 0.2), transparent 30rem), linear-gradient(180deg, var(--page) 0%, #efe3d2 100%);
+  color: var(--ink);
+}
+
+/* HERO */
+
+.tutorial-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 68vh;
+  display: grid;
+  align-items: center;
+  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-inline: clamp(1rem, 5vw, 4rem);
+  background: linear-gradient(90deg, rgba(2, 7, 16, 0.97) 0%, rgba(2, 7, 16, 0.9) 34%, rgba(2, 7, 16, 0.52) 66%, rgba(2, 7, 16, 0.16) 100%), url("/images/tutorials/berry-boat-hero-right.webp");
+  background-size: cover;
+  background-position: 98% center;
+  background-repeat: no-repeat;
+  color: var(--hero-cream);
+}
+
+.tutorial-hero::after {
+  display: none;
+}
+
+.tutorial-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--max));
+  margin: 0;
+  transform: none;
+}
+
+.tutorial-kicker {
+  margin: 0 0 1rem;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tutorial-hero h1 {
+  max-width: 12ch;
+  color: var(--hero-cream);
+  font-size: clamp(4rem, 10vw, 8.75rem);
+  line-height: 0.86;
+  letter-spacing: -0.07em;
+}
+
+.tutorial-hero-copy {
+  max-width: 34rem;
+  margin-top: 1.75rem;
+  color: rgba(246, 239, 232, 0.9);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.35vw, 2.05rem);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.tutorial-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.tutorial-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border: 1px solid rgba(246, 239, 232, 0.44);
+  border-radius: var(--pill);
+  padding: 0.75rem 1.35rem;
+  color: var(--hero-cream);
+  background: rgba(246, 239, 232, 0.1);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.tutorial-button:hover,
+.tutorial-button:focus-visible {
+  background: var(--hero-cream);
+  color: var(--ink);
+}
+
+/* PAGE LAYOUT */
+
+/* Night sky torn away to reveal the daylight content below — same seam treatment as .quick-info
+   on the weekend-of-weaving pages. .tutorial-shell isn't full-bleed like .quick-info is, so the
+   torn strip breaks out to 100vw on its own via left: 50% + translateX(-50%) instead. */
+.tutorial-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  width: min(100%, var(--wide));
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 5rem) var(--page-pad);
+}
+
+.tutorial-shell::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: -1.65rem;
+  width: 100vw;
+  height: 3.25rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: var(--page);
+  -webkit-mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
+  mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
+}
+
+.tutorial-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  border-right: 1px solid var(--line);
+  padding-right: 1.5rem;
+}
+
+.tutorial-sidebar h2 {
+  margin-bottom: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bark);
+}
+
+.tutorial-nav {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tutorial-nav a {
+  display: grid;
+  grid-template-columns: 1.7rem 1fr;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+  line-height: 1.25;
+  font-size: 0.96rem;
+}
+
+.tutorial-nav a:hover,
+.tutorial-nav a:focus-visible {
+  color: var(--ink);
+}
+
+.tutorial-nav span {
+  color: var(--willow);
+  font-family: var(--font-display);
+}
+
+.tutorial-main {
+  min-width: 0;
+}
+
+/* INTRO CARD */
+
+.tutorial-intro-card {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  margin-bottom: clamp(2.5rem, 7vw, 6rem);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) * 2);
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--paper-soft);
+  box-shadow: var(--shadow);
+}
+
+.tutorial-intro-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.tutorial-intro-card p {
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  line-height: 1.55;
+}
+
+/* SECTIONS */
+
+.tutorial-section {
+  scroll-margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.tutorial-section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.tutorial-section h2 {
+  margin-bottom: 1.2rem;
+  color: var(--bark);
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.tutorial-section h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+  color: var(--bark);
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.05;
+}
+
+.tutorial-section p {
+  max-width: 48rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.7;
+}
+
+.tutorial-section strong {
+  color: var(--bark);
+}
+
+/* YOUTUBE VIDEO EMBEDS */
+
+.video-card {
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 0 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) * 2);
+  padding: clamp(0.5rem, 1.5vw, 0.85rem);
+  background: rgba(255, 249, 241, 0.75);
+  box-shadow: var(--shadow);
+}
+
+.video-card iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--hero-dark);
+}
+
+/* NOTES AND CALLOUTS */
+
+.step-note {
+  max-width: 54rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  background: rgba(255, 249, 241, 0.68);
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.rhythm-card {
+  max-width: 54rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--willow);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.2rem 1.4rem;
+  background: rgba(177, 129, 82, 0.11);
+}
+
+.rhythm-card p {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.25;
+}
+
+/* CARDS */
+
+.materials-grid,
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.material-card,
+.tip-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  background: var(--paper-strong);
+  box-shadow: var(--shadow);
+}
+
+.material-card h3,
+.tip-card h3 {
+  margin-top: 0;
+  color: var(--bark);
+}
+
+.material-card img,
+.tip-card img {
+  width: 100%;
+  aspect-ratio: 5 / 3.4;
+  object-fit: cover;
+  border-radius: calc(var(--radius) * 0.75);
+  margin-top: 1rem;
+}
+
+/* LISTS */
+
+.mini-list {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mini-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.55;
+}
+
+.mini-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--willow);
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* IMAGES */
+
+.image-break {
+  margin: 2rem 0;
+}
+
+.image-break img {
+  width: 100%;
+  max-height: 34rem;
+  object-fit: cover;
+  border-radius: calc(var(--radius) * 2);
+  box-shadow: var(--shadow);
+}
+
+.image-break figcaption {
+  margin-top: 0.6rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+/* CLOSING PANEL */
+
+body.tutorial-page .closing-panel {
+  width: min(100%, 56rem);
+  margin: clamp(2.5rem, 7vw, 6rem) 0 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--ink);
+  text-align: left;
+}
+
+body.tutorial-page .closing-panel .tutorial-kicker {
+  margin-bottom: 0.85rem;
+  color: var(--willow);
+}
+
+body.tutorial-page .closing-panel h2 {
+  max-width: 10ch;
+  margin-bottom: 1rem;
+  color: var(--bark);
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+body.tutorial-page .closing-panel p {
+  max-width: 38rem;
+  margin: 0.75rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+body.tutorial-page .closing-panel .tutorial-button {
+  width: auto;
+  min-height: 2.75rem;
+  margin-top: 1.75rem;
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background: transparent !important;
+}
+
+body.tutorial-page .closing-panel .tutorial-button:hover,
+body.tutorial-page .closing-panel .tutorial-button:focus-visible {
+  background: var(--ink);
+  color: var(--hero-cream);
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .tutorial-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-sidebar {
+    position: static;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-right: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  .tutorial-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tutorial-intro-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 680px) {
+  .site-header {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.7rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .tutorial-hero {
+    min-height: 72vh;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background: linear-gradient(180deg, rgba(2, 7, 16, 0.96) 0%, rgba(2, 7, 16, 0.82) 48%, rgba(2, 7, 16, 0.58) 100%), url("/images/tutorials/berry-boat-hero-right.webp");
+    background-size: cover;
+    background-position: 78% center;
+    background-repeat: no-repeat;
+  }
+
+  .tutorial-hero h1 {
+    max-width: 9ch;
+    font-size: clamp(4rem, 18vw, 6.5rem);
+  }
+
+  .tutorial-hero-copy {
+    max-width: 21rem;
+  }
+
+  .tutorial-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .materials-grid,
+  .tip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-section h2 {
+    font-size: clamp(2.25rem, 14vw, 4rem);
+  }
+
+  .video-card {
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius);
+  }
+
+  .video-card iframe {
+    border-radius: calc(var(--radius) * 0.75);
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 430px) {
+  .tutorial-hero-actions {
+    display: grid;
+  }
+
+  .tutorial-button {
+    width: 100%;
+  }
+
+  .tutorial-shell {
+    padding-inline: 1rem;
+  }
+
+  .tutorial-intro-card,
+  .material-card,
+  .tip-card,
+  .step-note,
+  .rhythm-card,
+  .video-card {
+    padding: 1rem;
+  }
+
+  .tutorial-section p {
+    font-size: 1.05rem;
+  }
+}

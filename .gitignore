@@ -1,3 +1,6 @@
 node_modules
 package-lock.json
 public
+CLAUDE.md
+screenshots
+.playwright-mcp

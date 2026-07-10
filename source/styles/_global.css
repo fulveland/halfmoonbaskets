@@ -1,0 +1,355 @@
+/* Half Moon Baskets — truly global styles: design tokens, nav, resets, and the typography utility classes used across every page regardless of design system. Page-specific and weekend-of-weaving system styles live in main.css. */
+
+/* Design tokens — the weekend-of-weaving system is the site-wide default. Pages that predate it (email, index, wild-roses, etc.) get their own nested overrides further down so they keep their original look. */
+:root {
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", system-ui, -apple-system, sans-serif;
+
+  /* Night sky — hero + nav only. */
+  --hero-dark: #020710;
+  --hero-soft: #151820;
+  --hero-cream: #f6efe8;
+  --hero-gold: #d2be95;
+
+  /* Daylight palette — everything below the hero lives here. */
+  --page: #f6efe8;
+  --page-warm: #eadccb;
+  --page-dark-highlight: rgba(229, 225, 218, 0.5);
+  --paper-soft: rgba(255, 249, 241, 0.82);
+  --paper-strong: rgba(255, 249, 241, 0.94);
+
+  --ink: #2c2925;
+  --ink-soft: rgba(44, 41, 37, 0.72);
+  --ink-muted: rgba(44, 41, 37, 0.58);
+  --cedar: #25251d;
+
+  /* Schedule is colour-coded by material. */
+  --moss: #555b3b;
+  --sage: #747a5d;
+  --willow: #b18152;
+  --bark: #7c533c;
+  --bulrush: #5f7680;
+  --cattail: var(--sage);
+  --rose-clay: #b98778;
+  --warm-clay: #a8755f;
+  --lavender-smoke: #9c8a9b;
+
+  --line: rgba(124, 83, 60, 0.18);
+  --line-strong: rgba(124, 83, 60, 0.3);
+  --shadow: 0 0.8rem 1.8rem rgba(98, 74, 55, 0.06);
+
+  --max: 1180px;
+  --wide: 1480px;
+  --fat: 1800px;
+  --page-pad: clamp(1.25rem, 4vw, 2rem);
+  --wide-pad: clamp(1.25rem, 7vw, 6rem);
+  --radius: 0.4rem;
+  --pill: 999px;
+
+  --easy-to-read-size: 1.5rem;
+  --font-size: 1rem;
+}
+
+/* NAV */
+
+.site-header {
+  position: static;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem clamp(1rem, 5vw, 4rem);
+}
+
+.site-logo {
+  font-family: garamond;
+  font-size: calc(var(--font-size) + 0.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-logo span {
+  display: block;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem;
+  font-family: garamond;
+  font-size: calc(var(--font-size) - 0.28rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  text-decoration: none;
+}
+
+/* Nav defaults to cream, since it most often overlays a dark hero photo. Pages with a light hero (wild-roses, grief-tent) override this in their own scope below. */
+.site-logo,
+.site-nav a {
+  color: var(--hero-cream);
+}
+
+/* For pages with a hero image/photo behind the nav (e.g. index) — pins the nav on top instead of in the flow. */
+.site-header--overlay {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+@media (max-width: 560px) {
+  .site-header {
+    padding: 1rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%; /* For the index page, so that `cover` always fills the full height of the window even when the text doesn't */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--font-size);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+h2 p {
+  margin: 0;
+}
+
+p {
+  padding: 0rem 0;
+  margin: 0.75em 0;
+}
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: calc(var(--font-size) - 0.24rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Smaller eyebrow for tighter spots — e.g. the workshop detail cards — where the full .eyebrow size crowds the layout. */
+.eyebrow-lesser {
+  margin: 0 0 0.4rem;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: calc(var(--font-size) - 0.36rem);
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+/* Force dark ink or light cream text regardless of the section a paragraph happens to sit in — for copy reused across the night-sky hero and the daylight page. */
+.dark {
+  color: var(--ink);
+}
+
+.light {
+  color: var(--hero-cream);
+}
+
+/* Switch a piece of copy between the display serif and the body sans, independent of whatever element it's on. */
+.serif {
+  font-family: var(--font-display);
+}
+
+.sanserif {
+  font-family: var(--font-body);
+}
+
+/* The dim, thin, translucent voice used on the index page's night-sky photo. */
+.moon {
+  font-family: garamond;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.595);
+}
+
+/* A plain, generously-sized paragraph style for longer-form reading on light backgrounds — wild-roses and similar pages. */
+.easy-to-read {
+  font-size: var(--easy-to-read-size);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* Headings within easy-to-read prose stay proportionally larger than the body copy around them. */
+h2.easy-to-read {
+  padding-top: 0.5em;
+  font-size: calc(var(--easy-to-read-size) + 2.5rem);
+  line-height: 100%;
+  letter-spacing: -0.04em;
+}
+
+h2.second-line.easy-to-read {
+  font-size: calc(var(--easy-to-read-size) + 0rem);
+  line-height: 130%;
+}
+
+/* Headings within easy-to-read prose stay proportionally larger than the body copy around them. */
+h3.easy-to-read {
+  font-size: calc(var(--easy-to-read-size) + 0.5rem);
+}
+
+/* Short descriptive text next to a photo in a card layout — remembering-the-village and wild-roses share this exact size. */
+.card-text {
+  font-size: clamp(var(--font-size), 1.3vw, calc(var(--font-size) + 0.5rem));
+}
+
+/* A larger opening paragraph for the first line or two after a headline. Scaled off --easy-to-read-size (rather than a flat value) so it's always a step up from that system's body copy, wherever the two are combined. */
+.lede {
+  font-size: calc(var(--easy-to-read-size) + 0.25rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Muted secondary text — captions, fine print, helper copy. */
+.quiet {
+  color: var(--ink-soft);
+}
+
+/* Compact meta text — smaller than body copy but plain-case, unlike .eyebrow-lesser. */
+.small {
+  font-size: calc(var(--font-size) - 0.15rem);
+}
+
+/* Keeps a phrase from splitting across a line break, so a wrapping heading breaks before it instead of mid-phrase. */
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* Italic display-font pull-quote, usable on its own outside of .quote-card. */
+.quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: calc(var(--font-size) + 0.15rem);
+}
+
+a {
+  color: inherit;
+}
+
+a.basic-button {
+  display: inline-block;
+  border-radius: 0.5em;
+  padding: 0.5em 2em;
+  margin: 1em 0;
+  text-align: center;
+  font-weight: 400;
+  text-decoration: none;
+  color: #f2f2f2;
+  background-color: #232226;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.center {
+  text-align: center;
+}
+
+form {
+  padding-top: 1em;
+  width: 30rem;
+  max-width: calc(100% - 1rem);
+  font-size: max(17px, 0.5em);
+  --bg: #090c0d33;
+  --bg-active: hsl(30, 14%, 97%);
+  --outline: #fff;
+  --shadow: 0 3px 6px #0004;
+}
+
+form div {
+  display: flex;
+  box-shadow: var(--shadow);
+  border-radius: 0.3em; /* we need this for the box shadow… */
+}
+
+/* and these for the focus outline… */
+form div > :first-child {
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+}
+form div > :last-child {
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+}
+
+input {
+  padding: 0.3em 0.4em 0.2em;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+}
+
+/* avoid the brief flash of yellow in some browsers */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg) inset !important;
+  box-shadow: var(--shadow) inset !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.595) !important;
+}
+
+input:focus-visible {
+  outline: 2px solid var(--outline);
+  outline-offset: -2px;
+}
+
+input[type="email"] {
+  width: 100%;
+}
+
+input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus-within,
+input[type="submit"]:active {
+  background: var(--bg-active);
+  box-shadow: 0 0.1em 1em hsl(350, 33%, 70%);
+  color: #090c0dad;
+}
+
+input[type="submit"]:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
