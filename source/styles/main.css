@@ -375,8 +375,8 @@
   width: auto;
   height: 4rem;
   background-color: color-mix(in srgb, var(--hero-gold) 48%, var(--ink-soft) 52%);
-  -webkit-mask-image: url("/images/icons/level-horizon.svg");
-  mask-image: url("/images/icons/level-horizon.svg");
+  -webkit-mask-image: url("/images/svgs/level-horizon.svg");
+  mask-image: url("/images/svgs/level-horizon.svg");
   -webkit-mask-size: 110% 100%;
   mask-size: 110% 100%;
   -webkit-mask-position: calc(50% + 2rem) center;
@@ -411,15 +411,15 @@
 
 /* Each branch is a different height, tallest for the most advanced level — the taller stem is what visually carries the "further along the path" feeling, not just the label/colour. */
 .level-step--gentle .level-branch {
-  -webkit-mask-image: url("/images/icons/branch-gentle.svg");
-  mask-image: url("/images/icons/branch-gentle.svg");
+  -webkit-mask-image: url("/images/svgs/branch-gentle.svg");
+  mask-image: url("/images/svgs/branch-gentle.svg");
   -webkit-mask-size: auto 6.25rem;
   mask-size: auto 6.25rem;
 }
 
 .level-step--beginner .level-branch {
-  -webkit-mask-image: url("/images/icons/branch-beginner.svg");
-  mask-image: url("/images/icons/branch-beginner.svg");
+  -webkit-mask-image: url("/images/svgs/branch-beginner.svg");
+  mask-image: url("/images/svgs/branch-beginner.svg");
   -webkit-mask-size: auto 7.75rem;
   mask-size: auto 7.75rem;
   -webkit-mask-position: calc(50% + 0.5rem) bottom;
@@ -429,8 +429,8 @@
 .level-step--intermediate .level-branch {
   height: 10.25rem;
   margin-top: -2.75rem;
-  -webkit-mask-image: url("/images/icons/branch-intermediate.svg");
-  mask-image: url("/images/icons/branch-intermediate.svg");
+  -webkit-mask-image: url("/images/svgs/branch-intermediate.svg");
+  mask-image: url("/images/svgs/branch-intermediate.svg");
   -webkit-mask-size: auto 10.25rem;
   mask-size: auto 10.25rem;
   -webkit-mask-position: calc(50% + 0.5rem) bottom;
