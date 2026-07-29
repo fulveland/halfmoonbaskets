@@ -1,0 +1,82 @@
+/* INDEX */
+
+#index {
+  margin: 0;
+  background: url("/images/half-moon-baskets-moon-stars.webp");
+
+  /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */
+  --bg: hsl(0, 0%, 2%);
+  background-color: var(--bg);
+
+  /* The background will always fill the full window. */
+  background-size: cover;
+
+  /* Anchor the top left corner of the photo to the top left corner of the screen. */
+  /* This doesn't matter (because background-size: cover), except we fine-tune the position to control how it's cropped. */
+  /* The 15% and 30% crop could be applied in Pixelmator, but this is fine. */
+  background-position: top 15% left 30%;
+
+  /* We sometimes see the bottom edge of the image, and we don't want it to tile. */
+  background-repeat: no-repeat;
+
+  /* This controls where the text is situated. Adjust it in small amounts. */
+  /* Using percentage means the text will squash and stretch similar to how background-size: cover works. */
+  padding: 17% 10% 1em 45%;
+  /* This tiny bit ^ is for when the text runs all the way to the bottom of the screen */
+
+  /* These were just tuned by eye to roughly match how Figma looks (which is using a thinner version of Garamond, and bad antialiasing) */
+  color: rgba(255, 255, 255, 0.595);
+  /* Predates the site-wide type system (var(--font-body) is Source Sans 3) — restore garamond so the form/input inherit it correctly. */
+  font-family: garamond;
+  letter-spacing: 0.02rem;
+
+  h1 {
+    font-weight: 100;
+    font-size: 1.6em;
+    /* The site-wide h1,h2,h3 rule sets color: var(--ink) and font-family: var(--font-display), which would break this page's dim night-sky heading — restore both. */
+    color: inherit;
+    /* font-family: garamond; */
+  }
+  p {
+    /* font-family: garamond; */
+    font-weight: 10;
+  }
+
+  /* _site.css sets a link color, which is annoying, so we strip that out. */
+  a {
+    color: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+  }
+
+  /* FORM */
+  form {
+    padding-top: 0.1em;
+    --bg: #3a419f36;
+  }
+
+  /* Note: if you change this breakpoint, you also need to redo the background-size and position. */
+  @media (max-width: 500px) {
+    /* Keep the photo at a fixed size, and we'll just crop as the screen shrinks */
+    background-size: 1650px;
+
+    /* Anchor the top right corner of the photo to the top right corner of the screen. */
+    /* This means we crop the left and bottom, and keep your head in the corner. */
+    background-position: top -350px right -1150px;
+    /*    more negative = up ^            ^ more negative = right */
+
+    /* Space between the text and the left, top, and bottom edges of the screen */
+    padding: 5em 0.5em;
+
+    /* Keep the text away from the photo */
+    padding-right: 8em;
+
+    /* This helps make the text more readable when it overlaps the photo */
+    text-shadow: 0 0 0.5em var(--bg);
+
+    /* FORM */
+    form {
+      --bg: #3a419f7e;
+    }
+  }
+}

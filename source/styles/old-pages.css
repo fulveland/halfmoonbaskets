@@ -1,0 +1,714 @@
+/* REMEMBERING THE VILLAGE */
+
+#remembering-the-village {
+  padding: 0;
+  margin: 0;
+  /* This page predates the site-wide type system and never had its own type rules — it fully relied on the old global body/heading/link defaults, which were near-white text on this light gray background: illegible. Dark ink instead. */
+  font-family: garamond;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  margin-top: 5em;
+
+  /* Nav defaults to cream (for pages with a dark hero) — override for this page's light background. */
+  .site-logo,
+  .site-nav a {
+    color: var(--ink);
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+    color: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.3em;
+    letter-spacing: normal;
+  }
+
+  a {
+    color: #2c3673;
+  }
+
+  .remembering-card {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      ". .  p p p p i i i i . ."
+      ". . p2 p2 p2 p2 d d d d . .";
+    place-items: center;
+    margin: 3em 0 0 0;
+  }
+
+  .remembering-p-box {
+    grid-area: p;
+    margin: 1em 0 1em 0;
+  }
+
+  .remembering-p2-box {
+    grid-area: p2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+  }
+
+  .remembering-p2-box img {
+    margin: 0 0 2em 0;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .remembering-i-box {
+    grid-area: i;
+    margin: 3rem 3rem 3rem 1rem;
+    align-self: center;
+  }
+
+  .remembering-d-box {
+    grid-area: d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    margin: 0rem 0rem 0rem 1rem;
+    padding: 3rem 0rem 8rem 0rem;
+  }
+
+  @media (max-width: 800px) {
+    .remembering-card {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        ". p p p p p p p p p p ."
+        ". i i i i i i i i i i ."
+        ". d d d d d d d d d d ."
+        ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 .";
+      align-content: center;
+      margin: 0;
+      padding: 3em 0em 0em 0em;
+    }
+
+    .remembering-p-box img {
+      width: 100%;
+      margin: 0;
+    }
+
+    .remembering-p2-box img {
+      margin: 1em 0em 1em 0em;
+      width: 100%;
+    }
+
+    .remembering-i-box {
+      margin: 0rem 0rem 0rem 0rem;
+      align-self: center;
+      width: 100%;
+    }
+
+    .remembering-d-box {
+      display: inline-block;
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
+    }
+  }
+}
+
+/* WILD ROSES */
+
+#wild-roses {
+  .site-logo,
+  .site-nav a {
+    color: var(--ink-soft);
+  }
+  h2,
+  h3,
+  p {
+    color: var(--ink-soft);
+  }
+  h2,
+  h3 {
+    font-weight: bold;
+  }
+  h2:not(.second-line) {
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  a.basic-button {
+    background-color: #4d593c;
+  }
+
+  /* Photos are one continuous column (all 4 images together) instead of split across rows.
+     Splitting them was the actual root cause of the "awkward gap" — a text box sharing a row
+     with just the tall hero photo forced that whole row to the photo's height regardless of how
+     short the text was, pushing the next row down by however much taller the photo was. Every
+     piece of text — header, quote, and each individual paragraph — is its own grid row here, so
+     no single row is ever forced taller than its own content, and they all stack with ordinary
+     spacing. The photo column spans all of them combined and stretches to match that total
+     height on its own side. */
+  #roses-card {
+    margin: 0;
+    padding: 1.3rem clamp(1rem, 5vw, 4rem);
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "p p p p p i i i i i i ."
+      "p p p p p q q q q q q ."
+      "p p p p p d1 d1 d1 d1 d1 . ."
+      "p p p p p d2 d2 d2 d2 d2 . ."
+      "p p p p p d3 d3 d3 d3 d3 . ."
+      "p p p p p d4 d4 d4 d4 d4 . ."
+      ". n n n n n n n n n n .";
+
+    place-items: center;
+  }
+
+  .roses-p-box {
+    grid-area: p;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+  .roses-p-box img {
+    margin: 0 0 2em 0;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* justify-self: start on every text-side box (below) — without it, #roses-card's
+     place-items: center centers each box within its whole column track instead of stretching or
+     left-aligning it. The photo column fills its track edge to edge, but these boxes are each
+     narrower than theirs and were floating independently centered, so the visible gap between
+     the photo and the text was actually "however much narrower than the track this box's content
+     happens to be," which grows and shrinks with viewport width instead of staying fixed. Fixed
+     25px margin-left now does the only job of creating that gap. */
+  .roses-i-box {
+    grid-area: i;
+    margin: clamp(1rem, 5vw, 4rem) 3rem 3rem 0rem;
+    align-self: start;
+    justify-self: start;
+  }
+  .roses-i-box p,
+  .roses-quote p {
+    /* margin: 0; */
+    /* padding: 0; */
+  }
+
+  /* The quote is its own grid item, not nested inside anything, specifically so it can be placed
+     in a completely different row at tablet widths (see the media query below) — reordering
+     within a single flex column can't move something to a different section of the page, only a
+     real grid reposition can. Here at the default width it sits directly between the header and
+     the other paragraphs, in the same column, reading as one continuous block. */
+  .roses-quote {
+    grid-area: q;
+    align-self: start;
+    justify-self: start;
+    margin: 0 0 1.2rem 0rem;
+  }
+
+  /* These are separate grid rows now, not flex children — a plain <p> no longer gets natural
+     stacking spacing from the browser's default paragraph margin, since grid doesn't collapse
+     or apply margins between rows the way normal flow would. The bottom margin here is what
+     actually creates the gap between one paragraph and the next. */
+  .roses-line {
+    align-self: start;
+    justify-self: start;
+    margin: 0 0 1.2rem 0rem;
+    max-width: 40rem;
+  }
+  .roses-line-1 {
+    grid-area: d1;
+  }
+  .roses-line-2 {
+    grid-area: d2;
+  }
+  .roses-line-3 {
+    grid-area: d3;
+  }
+  .roses-line-4 {
+    grid-area: d4;
+    margin-bottom: 8rem;
+  }
+  .roses-n-box {
+    grid-area: n;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: start;
+    justify-self: start;
+    width: 100%;
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 3rem 8rem 8rem 8rem;
+    background-color: var(--page-dark-highlight);
+  }
+
+  .roses-n-box p {
+  }
+
+  /* --page: #f6efe8;
+  --page-warm: #eadccb;
+  --paper: #fff9f1;
+  --paper-soft: rgba(255, 249, 241, 0.82);
+  --paper-strong: rgba(255, 249, 241, 0.94); */
+
+  @media (max-width: 800px) {
+    #roses-card {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        ". p1 p1 p1 p1 p1 p1 p1 p1 p1 p1 ."
+        ". i i i i i i i i i i ."
+        ". q q q q q q q q q q ."
+        ". d1 d1 d1 d1 d1 d1 d1 d1 d1 d1 ."
+        ". d2 d2 d2 d2 d2 d2 d2 d2 d2 d2 ."
+        ". d3 d3 d3 d3 d3 d3 d3 d3 d3 d3 ."
+        ". d4 d4 d4 d4 d4 d4 d4 d4 d4 d4 ."
+        ". n n n n n n n n n n ."
+        ". p2 p2 p2 p2 p2 p2 p2 p2 p2 p2 ."
+        ". p3 p3 p3 p3 p3 p3 p3 p3 p3 p3 ."
+        ". p4 p4 p4 p4 p4 p4 p4 p4 p4 p4 .";
+      align-content: center;
+      margin: 0;
+      padding: 3em 0em 0em 0em;
+    }
+
+    /* display: contents removes .roses-p-box's own box, exposing its 4 <img> children as direct
+       grid items — so the hero photo can go back to the top and the other three can go to the
+       very bottom, on mobile only, with zero HTML changes and no effect on desktop/tablet, where
+       the wrapper stays a real flex box (all 4 photos as one stretching column). */
+    .roses-p-box {
+      display: contents;
+    }
+    .roses-p-box img:nth-child(1) {
+      grid-area: p1;
+    }
+    .roses-p-box img:nth-child(2) {
+      grid-area: p2;
+    }
+    .roses-p-box img:nth-child(3) {
+      grid-area: p3;
+    }
+    .roses-p-box img:nth-child(4) {
+      grid-area: p4;
+    }
+    .roses-p-box img {
+      width: 100%;
+      margin: 0 0 1em 0;
+    }
+    .roses-i-box {
+      margin: 0rem 0rem 0rem 0rem;
+      align-self: center;
+      width: 100%;
+    }
+    .roses-quote {
+      width: 100%;
+      margin: 0 0 1.2rem 0;
+    }
+    .roses-line {
+      width: 100%;
+      margin: 0 0 1.2rem 0;
+    }
+    .roses-line-4 {
+      margin-bottom: 0;
+    }
+
+    .roses-n-box {
+      display: inline-block;
+      width: 100%;
+      margin: 0rem 0rem 0rem 0rem;
+      padding: 0;
+    }
+  }
+
+  /* Tablet range only (mobile stacks everything below 800px anyway; by ~1100px there's enough
+     room that the top-of-column quote reads fine again). A real grid reposition — the quote
+     gets its own row after .roses-n-box, at the very bottom of the page — not just a reorder
+     within one column, since the actual ask was to move it out of the photo+text pairing
+     entirely, not just to the end of that column. */
+  @media (min-width: 801px) and (max-width: 1100px) {
+    #roses-card {
+      grid-template-areas:
+        "p p p p p i i i i i i ."
+        "p p p p p d1 d1 d1 d1 d1 d1 ."
+        "p p p p p d2 d2 d2 d2 d2 d2 ."
+        "p p p p p d3 d3 d3 d3 d3 d3 ."
+        "p p p p p d4 d4 d4 d4 d4 d4 ."
+        ". n n n n n n n n n n ."
+        ". q q q q q q q q q q .";
+    }
+
+    .roses-quote {
+      margin: 3rem 0 0 1rem;
+    }
+  }
+}
+
+/* WORKSHOPS (legacy standalone workshops.html page — scoped to body id so it can't collide with the <section id="workshops"> used on the event pages) */
+
+body#workshops {
+  /* Legacy standalone page — restore the old inherited font/color/background instead of the site-wide type system. Dark ink (not the old near-white): the calendar's city labels and plain (unbooked) date numbers have no color of their own and were inheriting this base value directly. */
+  font-family: garamond;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+
+  /* No color: inherit on these headings — prose paragraphs now carry .easy-to-read (dark ink), so headings match rather than staying the page's old near-white default. */
+  h2 {
+    grid-column: 1 / -1; /* make headings span full width */
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Prose paragraphs (intro text, workshop descriptions) carry .easy-to-read in the HTML; this rule now only covers the calendar city-labels and price-row figures, which keep the old fixed size. */
+  p {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .workshop > p,
+  .price-row p {
+    font-size: 25px;
+  }
+
+  h3 {
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 30px 0 0 0;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  .past-event-names {
+    grid-column: 1 / -1;
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  #intro {
+    max-width: 1000px;
+  }
+  #past {
+    max-width: 1000px;
+    margin-top: 60px;
+  }
+  #calendar {
+    margin-bottom: 20px;
+  }
+
+  .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  .catalogue-grid img {
+    margin-top: 30px;
+  }
+
+  .catalogue-grid h2 {
+    font-size: 60px;
+    margin: 60px 0 -10px 0;
+  }
+  .workshop {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* default for desktop */
+  }
+
+  @media (max-width: 750px) {
+    .workshop {
+      max-width: 750px; /* wider workshops on tablet */
+    }
+  }
+
+  /* Calendar month blocks only (.words has its own catalogue-project paragraphs) — bigger, more spaced-out dates so booking status doesn't need zooming in to read. */
+  .workshop ul {
+    margin: 0.3em 0;
+    padding-left: 1.2em;
+  }
+
+  .workshop li {
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+
+  .workshop .words {
+    flex: 1; /* fill vertical space */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-top: auto; /* push to bottom */
+    padding: 0 10px 0 0;
+  }
+
+  .price-row p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .booked {
+    background-color: rgb(101, 101, 227);
+    text-decoration: line-through;
+  }
+  .hold {
+    background-color: rgb(224, 116, 234);
+    text-decoration: line-through;
+  }
+
+  .past-event-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-content: start;
+    align-items: stretch;
+    gap: 70px 40px;
+    padding-top: 40px;
+  }
+
+  .past-event-images img {
+    max-width: 400px;
+    object-fit: contain;
+  }
+}
+
+/* THE WEAVE CONTINUES */
+
+#the-weave-continues {
+  /* Legacy standalone page — restore the old inherited font/color/link/background instead of the site-wide type system. Dark ink (not the old near-white) since every visible paragraph/heading already carries an explicit dark color; this is just the base. */
+  font-family: garamond;
+  line-height: 1.4;
+  color: var(--ink);
+  background-color: #f2f2f2;
+  max-width: 755px;
+  margin: 0 auto;
+  padding: 20px;
+
+  a {
+    color: #2c3673;
+  }
+
+  /* Nav defaults to cream (for pages with a dark hero); this page's own a{color:#2c3673} above would otherwise win by specificity and turn the nav blue instead. */
+  .site-logo,
+  .site-nav a {
+    color: var(--ink);
+  }
+
+  p {
+    margin: 10px 0 10px;
+    padding: 10px;
+  }
+
+  /* Warm paper tone instead of the old lavender/blue-purple tint, which read as off-brand against the rest of the site's earthy palette. Dark ink instead of color: inherit, since it no longer needs to work as light text on a saturated background. */
+  h2 {
+    background-color: var(--page-warm);
+    padding: 0.3em 0.6em;
+    border-radius: var(--radius);
+    font-family: "Cormorant Garamond";
+    font-size: 2.2em;
+    margin: 40px 0 20px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Unlike h2/h4, no color: inherit here — these headings now carry .easy-to-read in the HTML alongside the page's .dark paragraphs, so they share the same dark ink instead of the page's legacy near-white default. */
+  h3 {
+    font-family: "Cormorant Garamond";
+    padding: 0;
+    margin: 20px 0 10px 0;
+    font-size: 1.7em;
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  /* Explicit color: var(--ink) here (not just a removed color: inherit) — unlike h3, h4 isn't caught by the site-wide h1,h2,h3 rule, so without this it silently inherits the container's near-white legacy color. */
+  h4 {
+    font-family: "Cormorant Garamond";
+    font-size: 1.3em;
+    margin: 40px 0 0px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+  .past-event-names {
+    grid-column: 1 / -1;
+    font-family: "Cormorant Garamond";
+    font-size: 2em;
+    margin: 60px 0 10px 0;
+    color: var(--ink);
+    font-weight: bold;
+    letter-spacing: normal;
+  }
+
+  #intro {
+    max-width: 1000px;
+  }
+  #guide {
+    max-width: 1000px;
+  }
+}
+
+/* GRIEF TENT */
+
+#grief-tent {
+  font-family: garamond, serif;
+  background-color: #141619;
+
+  .site-logo,
+  .site-nav a {
+    color: #a8a5a0;
+  }
+
+  /* Container for layout */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .responsive-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-width: 350px; /* Ensures the image does not shrink below 100px */
+  }
+
+  /* Content divs */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 850px; /* Adjust width as needed */
+    min-width: 500px;
+    padding-top: 7em;
+  }
+
+  /* Individual divs */
+  .box {
+    padding: 3em 2em 0 2em;
+    margin: 0 1em 0 1em;
+  }
+
+  /* Larger screens - two divs to the right */
+  @media (min-width: 768px) {
+    .container {
+      flex-wrap: nowrap;
+      align-items: flex-start;
+    }
+
+    .responsive-image {
+      width: 10%; /* Adjust width for image */
+      height: auto;
+    }
+
+    .content {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .box {
+      flex: 1;
+    }
+  }
+
+  /* Smaller screens - image above divs */
+  @media (max-width: 767px) {
+    .responsive-image {
+      width: 10%;
+    }
+
+    .content {
+      justify-content: center;
+      min-width: fit-content;
+      margin-bottom: 2em;
+    }
+    .box {
+      margin-top: 2em;
+      margin-bottom: 0;
+      padding: 1em 1em 0 1em;
+    }
+  }
+
+  p,
+  h2 {
+    color: #a8a5a0;
+  }
+  /* Size/line-height/max-width are now owned by .easy-to-read in the HTML; this just keeps the page's own sans-serif choice for body copy. */
+  p {
+    font-family: "Source Sans 3";
+  }
+  h2 {
+    font-family: garamond;
+    font-weight: 400;
+    font-size: 1.1em;
+    letter-spacing: normal;
+  }
+
+  p.move-right {
+    padding: 0 3em 0 2em;
+  }
+
+  /* Full-width banner */
+  .banner {
+    width: 100%;
+    height: auto;
+    background-color: #241e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  /* Centered image */
+  .banner-fest-logo {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+  }
+
+  @media (max-width: 800px) {
+    .banner {
+      padding: 10px 0;
+    }
+
+    .banner-fest-logo {
+      width: 90%;
+      max-width: 250px;
+    }
+
+    .content {
+      padding-top: 0;
+    }
+  }
+}

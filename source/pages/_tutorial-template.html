@@ -16,13 +16,11 @@
          blocks and sidebar <li> entries for as many steps as the tutorial needs —
          there's no fixed count, tutorial-berry-boat.html has 21.
       3. Add real photos under /images/tutorials/[slug]/ and swap the img src
-         attributes and hero background in tutorials.css (search for
-         "berry-boat-hero-right.webp" for the pattern — each tutorial currently
-         sets its own hero image with a page-specific override; see note below).
-      4. Every class here (.tutorial-hero, .tutorial-section, .video-card,
+         attributes and the --hero-photo URL on the hero <section> below.
+      4. Every class here (.site-hero, .tutorial-section, .video-card,
          .step-note, .rhythm-card, .materials-grid, etc.) is already styled in
-         tutorials.css and shared across all tutorial pages — no new CSS should
-         be needed for a standard tutorial.
+         _global.css / tutorials.css and shared across all tutorial pages — no
+         new CSS should be needed for a standard tutorial.
   -->
 
   <body class="tutorial-page">
@@ -40,25 +38,21 @@
 
     <main>
       <!--
-        HERO
-        The background photo is set per-tutorial. tutorials.css currently hardcodes
-        it on .tutorial-hero for the berry boat page (see the "background:" line
-        under /* HERO */); the simplest path for a new tutorial is a page-scoped
-        override, e.g. `.tutorial-page.[slug]-page .tutorial-hero { background: ...
-        url("/images/tutorials/[slug]/hero.webp"); }`, with that class added to
-        <body> alongside .tutorial-page.
+        HERO — shared .site-hero component (see _global.css), also used by the
+        weekend-of-weaving event/gateway pages. The background photo is set
+        per-page via the --hero-photo custom property below.
       -->
-      <section class="tutorial-hero" aria-labelledby="page-title">
-        <div class="tutorial-hero-inner">
-          <p class="tutorial-kicker">[Category, e.g. Willow Basketry Tutorial]</p>
+      <section class="site-hero" aria-labelledby="page-title" style="--hero-photo: url('/images/tutorials/[slug]/hero.webp')">
+        <div class="site-hero-inner">
+          <p class="eyebrow">[Category, e.g. Willow Basketry Tutorial]</p>
 
           <h1 id="page-title">[Tutorial <span class="no-wrap">Title]</span></h1>
 
-          <p class="tutorial-hero-copy">[One or two sentences setting up what this is and why someone would want to make it.]</p>
+          <p class="site-hero-copy">[One or two sentences setting up what this is and why someone would want to make it.]</p>
 
-          <div class="tutorial-hero-actions">
-            <a class="tutorial-button" href="#materials">Gather Materials</a>
-            <a class="tutorial-button" href="#[first-step-id]">Start [Weaving/Making]</a>
+          <div class="site-hero-actions">
+            <a class="primary-button" href="#materials">Gather Materials</a>
+            <a class="secondary-button" href="#[first-step-id]">Start [Weaving/Making]</a>
           </div>
         </div>
       </section>

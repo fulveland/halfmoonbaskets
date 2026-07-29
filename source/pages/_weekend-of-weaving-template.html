@@ -1,0 +1,374 @@
+<title>[Event Name] at Pioneer Lodge in Red Deer Alberta</title>
+</head>
+
+<!--
+  WEEKEND OF WEAVING — EVENT PAGE TEMPLATE
+  =========================================
+  To start a new event:
+    1. Copy this file to source/pages/weekend-of-weaving-[slug].html (dropping
+       the leading underscore is what makes the Cakefile build it — files
+       starting with _ are skipped, same as this one, _tutorial-template.html,
+       and _template.html).
+    2. Fill in every [placeholder]. The three per-page configuration points
+       are: the <body> class, the hero section's id/aria-labelledby/--hero-photo/
+       --hero-dark, and the <h1> id — all marked below.
+    3. Duplicate <article class="schedule-day"> once per day of the event, and
+       <article class="workshop-detail-card"> once per workshop offered — there's
+       no fixed count (the two real events so far have run 3 days / 6-7 workshops,
+       but that's incidental, not a rule). Duplicate <a class="workshop-date-button">
+       inside a card once per time slot that specific workshop runs.
+    4. .schedule-legend's material <span> classes (e.g. willow, cattail, bulrush)
+       must match whatever classes you use on .timeline-event elements — the set
+       varies per event (2-4 so far), it isn't fixed either.
+    5. Once the page is live, add a matching <a class="date-button date-button-[color]">
+       link in TWO places on weekend-of-weaving-red-deer.html (the gateway page):
+       the hero .site-hero-actions block and the bottom-cta .site-hero-actions
+       block. Easy to forget since it's a separate file from everything above.
+    6. Every class here (.site-hero, .quick-info, .path-section, .schedule-*,
+       .timeline-*, .workshop-detail-*, .info-grid, .policies-section,
+       .bottom-cta, etc.) is already styled in _global.css / main.css and shared
+       across the gateway + both real event pages — no new CSS should be needed
+       for a standard event page.
+-->
+
+<body class="weekend-page [slug]-event-page">
+  <header class="site-header site-header--overlay">
+    <a href="/" class="site-logo">Half Moon<br /><span>Baskets</span></a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <!-- <a href="/about">About</a>
+      <a href="/calendar">Calendar</a> -->
+      <a href="/wild-roses">Wild Roses</a>
+      <a href="/email">Newsletter</a>
+    </nav>
+  </header>
+  <main>
+    <!--
+      HERO — shared .site-hero component (see _global.css), also used by the
+      gateway page and the tutorial pages. --hero-photo and --hero-dark are the
+      per-event config point (--hero-dark is a fallback/overlay tone behind the
+      photo, pick something in the same family as the photo's darkest area).
+      id/aria-labelledby/h1 id follow a [slug]-hero / [slug]-title convention.
+    -->
+    <section id="[slug]-hero" class="site-hero" aria-labelledby="[slug]-title" style="--hero-photo: url('/images/events/weekend-of-weaving-red-deer/[slug]-hero.jpg'); --hero-dark: #[hex]">
+      <div class="site-hero-inner">
+        <p class="eyebrow">[Month Day–Day] · Red Deer</p>
+        <h1 id="[slug]-title">[Event Name]</h1>
+        <p class="hero-location">at Pioneer Lodge</p>
+        <p class="site-hero-copy">[One or two sentences setting up the weekend and the materials it covers.]</p>
+
+        <div class="site-hero-actions" aria-label="[Event Name] page links">
+          <a href="#schedule" class="primary-button">View Schedule</a>
+          <a href="#workshops" class="secondary-button">Browse Workshops</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-info" aria-label="Quick [Event Name] information">
+      <div class="content full">
+        <article>
+          <h3 class="label">Dates</h3>
+          <p>[Month Day–Day]</p>
+        </article>
+
+        <article>
+          <h3 class="label">Location</h3>
+          <p>Pioneer Lodge,<br />Red Deer</p>
+        </article>
+
+        <article>
+          <h3 class="label">Workshops</h3>
+          <p>[e.g. "Gentle beginner, beginner, and intermediate options."]</p>
+        </article>
+
+        <article>
+          <h3 class="label">Materials</h3>
+          <p>Prepared natural materials and tools are included.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="choose-your-path" class="path-section">
+      <div class="content wide">
+        <div class="path-copy">
+          <p class="eyebrow">Choose your path</p>
+          <h2 class="section-title">Which workshop is right for you?</h2>
+          <p class="section-intro">[One or two sentences summarizing the range of workshops on offer, gentlest to fullest.]</p>
+          <p>You can register for a single workshop, combine a few shorter sessions, or spend the weekend moving between different materials and forms.</p>
+        </div>
+
+        <!--
+          PATH CARDS — both real events use exactly 3 of these (gentlest start /
+          practice-or-pattern / fuller day, icons ☾ ✶ ✧ in that order), but that's
+          not a hard rule — add or remove as the event's workshop spread calls for.
+        -->
+        <div class="path-cards" aria-label="Workshop choice suggestions">
+          <article>
+            <div class="path-icon" aria-hidden="true">☾</div>
+            <div>
+              <h3 class="eyebrow-lesser">For the gentlest start</h3>
+              <p>[Suggested gentle-beginner workshop(s).]</p>
+            </div>
+          </article>
+
+          <article>
+            <div class="path-icon" aria-hidden="true">✶</div>
+            <div>
+              <h3 class="eyebrow-lesser">[e.g. "For willow practice" / "For pattern and focus"]</h3>
+              <p>[Suggested beginner workshop(s).]</p>
+            </div>
+          </article>
+
+          <article>
+            <div class="path-icon" aria-hidden="true">✧</div>
+            <div>
+              <h3 class="eyebrow-lesser">For a fuller day</h3>
+              <p>[Suggested intermediate/longer workshop(s).]</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="schedule" class="schedule-section">
+      <div class="content wide">
+      <p class="eyebrow">[Event Name] Schedule</p>
+      <h2 class="section-title">Choose your weaving time</h2>
+      <p class="schedule-note">Overlapping workshops are shown side by side, so you can see which sessions happen at the same time.</p>
+      <!--
+        LEGEND — one <span> per material used this event; the class on each
+        (here "willow"/"cattail") must exist as a matching colour in the CSS
+        and must match the classes you use on .timeline-event below.
+      -->
+      <p class="schedule-legend" aria-label="Material colour key">
+        <span class="[material-class]">[Material Name]</span>
+        <span class="[material-class]">[Material Name]</span>
+      </p>
+
+      <div class="schedule-days">
+        <!--
+          SCHEDULE DAY — repeat this whole <article> once per day of the event.
+          The 9am–10pm hour strip below is identical boilerplate every time,
+          copy it as-is.
+        -->
+        <article class="schedule-day">
+          <h3 class="accent-heading">[Weekday] · [Month Date]</h3>
+
+          <div class="timeline" aria-label="[Weekday] [Month Date] workshop schedule">
+            <div class="timeline-hours" aria-hidden="true">
+              <span>9</span>
+              <span>10</span>
+              <span>11</span>
+              <span>12</span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+            </div>
+
+            <div class="timeline-events">
+              <!--
+                TIMELINE EVENT — repeat once per session scheduled this day.
+                --start/--span/--lane position the block in the grid (start = which
+                half-hour column it begins in, span = how many half-hour columns
+                wide, lane = which overlapping row when two sessions run at once).
+                href must match the workshop's id down in the workshop-detail-list.
+              -->
+              <a href="#[workshop-slug]" class="timeline-event [level-class]" style="--start: [n]; --span: [n]; --lane: 1">
+                <time>[Time Range]</time>
+                <strong>[Workshop Name]</strong>
+                <span class="tag">[Level]</span>
+              </a>
+
+              <!--
+                If a workshop occupies a second lane at the same time as another
+                (see November's Butt Cheek Basket for a real example), add a
+                second block for it with hidden set and a different --lane —
+                this keeps the id="[workshop-slug]" anchor's timeline entry
+                complete without visually doubling it up.
+                <a href="#[workshop-slug]" class="timeline-event [level-class]" style="--start: [n]; --span: [n]; --lane: 2" hidden>
+                  <time>[Time Range]</time>
+                  <strong>[Workshop Name]</strong>
+                  <span class="tag">[Level]</span>
+                </a>
+              -->
+            </div>
+          </div>
+        </article>
+      </div>
+      </div>
+    </section>
+
+    <!--
+      EVENT NOTE GRID — this exact copy is reused word-for-word by both real
+      events; only the aria-label needs the event name. Adjust the two
+      paragraphs only if this event's break/registration logistics differ.
+    -->
+    <section class="event-note-grid" aria-label="[Event Name] practical registration notes">
+      <div class="content wide">
+        <article>
+          <h3 class="label">Longer Workshops</h3>
+          <p>Workshops over 5 hours include a 1-hour break partway through. Bring something to store in the fridge or heat in the microwave, or head out for a bite nearby.</p>
+        </article>
+
+        <article>
+          <h3 class="label">Registration</h3>
+          <p>Choose the date and time that works for you, then use the registration button for that specific offering.</p>
+          <p>Registrations are managed through Luma and payments are processed through Stripe.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workshops" class="workshop-detail-section">
+      <div class="content wide">
+      <p class="eyebrow">[Event Name] Workshop Details</p>
+      <h2 class="section-title">[Event Name] Workshop Details</h2>
+      <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering.</p>
+
+      <div class="workshop-detail-list">
+        <!--
+          WORKSHOP DETAIL CARD — repeat this whole <article> once per workshop
+          offered. id must match the href used on this workshop's timeline
+          entries above.
+        -->
+        <article id="[workshop-slug]" class="workshop-detail-card">
+          <figure class="workshop-detail-media">
+            <img src="/images/events/weekend-of-weaving-red-deer/[workshop-slug].jpg" alt="[Describe the finished piece.]" loading="lazy" />
+            <!--
+              Add style="--focus: center 78%" (or similar) on the <img> above if
+              the photo needs recentering — most cards don't need this, only add
+              it when the default centered crop cuts off the subject.
+            -->
+          </figure>
+
+          <!--
+            NO-PHOTO VARIANT — if there's no photo yet for a workshop, use this
+            shape instead of the <figure> above: add the --no-image modifier to
+            the card, either drop the <figure> entirely or keep it commented out
+            as a placeholder for later (see September's Twill Berry Basket card
+            for a real example), and optionally fall back to
+            /images/willow-place-holder.webp with an alt describing the actual
+            workshop instead of no image at all.
+            <article id="[workshop-slug]" class="workshop-detail-card workshop-detail-card--no-image">
+          -->
+
+          <div class="workshop-detail-copy">
+            <p class="workshop-detail-level eyebrow-lesser">[Level] · $[price]</p>
+            <h2 class="card-title">[Workshop Name]</h2>
+
+            <div class="workshop-date-buttons" aria-label="[Workshop Name] registration options">
+              <!-- Repeat this <a> once per time slot this workshop runs. -->
+              <a href="#" class="workshop-date-button">
+                <span class="date-button-info">
+                  <span class="date-button-daydate">
+                    <span class="date-button-day">[Weekday],</span> <span class="date-button-date">[Month Date]</span>
+                  </span>
+                  <span class="date-button-time">[Time Range]</span>
+                </span>
+                <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span>
+              </a>
+            </div>
+
+            <p>[Opening description paragraph — inviting, a question or a hook.]</p>
+            <p>[1-3 more description paragraphs as needed.]</p>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>[Duration and break structure, e.g. "This is a 4-hour workshop with approximately 3 hours of guided instruction. We will take a 15-minute break partway through for tea and cake."]</p>
+            </div>
+
+            <div class="skills-list">
+              <h3 class="label">Skills learned</h3>
+              <ul>
+                <li>[Skill]</li>
+                <!-- Repeat per skill — 3 to 6 seen across existing cards. -->
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+      </div>
+    </section>
+
+    <!--
+      GRID SECTION — this exact copy (including the Google Maps link) is reused
+      word-for-word by both real events and the gateway page. Only touch the
+      contact details if they ever change.
+    -->
+    <section class="grid-section" aria-label="What to bring, location, and questions">
+      <div class="content wide info-grid">
+        <article>
+          <h3 class="label">What to Bring</h3>
+          <ul>
+            <li>All weaving materials and tools are provided.</li>
+            <li>A water bottle and any snacks you may need.</li>
+            <li>Food for longer workshops, if you are staying through a break.</li>
+            <li>Comfortable clothing for hands-on making.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3 class="label">Location &amp; Arrival</h3>
+          <p>Workshops take place at Pioneer Lodge in Red Deer, Alberta.</p>
+          <p>Full arrival details will be sent after registration.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=4324-46A%20Avenue%20Red%20Deer%20AB" class="text-button tag">Get directions →</a>
+        </article>
+
+        <article>
+          <h3 class="label">Questions?</h3>
+          <p>Email us anytime.</p>
+          <p><a href="mailto:halfmoonbaskets@gmail.com">halfmoonbaskets@gmail.com</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!--
+      POLICIES — this exact copy (including the waiver link) is reused
+      word-for-word by both real events. Only touch it if this event's
+      age/cancellation/waiver policy genuinely differs.
+    -->
+    <section class="policies-section" aria-labelledby="policies-title">
+      <div class="content wide">
+        <h2 id="policies-title">Policies</h2>
+
+        <div class="info-grid">
+          <article>
+            <h3 class="label">Children &amp; Youth</h3>
+            <p>Children over 12 are welcome in Gentle Beginner and Beginner workshops with a dedicated caregiver. Intermediate workshops are generally best suited to adults or older youth with some weaving experience.</p>
+          </article>
+
+          <article>
+            <h3 class="label">Cancellation Policy</h3>
+            <p>All sales are final. Tickets are non-refundable. If you are unable to attend, you may pass your ticket to a friend.</p>
+          </article>
+
+          <article>
+            <h3 class="label">Waiver</h3>
+            <p>A liability waiver is required for participation. Please review the <a href="https://docs.google.com/document/d/12rVb5zN-8WX8c2U5jFUigSngqIjpCrtT2kffPuywNOY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">liability waiver</a> before registering.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-cta" aria-labelledby="bottom-cta-title">
+      <div class="content full">
+        <div>
+          <h2 id="bottom-cta-title">Ready to weave in [Month]?</h2>
+          <p>Choose your workshop, save your spot, and spend the weekend weaving with natural materials.</p>
+        </div>
+
+        <a href="#workshops" class="primary-button">
+          <span class="moon-mark" aria-hidden="true">☾</span>
+          <span>View [Month] Workshops</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
