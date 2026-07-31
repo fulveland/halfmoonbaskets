@@ -44,7 +44,9 @@
 }
 
 .gateway-page .site-logo,
-.gateway-page .site-nav a {
+.gateway-page .site-nav a,
+.event-hero-page .site-logo,
+.event-hero-page .site-nav a {
   color: var(--ink);
 }
 
@@ -573,7 +575,161 @@
   }
 }
 
-/* QUICK INFO (event pages only — .quick-info without the --plain modifier) — icon-based 4-column strip below the dark photo hero, with the torn-paper tear below marking that night-sky-to-daylight seam. The gateway page's own info card is a fully independent block further down (search "GATEWAY INFO CARD") — it doesn't inherit from any of this, so nothing here needs to account for it. */
+/* EVENT HERO (event pages) — replaces .site-hero for the weekend-of-weaving event pages (September + November), both migrated to the Bark/Paper/Ink redesign. Echoes the gateway hero's language — Paper background, Ink headline, flat Bark Rust actions, no gradient/glow — but simpler: one event photo instead of a multi-photo collage, since there's no "About the weekend" card content to float here. */
+.event-hero {
+  padding-top: clamp(5.5rem, 7vw, 6rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.event-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+.event-hero-copy {
+  max-width: 34rem;
+}
+
+.event-hero-h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  font-size: clamp(38px, 4.4vw, 64px);
+  line-height: 1.04;
+}
+
+.event-hero-location {
+  margin: 0.5rem 0 0;
+  color: var(--hero-gold);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.3rem;
+}
+
+.event-hero-intro {
+  max-width: 32rem;
+  margin: 1.5rem 0 2rem;
+  color: var(--charcoal);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+}
+
+.event-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* .event-hero-actions .event-hero-button (not just .event-hero-button) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which would otherwise silently repaint this text the same colour as its own background. Same bug pattern as .gateway-button earlier this session. */
+.event-hero-actions .event-hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.9rem 1.75rem;
+  border: 1px solid var(--hero-gold);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.event-hero-actions .event-hero-button--primary {
+  background: var(--hero-gold);
+  color: var(--page);
+}
+
+.event-hero-actions .event-hero-button--primary:hover {
+  background: var(--bark-hover);
+  border-color: var(--bark-hover);
+  color: var(--page);
+  transform: translateY(-1px);
+}
+
+.event-hero-actions .event-hero-button--secondary {
+  background: transparent;
+  color: var(--hero-gold);
+}
+
+.event-hero-actions .event-hero-button--secondary:hover {
+  background: var(--hero-gold);
+  color: var(--page);
+  transform: translateY(-1px);
+}
+
+.event-hero-figure {
+  margin: 0;
+  aspect-ratio: 1.15;
+  overflow: hidden;
+}
+
+.event-hero-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 899px) {
+  .event-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .event-hero-copy {
+    max-width: none;
+  }
+
+  .event-hero-figure {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Matches .site-hero's own fix at this exact breakpoint (_global.css) — the header stacks logo+wrapped-nav here instead of one row, and .site-header--overlay floats it on top of whatever's beneath; .event-hero isn't an overlay hero, but the stacked header is still taller, so it needs the same clearance as .gateway-hero. */
+@media (max-width: 680px) {
+  .event-hero {
+    padding-top: 7.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .event-hero-grid {
+    padding-inline: var(--gateway-pad);
+  }
+
+  .event-hero-h1 {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    line-height: 1;
+  }
+
+  .event-hero-figure {
+    aspect-ratio: 4 / 3;
+  }
+
+  .event-hero-actions {
+    flex-direction: column;
+  }
+
+  .event-hero-actions .event-hero-button {
+    width: 100%;
+  }
+}
+
+/* QUICK INFO (event pages only — .quick-info without the --plain modifier) — flat 4-column strip below the hero. The torn-paper tear marks the night-sky-to-daylight seam for pages still using the old dark .site-hero (currently none live — both event pages now use .event-hero — but kept for any page built from _weekend-of-weaving-template.html's older form, or a future dark-hero page); the .event-hero + .quick-info::before override just below turns it off since there's no dark hero to transition from. */
 
 .quick-info::before {
   content: "";
@@ -587,6 +743,11 @@
   background: var(--page);
   -webkit-mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
   mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
+}
+
+/* No dark hero above to tear away from here — .event-hero is Paper already. */
+.event-hero + .quick-info::before {
+  content: none;
 }
 
 /* The section breaks out to the viewport edge (so a future background colour can run edge to edge); .content.full inside carries the actual 4-column layout, just with the hero's wider side padding instead of the standard page-pad. */
@@ -1545,7 +1706,9 @@
 }
 
 .schedule-note {
-  margin-bottom: calc(var(--font-size) * 2);
+  max-width: 44rem;
+  margin-inline: auto;
+  margin-bottom: 2rem;
   color: var(--ink-soft);
 }
 
@@ -1556,16 +1719,19 @@
   text-align: left;
 }
 
+/* Panel fill kept close to the page colour rather than a distinct pale rectangle — this section reads as editorial, not application UI, so the day groupings shouldn't compete visually with the workshop cards inside them. */
 .schedule-day {
-  padding: calc(var(--font-size) * 1.1) calc(var(--font-size) * 1.25);
-  border: 1px solid var(--line);
+  padding-block: calc(var(--font-size) * 1.1);
+  padding-inline: 1rem;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   border-radius: var(--radius);
-  background: var(--paper-soft);
+  background: color-mix(in srgb, var(--pale-ground) 55%, var(--page) 45%);
 }
 
-/* Font styling: .accent-heading (_global.css). */
+/* Font styling: .accent-heading (_global.css). Carries more of the section's hierarchy now that the panel itself is quieter. */
 .schedule-day h3 {
-  margin-bottom: calc(var(--font-size) * 0.75);
+  margin-bottom: 1.35rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.3vw, 1.55rem);
 }
 
 .timeline {
@@ -1576,7 +1742,8 @@
 .timeline-hours {
   position: relative;
   height: 1rem;
-  color: var(--ink-soft);
+  color: color-mix(in srgb, var(--charcoal) 60%, transparent);
+  font-size: 0.82rem;
 }
 
 .timeline-hours span {
@@ -1635,12 +1802,13 @@
 .timeline-events {
   display: grid;
   grid-template-columns: repeat(13, minmax(0, 1fr));
-  grid-auto-rows: minmax(4.4rem, auto);
+  grid-auto-rows: minmax(5rem, auto);
   gap: 0.5rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--line);
 }
 
+/* Full border simplified to just the coloured material edge — the day panel above already got quieter, and a full outline plus pale fill plus that edge read as too much chrome for what's otherwise an editorial page. Background kept a shade different from the day panel's own fill so the card still reads as distinct from it, just without the extra border weight. */
 .timeline-event {
   grid-column: var(--start) / span var(--span);
   grid-row: var(--lane);
@@ -1648,11 +1816,11 @@
   flex-direction: column;
   justify-content: center;
   gap: 0.15rem;
-  padding: calc(var(--font-size) * 0.7) calc(var(--font-size) * 0.9);
-  border: 1px solid var(--line);
+  padding: 0.9rem 1rem;
+  border: 0;
   border-left: 0.3rem solid var(--hero-gold);
   border-radius: 0.2rem;
-  background: var(--paper-soft);
+  background: color-mix(in srgb, var(--page) 72%, var(--pale-ground) 28%);
   text-decoration: none;
   transition: transform 180ms ease;
 }
@@ -1674,11 +1842,15 @@
 .timeline-event strong {
   font-family: var(--font-display);
   color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.2;
 }
 
-/* Font styling: .tag (_global.css). */
+/* Font styling: .tag (_global.css), scaled down slightly — the uppercase level label was reading nearly as loud as the workshop title next to it. */
 .timeline-event span {
   color: var(--hero-gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
 }
 
 /* Material colour key: willow, cattail, bulrush, willow bark, gathered/mixed. */
@@ -1712,7 +1884,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 0 0 var(--font-size);
+  margin: 0 0 1rem;
   color: var(--ink-soft);
 }
 
@@ -1748,13 +1920,14 @@
 
 /* PRACTICAL NOTES */
 
+/* Quiet transition rather than a separate feature — no grey field or boxed-white-panel effect, just the two rules containing a two-column note that sits directly on the page. */
 .event-note-grid {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  padding-block: calc(var(--font-size) * 3);
+  padding-block: clamp(2rem, 3vw, 3rem);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  background: var(--line);
+  background: transparent;
 }
 
 .event-note-grid .content {
@@ -1763,18 +1936,23 @@
 }
 
 .event-note-grid article {
-  padding: calc(var(--font-size) * 1.5);
-  background: var(--page);
+  padding: clamp(1.25rem, 2vw, 2rem);
+  background: transparent;
   border-right: 1px solid var(--line);
 }
 
+.event-note-grid article:first-child {
+  padding-left: 0;
+}
+
 .event-note-grid article:last-child {
+  padding-right: 0;
   border-right: 0;
 }
 
 /* Font styling: .label (_global.css). */
 .event-note-grid h3 {
-  margin-bottom: calc(var(--font-size) * 0.5);
+  margin-bottom: 0.65rem;
 }
 
 .event-note-grid p {
@@ -1782,22 +1960,28 @@
   line-height: 1.5;
 }
 
+.event-note-grid article p + p {
+  margin-top: 0.75rem;
+}
+
 /* WORKSHOP DETAIL CARDS */
 
+/* Top padding only reduced — the quieter .event-note-grid transition right above no longer needs as much clearance before this section's own heading; bottom stays as-is. */
 .workshop-detail-section {
-  padding-block: calc(var(--font-size) * 3) calc(var(--font-size) * 4);
+  padding-block: clamp(3rem, 5vw, 4.5rem) calc(var(--font-size) * 4);
   border-top: 1px solid var(--line);
   text-align: center;
 }
 
-.workshop-detail-section > .content > .eyebrow,
-.workshop-detail-intro {
+.workshop-detail-section > .content > .eyebrow {
   max-width: 34rem;
   margin-inline: auto;
 }
 
 .workshop-detail-intro {
-  margin-bottom: calc(var(--font-size) * 1.17);
+  max-width: 38rem;
+  margin-inline: auto;
+  margin-bottom: 1rem;
   color: var(--ink-soft);
   font-size: calc(var(--font-size) * 1.05);
   line-height: 1.5;
@@ -1805,20 +1989,18 @@
 
 .workshop-detail-list {
   display: grid;
-  gap: 2rem;
+  gap: 1.75rem;
   text-align: left;
 }
 
-/* container-type here (not on .workshop-detail-media itself) so the cqw units used for the image's min/max-height below can measure this card's own width — a container can't query its own size, so putting container-type on the figure directly silently resolves cqw against the viewport instead (that was a real, previously-shipped bug). */
 .workshop-detail-card {
   display: grid;
-  grid-template-columns: minmax(22rem, 32rem) minmax(20rem, 1fr);
+  grid-template-columns: minmax(20rem, 28rem) minmax(24rem, 1fr);
   align-items: stretch;
-  container-type: inline-size;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--paper-soft);
+  background: color-mix(in srgb, var(--paper-soft) 58%, var(--page) 42%);
 }
 
 /* No photo yet for this workshop — let the copy run full-width instead of leaving a blank column. */
@@ -1826,12 +2008,11 @@
   grid-template-columns: 1fr;
 }
 
-/* <figure> carries a default 1em/40px browser margin — zero it so the photo fills its grid column instead of floating in a narrower box. height: 100% stretches it to match the (usually taller) copy column, clamped between two bounds: min-height keeps 4:5 as the ideal/resting shape for a normal card, max-height is the hard floor — never narrower than 3:5, even if that means not quite reaching the bottom of an unusually long card. Both bounds are computed from the image column's *actual* width (100cqw − the text column's 20rem minimum, capped at the column's own 32rem max) rather than assuming it's always 32rem — just above the 850px breakpoint the text column's minimum genuinely squeezes the image narrower than 32rem, and a fixed assumption there let the ratio slip past the 3:5 floor. */
+/* <figure> carries a default 1em/40px browser margin — zero it so the photo fills its grid column instead of floating in a narrower box. A fixed 4:5 editorial ratio, not stretched to match the (often much taller, text-heavy) copy column — align-self: start overrides the card's own align-items: stretch so the image keeps its own calm, consistent shape instead of growing to whatever height the copy happens to need. */
 .workshop-detail-media {
   margin: 0;
-  height: 100%;
-  min-height: calc(min(100cqw - 20rem, 32rem) * 5 / 4);
-  max-height: calc(min(100cqw - 20rem, 32rem) * 5 / 3);
+  align-self: start;
+  aspect-ratio: 4 / 5;
 }
 
 .workshop-detail-media img {
@@ -1839,33 +2020,33 @@
   height: 100%;
   object-fit: cover;
   object-position: var(--focus, center);
-  filter: grayscale(0.1) saturate(0.95) brightness(0.98) contrast(1.03);
+  filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
 }
 
 .workshop-detail-copy {
-  padding: calc(var(--font-size) * 1.5) calc(var(--font-size) * 1.75);
+  padding: clamp(1.65rem, 2.35vw, 2.4rem);
 }
 
 /* Font styling: .eyebrow-lesser (_global.css), with its own colour override below (warm-clay, not eyebrow-lesser's gold). */
 /* Darker than a plain --warm-clay so this reads as legible information (price/level), not a decorative accent like the section eyebrow above it. */
 .workshop-detail-level {
-  margin-bottom: calc(var(--font-size) * 0.4);
+  margin-bottom: 0.45rem;
   color: color-mix(in srgb, var(--warm-clay) 55%, var(--ink) 45%);
   letter-spacing: 0.1em;
 }
 
-/* Font styling lives in .card-title (_global.css) — this is just this component's spacing. */
+/* Font styling lives in .card-title (_global.css) — this is just this component's spacing. More room below now so the date/registration row beneath doesn't crowd it. */
 .card-title {
-  margin-bottom: calc(var(--font-size) * 0.95);
+  margin-bottom: 1.25rem;
 }
 
-/* > (not a descendant selector) so this only ever touches this card's own paragraphs — never leaks into the nested .workshop-note/.skills-list boxes. :not() excludes the price badge, which is also a direct-child <p> but has its own sizing via .eyebrow-lesser. */
+/* > (not a descendant selector) so this only ever touches this card's own paragraphs — never leaks into the nested .workshop-note/.skills-list boxes. :not() excludes the price badge, which is also a direct-child <p> but has its own sizing via .eyebrow-lesser. Sized up slightly (was 0.98/1.5) — the body copy was reading a little small relative to the large image and heading beside it. */
 .workshop-detail-copy > p:not(.workshop-detail-level) {
   margin: 0 0 calc(var(--font-size) * 0.83);
   color: var(--ink);
-  font-size: calc(var(--font-size) * 0.98);
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.58;
 }
 
 /* The price badge is always the first <p>, so the true opening description line is the second — a slightly larger size invites you in, and a tight gap below it keeps it and the paragraph right after reading as one continuous introduction (a question, then its answer). */
@@ -1879,14 +2060,14 @@
   margin-top: calc(var(--font-size) * 0.4);
 }
 
-/* auto-fit + a minimum column width, rather than a hardcoded 2 columns — some dates ("Saturday, September 26 · 6 PM–10 PM") are long enough that two rigid 50% columns would force an overflow. This settles into 2 columns when there's room and drops to 1 when there isn't, regardless of exactly how long a given date/time string is. justify-items: start keeps each button's own grid from stretching to fill its column, since the button below is sized to its content (max-content columns), not the full grid track. */
+/* auto-fit + a minimum column width, rather than a hardcoded 2 columns — some dates ("Saturday, September 26 · 6 PM–10 PM") are long enough that two rigid 50% columns would force an overflow. Kept at 20rem: auto-fit picks its column count from only the minimum in minmax(), before knowing each button's real content width (grid-template-columns: max-content max-content inside .workshop-date-button, which can't shrink) — a smaller minimum (15rem, and max-content in place of 1fr) was tried here, but both let auto-fit commit to more columns than the buttons actually fit into, overlapping 3-offering cards (Bird Feeder) instead of wrapping them. 20rem is the smallest minimum that reliably wraps before that happens. justify-items: start keeps each button's own grid from stretching to fill its column. */
 .workshop-date-buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   align-items: center;
   justify-items: start;
-  gap: 0.25rem 1.75rem;
-  margin: calc(var(--font-size) * 0.2) 0 calc(var(--font-size) * 1.5);
+  gap: 0.7rem 1.25rem;
+  margin: 0 0 1.25rem;
 }
 
 /* A 2-column grid (info, register) instead of a wrapping flex row — the day/date and time now stack as their own two grid rows inside .date-button-info, so the button's shape stays predictable regardless of how long the date string is, rather than depending on where flex-wrap happens to break. */
@@ -1895,8 +2076,8 @@
   grid-template-columns: max-content max-content;
   align-items: center;
   justify-content: start;
-  gap: 1.1rem;
-  padding-block: 0.65rem;
+  gap: 0.65rem;
+  padding-block: 0.35rem;
   color: var(--ink);
   font-weight: 600;
   text-decoration: none;
@@ -1979,13 +2160,21 @@
   transform: translate(-32%, -50%) scale(1) rotate(-3deg);
 }
 
-.workshop-note,
-.skills-list {
-  margin-top: calc(var(--font-size) * 0.85);
-  padding: calc(var(--font-size) * 0.85) var(--font-size);
-  border: 1px solid var(--line);
+/* Two bordered boxes of equal weight stacked at the bottom read as a form, not a card — kept .workshop-note as a soft note (background + border, no full box needed since it's a single short paragraph) and dropped .skills-list's box entirely in favour of a plain top rule, so the bottom of the card resolves as one soft note plus one simple list rather than two competing boxes. */
+.workshop-note {
+  margin-top: 1rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   border-radius: 0.3rem;
-  background: color-mix(in srgb, var(--page) 52%, transparent);
+  background: color-mix(in srgb, var(--page) 72%, transparent);
+}
+
+.skills-list {
+  margin-top: 0.75rem;
+  padding: 0.8rem 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
 }
 
 .workshop-note p,

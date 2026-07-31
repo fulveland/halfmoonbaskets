@@ -10,8 +10,8 @@
        starting with _ are skipped, same as this one, _tutorial-template.html,
        and _template.html).
     2. Fill in every [placeholder]. The three per-page configuration points
-       are: the <body> class, the hero section's id/aria-labelledby/--hero-photo/
-       --hero-dark, and the <h1> id — all marked below.
+       are: the <body> class, the hero section's id/aria-labelledby/photo, and
+       the <h1> id — all marked below.
     3. Duplicate <article class="schedule-day"> once per day of the event, and
        <article class="workshop-detail-card"> once per workshop offered — there's
        no fixed count (the two real events so far have run 3 days / 6-7 workshops,
@@ -25,14 +25,14 @@
        .gateway-hero-dates block in the hero, and a new .choose-weekend-item
        in the .choose-weekend-grid. Easy to forget since it's a separate file
        from everything above.
-    6. Every class here (.site-hero, .quick-info, .schedule-*,
+    6. Every class here (.event-hero, .quick-info, .schedule-*,
        .timeline-*, .workshop-detail-*, .info-grid, .policies-section,
        .bottom-cta, etc.) is already styled in _global.css / main.css and shared
        across the gateway + both real event pages — no new CSS should be needed
        for a standard event page.
 -->
 
-<body class="weekend-page [slug]-event-page">
+<body class="weekend-page [slug]-event-page event-hero-page">
   <header class="site-header site-header--overlay">
     <a href="/" class="site-logo">Half Moon<br /><span>Baskets</span></a>
 
@@ -46,23 +46,30 @@
   </header>
   <main>
     <!--
-      HERO — shared .site-hero component (see _global.css), also used by the
-      gateway page and the tutorial pages. --hero-photo and --hero-dark are the
-      per-event config point (--hero-dark is a fallback/overlay tone behind the
-      photo, pick something in the same family as the photo's darkest area).
-      id/aria-labelledby/h1 id follow a [slug]-hero / [slug]-title convention.
+      HERO — shared .event-hero component (see main.css), Bark/Paper/Ink system:
+      light two-column layout (copy + one event photo), same language as the
+      gateway hero. id/aria-labelledby/h1 id follow a [slug]-hero / [slug]-title
+      convention. Requires .event-hero-page on <body> (already set above) so the
+      header nav/logo render in ink instead of the sitewide cream-for-dark-hero
+      default.
     -->
-    <section id="[slug]-hero" class="site-hero" aria-labelledby="[slug]-title" style="--hero-photo: url('/images/events/weekend-of-weaving-red-deer/[slug]-hero.jpg'); --hero-dark: #[hex]">
-      <div class="site-hero-inner">
-        <p class="eyebrow">[Month Day–Day] · Red Deer</p>
-        <h1 id="[slug]-title">[Event Name]</h1>
-        <p class="hero-location">at Pioneer Lodge</p>
-        <p class="site-hero-copy">[One or two sentences setting up the weekend and the materials it covers.]</p>
+    <section id="[slug]-hero" class="event-hero" aria-labelledby="[slug]-title">
+      <div class="event-hero-grid">
+        <div class="event-hero-copy">
+          <p class="eyebrow">[Month Day–Day] · Red Deer</p>
+          <h1 id="[slug]-title" class="event-hero-h1">[Event Name]</h1>
+          <p class="event-hero-location">at Pioneer Lodge</p>
+          <p class="event-hero-intro">[One or two sentences setting up the weekend and the materials it covers.]</p>
 
-        <div class="site-hero-actions" aria-label="[Event Name] page links">
-          <a href="#schedule" class="primary-button">View Schedule</a>
-          <a href="#workshops" class="secondary-button">Browse Workshops</a>
+          <div class="event-hero-actions" aria-label="[Event Name] page links">
+            <a href="#schedule" class="event-hero-button event-hero-button--primary">View Schedule</a>
+            <a href="#workshops" class="event-hero-button event-hero-button--secondary">Browse Workshops</a>
+          </div>
         </div>
+
+        <figure class="event-hero-figure">
+          <img src="/images/events/weekend-of-weaving-red-deer/[slug]-hero.jpg" alt="[Describe the photo]" />
+        </figure>
       </div>
     </section>
 
