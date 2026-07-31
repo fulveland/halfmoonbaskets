@@ -1,5 +1,113 @@
 /* WEEKEND OF WEAVING — shared by the gateway page and both event pages. These were once scoped under .weekend-page; now that the system is the site default, the class is no longer load-bearing for CSS (left in the markup, but harmless either way). */
 
+/* BARK/PAPER/INK REDESIGN — shadows the shared :root tokens (_global.css) locally within .weekend-page rather than changing them globally, since those same tokens are the default for tutorial pages too. Every existing var(--hero-gold)/var(--moss)/var(--line)/etc. reference below picks up these values automatically on any page whose <body> carries .weekend-page (gateway + both event pages), with zero changes needed to the ~45 individual usages. --moss and --hero-gold both converge on the same Bark Rust accent since this design has a single accent colour rather than a gold/green pair. --pill and --radius go to 0 for "square corners, no rounded corners anywhere" — 50%-radius circles (level-number, path-icon, moon-mark) are left alone since those are round badges/glyphs, not the button chrome the rule is about.
+
+   Palette per the typography spec's 7-colour system (core: Paper/Ink/Graphite/Bark Rust; supporting: Pale Ground/Quiet Rule/Willow Grey; functional/hidden: Bark Hover/Deep Bark). --pale-ground now backs --paper-soft/--paper-strong (occasional alt surfaces + form fields) and --quiet-rule backs --line (structural borders/dividers) rather than a bark tint, per the spec's role split between short accent rules (Bark Rust) and structural lines (Quiet Rule). --willow-grey is defined but currently unused — the three willow illustrations it's reserved for don't exist on any live page right now. */
+.weekend-page {
+  --hero-gold: #865333;
+  --moss: #865333;
+  --bark-hover: #6e3f25;
+  --deep-bark: #4f2d1d;
+  --page: #f7f4ef;
+  --pale-ground: #ece8e2;
+  --paper-soft: #ece8e2;
+  --paper-strong: #ece8e2;
+  --ink: #151719;
+  --ink-soft: rgba(60, 59, 57, 0.72);
+  --charcoal: #3c3b39;
+  --quiet-rule: #d8d2cb;
+  --line: #d8d2cb;
+  --willow-grey: #747462;
+  --hero-dark: #151719;
+  --pill: 0;
+  --radius: 0;
+
+  /* The gateway hero collage's own mobile side padding — pulled out to a variable specifically because more than one element now needs to line up with it (the About card measures its inset from it, and the mobile quick-info card has to reproduce it from outside the collage to land on the same outer edge). Change this once and everything anchored to it moves together. */
+  --gateway-pad: clamp(1rem, 5vw, 2rem);
+
+  /* How far a mobile overlay card climbs up over the photo it sits on — the About card and the quick-info card both use this same amount so their overlap behaviour (not just their side insets) stays in sync. */
+  --gateway-overlap: -1.5rem;
+}
+
+/* Plain, chrome-free inline links (mailto, "liability waiver", the Food & Coffee/Places to Stay list links) default to inherit (_global.css) sitewide; the handoff gives every link a Bark colour with a lighter hover instead, so this restores that specifically within the weekend-of-weaving system. */
+.weekend-page a {
+  color: var(--hero-gold);
+}
+
+.weekend-page a:hover {
+  color: var(--bark-hover);
+}
+
+/* Nav re-asserted at equal-or-higher specificity than the generic link rule just above, since .site-nav a's own _global.css default (cream, for overlaying a dark hero photo) would otherwise lose a same-specificity tie to the later-loaded rule above. True for both event pages here; the gateway overrides to ink below since its new hero has no photo behind the nav. */
+.weekend-page .site-nav a {
+  color: var(--hero-cream);
+}
+
+.gateway-page .site-logo,
+.gateway-page .site-nav a {
+  color: var(--ink);
+}
+
+/* Nudges the nav's optical centre down to sit more naturally against the logo, and opens the link spacing slightly — a restrained spacing fix, not a resize. Guarded above the header's mobile stack breakpoint (_global.css, max-width: 680px) so it never touches the stacked layout. */
+@media (min-width: 681px) {
+  .gateway-page .site-nav {
+    gap: 30px;
+    transform: translateY(4px);
+  }
+}
+
+/* The sitewide header stacks logo-over-nav starting at 680px (_global.css) — on the gateway page, keep them in one row down to 420px (link gaps shrink fluidly first) and only stack below that, where they'd genuinely collide. Scoped to .gateway-page so every other page keeps the sitewide 680px threshold. */
+@media (min-width: 421px) and (max-width: 680px) {
+  .gateway-page .site-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .gateway-page .site-nav {
+    flex-wrap: nowrap;
+    gap: clamp(0.75rem, 3vw, 1.25rem);
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .gateway-page .site-nav {
+    gap: 14px;
+  }
+
+  .gateway-page .site-header {
+    gap: 10px;
+  }
+}
+
+/* The site's shared .eyebrow (_global.css) resolves to ~0.96rem/700/0.18em at this page's base --font-size — the handoff's own eyebrows are consistently smaller and lighter (0.8rem/650/0.2em) across every section that uses one (hero, about, location). Overridden here rather than touching the shared class, which is used site-wide outside this redesign. */
+.gateway-page .eyebrow {
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.2em;
+}
+
+/* The shared .label (_global.css) colours headings Bark (var(--moss)) at ~0.94rem/800 — every h3 label on this page (Location, Parking, What to Bring, etc.) keeps that Bark colour per the typography spec's "warm brown, not black" rule for small editorial labels, just resized/reweighted to the handoff's 0.85rem/650. */
+.gateway-page .label {
+  color: var(--hero-gold);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+/* Shared .section-intro (_global.css) is tuned around this site's fixed --font-size and colours itself solid Ink — the handoff uses a fluid clamp() size, Charcoal-85% colour, and taller 1.58 line-height for every section-intro on this page (Choose Your Weekend and Choose a Workshop Level both use the exact same values). */
+.gateway-page .section-intro {
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: clamp(1.08rem, 1rem + 0.25vw, 1.3rem);
+  line-height: 1.58;
+}
+
+/* The shared poster-heading rule (.visitor-info-intro/.policies-section h2, above) is close enough for most headings that use it, but the handoff's Location heading is meaningfully smaller — its own distinct clamp(), not the shared one. */
+.gateway-page .visitor-info-intro h2 {
+  font-size: clamp(38px, 4vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
 /* CONTENT WIDTH — sections are full-width wrappers (so they can carry a background colour edge to edge); a .content div inside each one centers and caps the actual content at one of two widths (wide/full — .standard/.fat modifiers existed at one point but nothing in the site uses them). */
 
 .content {
@@ -16,7 +124,6 @@
 }
 
 /* Poster-scale section headlines — see .section-title in _global.css. Still applied positionally here for the sections that haven't been converted to the class yet. */
-.level-section > .content > h2,
 .visitor-info-intro h2,
 .policies-section > .content > h2 {
   font-size: clamp(calc(var(--font-size) * 2.4), 5vw, calc(var(--font-size) * 4));
@@ -49,10 +156,424 @@
     var(--hero-photo);
 }
 
-/* Night sky torn away to reveal the daylight content below — the one seam in the page, kept deliberately singular rather than repeated at every section. */
-.quick-info {
-  position: relative;
+/* GATEWAY HERO — replaces .site-hero on weekend-of-weaving-red-deer.html only (event pages keep the dark photo-hero, unchanged). Light two-column layout per the Bark/Paper/Ink design handoff: no night-sky/torn-paper seam, so the gateway's own info card (see "GATEWAY INFO CARD") never uses that tear effect at all — it's a fully separate rule from the event pages' .quick-info, not an opt-out of it. */
+.gateway-hero {
+  /* Min raised from 4rem to 5.5rem — .site-header--overlay floats at ~83px tall (the logo's two-line wrap is permanent, not a narrow-width thing), and 4rem (64px) let the eyebrow crowd underneath it at any width below ~1257px, tablet included. */
+  padding-top: clamp(5.5rem, 7vw, 6rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
 }
+
+/* Asymmetrical editorial collage — text upper-left, tall primary photo upper-right, wide secondary photo staggered beneath-left, and a floating "About the weekend" card positioned across the seam of the two photos. The card is genuinely floating (position: absolute) rather than grid-confined to one column, since the spec calls for it to sit off-center and overlap both images — collage is the containing block, sized by its tallest normal-flow child (the primary photo, in the grid). */
+.gateway-hero-collage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  align-items: start;
+  gap: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 4rem);
+  padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+.gateway-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 34rem;
+}
+
+.gateway-hero-h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 1.04;
+  white-space: nowrap;
+}
+
+.gateway-hero-intro {
+  max-width: 32rem;
+  margin: 2rem 0 1.5rem;
+  color: var(--charcoal);
+  font-size: clamp(1.08rem, 1rem + 0.25vw, 1.3rem);
+  line-height: 1.58;
+}
+
+/* Surfaces the "two distinct weekends" framing right after the buttons ask you to pick one — a short serif-italic aside, not a second eyebrow or a repeat of the section further down the page. */
+.gateway-hero-rhythms {
+  margin: 1.5rem 0 0;
+  max-width: 26rem;
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.gateway-hero-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Solid, colour-filled rust buttons, side by side, at every width — the heaviest elements on the page since booking a weekend is the actual goal. */
+/* .gateway-hero-dates .gateway-button (not just .gateway-button) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which would otherwise silently repaint this text the same colour as its own background. Same bug as the earlier .primary-button invisible-text issue this session. */
+.gateway-hero-dates .gateway-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.9rem 1.5rem;
+  background: var(--hero-gold);
+  border: 1px solid var(--hero-gold);
+  border-radius: var(--radius);
+  color: var(--page);
+  font-family: var(--font-body);
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.gateway-hero-dates .gateway-button:hover {
+  background: var(--bark-hover);
+  border-color: var(--bark-hover);
+  color: var(--page);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 480px) {
+  .gateway-hero-dates {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .gateway-hero-dates .gateway-button {
+    width: auto;
+    flex: 1 1 auto;
+  }
+}
+
+/* The handoff's plain underlined-text-link CTA style, used wherever a link isn't one of the site's existing pill buttons — fine bottom border, no chrome. .gateway-link--label (map links: Bark, small, bold, letter-spaced, uppercase) and .gateway-link--waiver (Bark, bold, plain case) are its two remaining variants — not one interchangeable style. (.gateway-link--dark, the old mini-CTA repeat links, was removed along with the duplicate mid-page CTA it styled.) */
+.gateway-link {
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--hero-gold);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+
+.gateway-link--label {
+  padding-bottom: 0.25rem;
+  color: var(--hero-gold);
+  font-size: 0.84rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gateway-link--waiver {
+  padding-bottom: 0.25rem;
+  color: var(--hero-gold);
+  font-weight: 650;
+  font-size: 0.85rem;
+}
+
+.gateway-hero-figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+.gateway-hero-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.02) brightness(1.01);
+}
+
+/* Primary — tall portrait, upper-right, the vertical anchor of the section. */
+.gateway-hero-figure--primary {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  aspect-ratio: 0.84;
+}
+
+/* The crop area changes shape at every tier (0.84 down to a landscape 4:3 at 640-899), so one object-position can't protect the head, both baskets, and the surrounding field everywhere — each tier below sets its own rather than sharing this default. */
+.gateway-hero-figure--primary img {
+  object-position: center;
+}
+
+/* Secondary — wide close-up, beneath the text column. Spans both grid tracks as its containing box but is only ~64% wide (anchored left, default no justify-self), so it genuinely extends past the text column's edge into the primary image's horizontal space — a real stagger/underlap, not two images in clean separate columns. */
+.gateway-hero-figure--secondary {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  align-self: start;
+  width: 64%;
+  margin-top: 1rem;
+  aspect-ratio: 1.55;
+}
+
+/* Floating card — genuinely off-grid (see .gateway-hero-collage) so it can sit right-of-centre and overlap the seam between the two photos. Position tuned against the actual rendered image heights, not calculated. */
+/* Reusable "paper overlay" treatment, split into two concerns. Appearance (this rule): paper fill and soft shadow, shared by any card regardless of where or how it's positioned — .gateway-hero-about-card opts in directly since it's a card everywhere it appears; a future overlay card can opt in anywhere by adding .gateway-overlay-card. .quick-info--plain opts into the appearance half only, further down near its own rules, since its padding differs per breakpoint instead of using this shared clamp(). Placement (.gateway-overlay-card--overlap below): an optional modifier for the negative-margin "climbing over the image above" effect — not baked into the appearance rule, so a horizontal strip like .quick-info--plain can use the same paper look while staying in normal flow. */
+.gateway-hero-about-card,
+.gateway-overlay-card {
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  background: var(--page);
+  box-shadow: 0 16px 38px rgba(42, 31, 22, 0.065);
+}
+
+/* Optional placement modifier — pairs with .gateway-overlay-card (or any element that already has the paper appearance) to pull it up over whatever sits directly above. Not currently applied to any element in the markup; .gateway-hero-about-card and the mobile .quick-info--plain card repeat these same values directly today rather than wearing this class, since retrofitting them would mean editing HTML rather than just CSS. */
+.gateway-overlay-card--overlap {
+  z-index: 2;
+  margin-top: -2.25rem;
+}
+
+.gateway-hero-about-card {
+  position: absolute;
+  z-index: 1;
+  left: 52%;
+  top: 58%;
+  width: min(44%, 26rem);
+}
+
+.gateway-hero-about-card .about-weekend-lede {
+  font-size: clamp(20px, 1.6vw, 26px);
+  line-height: 1.23;
+}
+
+@media (min-width: 1400px) {
+  /* Structural guard, not a visual change: verified there's no current overflow at this tier (56px clear at 1400px, 187px at 1755px), but a firm lower bound on the text column means the heading can never physically slip under the image even if content or font metrics change later. */
+  .gateway-hero-collage {
+    grid-template-columns: minmax(28rem, 0.44fr) minmax(0, 0.56fr);
+  }
+
+  .gateway-hero-figure--primary {
+    aspect-ratio: 0.86;
+  }
+
+  .gateway-hero-figure--secondary {
+    aspect-ratio: 1.6;
+  }
+
+  /* Sits a little deeper in the collage — more of it over the dark weaving photo, still connected to the portrait — without widening it (the narrow proportion is deliberate). */
+  .gateway-hero-about-card {
+    left: calc(52% - 14px);
+    top: calc(58% - 8px);
+  }
+}
+
+/* Above ~2100px the hero photograph's own scale keeps growing while the heading (already at its clamp ceiling since ~1478px) stays flat — this brings the heading up 4-5% to hold its own against the photo without touching the paragraph or links, and keeps the same three-line structure. */
+@media (min-width: 2100px) {
+  .gateway-hero-h1 {
+    font-size: 71px;
+  }
+}
+
+/* TIGHTER COLLAGE (1200-1399px) — deltas layered on the base (≥1200px) rules, not a rebuild: same image sizes, same heading, same card width and page margins. Just a denser overlap between the two photos, the card embedded a little deeper, and a shorter pause before the next two sections. */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gateway-hero-figure--secondary {
+    margin-top: calc(1rem - 12px);
+    margin-left: 10px;
+  }
+
+  .gateway-hero-about-card {
+    left: calc(52% - 10px);
+    top: calc(58% - 6px);
+  }
+
+  .gateway-page .about-weekend {
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+  }
+}
+
+/* SMALLER DESKTOP (900-1199px) — columns closer to equal, images loosen toward a shorter/wider crop so the section doesn't get excessively tall, and the About card drifts toward centre with a lighter overlap. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .gateway-hero-collage {
+    grid-template-columns: minmax(0, 0.47fr) minmax(0, 0.53fr);
+  }
+
+  .gateway-hero-h1 {
+    white-space: normal;
+  }
+
+  /* Widens the gap to the photo by narrowing the photo's own box from its left edge — the column track, the grid gap, and the text column's width are untouched, so the extra space is spent entirely on the photograph. */
+  .gateway-hero-figure--primary {
+    aspect-ratio: 0.8;
+    margin-left: 24px;
+  }
+
+  .gateway-hero-figure--primary img {
+    object-position: center 35%;
+  }
+
+  .gateway-hero-intro {
+    margin-bottom: calc(2.5rem + 18px);
+  }
+
+  .gateway-hero-dates {
+    gap: 25px;
+  }
+
+  .gateway-hero-figure--secondary {
+    width: 68%;
+    aspect-ratio: 1.5;
+    margin-top: calc(1rem - 24px);
+  }
+
+  /* An extra 6px left on top of the existing -18px offset — more securely embedded over the photograph. */
+  .gateway-hero-about-card {
+    left: calc(46% - 24px);
+    top: calc(62% - 10px);
+    width: min(48%, 24rem);
+  }
+
+  /* Three sections used to each add their own large padding around this row (hero bottom + about-weekend top/bottom + choose-weekend top), which stacked into far more empty space than any one of them intended. Now only one side is "owned" by each neighbour: the hero controls the space above, this section keeps just a small top inset and no bottom padding of its own, and .choose-weekend-section (below) controls the entire space after. The base .gateway-hero padding-bottom (now clamp(3rem, 5vw, 5rem) ≈ 56px at this tier) already lands close enough to the old 3.5rem here that this override is no longer needed. */
+  .gateway-page .about-weekend {
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+  }
+}
+
+/* TABLET (640-899px) — stop treating this as a collage: full-width intro, full-width primary image below it, then a plain [secondary image][About card] row. The card leaves position: absolute behind (reset to static) since it's a normal flow item in this row, not floating over anything. */
+@media (max-width: 899px) {
+  .gateway-hero-collage {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "copy copy"
+      "primary primary"
+      "secondary card";
+    gap: 1.5rem;
+  }
+
+  .gateway-hero-h1 {
+    white-space: normal;
+    line-height: 1;
+  }
+
+  .gateway-hero-copy {
+    grid-area: copy;
+    max-width: none;
+  }
+
+  .gateway-hero-figure--primary {
+    grid-area: primary;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* The shortest, widest crop of any tier — biased well toward the top so the head and both baskets survive rather than a strip of sky. */
+  .gateway-hero-figure--primary img {
+    object-position: center 15%;
+  }
+
+  .gateway-hero-figure--secondary {
+    grid-area: secondary;
+    width: 100%;
+    margin-top: 0;
+    aspect-ratio: 5 / 4;
+  }
+
+  .gateway-hero-about-card {
+    grid-area: card;
+    position: static;
+    width: 100%;
+    align-self: start;
+  }
+}
+
+/* MOBILE (below 640px) — plain single-column editorial sequence: copy, primary photo, About card (slight overlap onto the photo below it), secondary photo last. */
+/* Matches .site-hero's own fix at this exact breakpoint (_global.css) — the header stacks logo+wrapped-nav here (~100px tall) instead of one row, and .site-header--overlay floats it on top of whatever's beneath, so this hero needs the same clearance or the nav overlaps the eyebrow underneath it. */
+@media (max-width: 680px) {
+  .gateway-hero {
+    padding-top: 7.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .gateway-hero-collage {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "primary"
+      "card"
+      "secondary";
+    gap: 0;
+    padding-inline: var(--gateway-pad);
+  }
+
+  /* Sized to land at 4 lines or fewer at 375px (was 5) — the heading is still the largest element on the page, just no longer so large that it breaks across every preposition. Full width rather than 92% — the 8% cutoff at narrow phones (360px) left unused cream space on the right without actually reducing the line count. (A ch-based max-width was tried here first — 9ch measured to only ~190px in this display serif at this size, well under the ~324px actually available, which wrapped the heading to 6 lines instead of fewer. Reverted.) */
+  .gateway-hero-h1 {
+    font-size: clamp(2.75rem, 12vw, 4rem);
+    line-height: 0.95;
+    white-space: normal;
+    width: 100%;
+  }
+
+  /* Title-to-intro spacing was tuned for the wider tiers; narrower here so it doesn't read as generous next to the tighter side padding. */
+  .gateway-hero-intro {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  /* More room before the primary photo below it — the collage's own grid gap is 0 at this tier (copy/primary/card/secondary stack tight), so this is the only thing separating the last line of copy from the image. */
+  .gateway-hero-rhythms {
+    margin-bottom: 2rem;
+  }
+
+  /* Full-bleed, edge to edge — .gateway-hero-collage is already full viewport width (no .content wrapper above it), so pulling out by exactly its own padding-inline reaches the true viewport edge. (The 100vw/50vw breakout trick doesn't apply here: that technique measures against the viewport directly and only works on an element whose containing block starts at the viewport edge — inside a padded grid track like this one it would be off by the padding amount.) */
+  .gateway-hero-figure--primary,
+  .gateway-hero-figure--secondary {
+    margin-inline: calc(-1 * var(--gateway-pad));
+  }
+
+  .gateway-hero-figure--primary {
+    aspect-ratio: 4 / 5;
+    margin-bottom: 1.5rem;
+  }
+
+  .gateway-hero-figure--primary img {
+    object-position: center 18%;
+  }
+
+  /* Inset and padding trimmed from the shared/desktop values specifically at this narrowest tier — .gateway-page .quick-info--plain below mirrors this same 0.65rem inset via --gateway-pad so the two overlay cards keep landing on the same outer edge. */
+  .gateway-hero-about-card {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    margin: var(--gateway-overlap) 0.65rem 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .gateway-hero-about-card .about-weekend-lede {
+    font-size: 1.2rem;
+    line-height: 1.27;
+  }
+
+  .gateway-hero-about-card .about-weekend-note {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .gateway-hero-figure--secondary {
+    margin-top: 0;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* QUICK INFO (event pages only — .quick-info without the --plain modifier) — icon-based 4-column strip below the dark photo hero, with the torn-paper tear below marking that night-sky-to-daylight seam. The gateway page's own info card is a fully independent block further down (search "GATEWAY INFO CARD") — it doesn't inherit from any of this, so nothing here needs to account for it. */
 
 .quick-info::before {
   content: "";
@@ -68,9 +589,10 @@
   mask: url("/images/textures/torn-paper-edge.svg") center / 100% 100% no-repeat;
 }
 
-/* QUICK INFO — the section breaks out to the viewport edge (so a future background colour can run edge to edge); .content.full inside carries the actual 4-column layout, just with the hero's wider side padding instead of the standard page-pad. */
+/* The section breaks out to the viewport edge (so a future background colour can run edge to edge); .content.full inside carries the actual 4-column layout, just with the hero's wider side padding instead of the standard page-pad. */
 
 .quick-info {
+  position: relative;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
   border-top: 1px solid var(--line);
@@ -94,16 +616,6 @@
   border-right: 0;
 }
 
-.quick-info .icon {
-  display: block;
-  width: 2rem;
-  height: 2rem;
-  margin: 0 auto calc(var(--font-size) * 0.6);
-  background-color: var(--ink-soft);
-  -webkit-mask: var(--icon-src) center / contain no-repeat;
-  mask: var(--icon-src) center / contain no-repeat;
-}
-
 /* Font styling: .label (_global.css). */
 .quick-info h3 {
   margin-bottom: calc(var(--font-size) * 0.3);
@@ -116,89 +628,239 @@
   line-height: 1.4;
 }
 
-/* CHOOSE YOUR PATH / BUILD CONFIDENCE — shared by the event pages' path-section and the gateway's "Build confidence with natural materials" section. */
+/* At the mobile tier (≤639px) the hero collage collapses to a single column ending in the secondary (weaving) photo, so that image sits directly above the info card with nothing else between them — at the 640-899 tablet tier the card and secondary image share a row instead, so the two aren't stacked directly on top of each other there. The card itself (which overlays this photo the same way .gateway-hero-about-card overlays the primary one) lives in the GATEWAY INFO CARD block further down, not here — these two rules just clear the space the overlap needs. */
+@media (max-width: 639px) {
+  .gateway-hero {
+    padding-bottom: 0;
+  }
 
-.path-section {
-  padding-block: 4rem;
+  .gateway-page .about-weekend {
+    padding-top: 0;
+    border-top: none;
+  }
 }
 
-.path-section .content {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1.15fr);
-  gap: clamp(2rem, 6vw, 5rem);
+/* ABOUT THE WEEKEND (gateway only) — now just the quick-facts strip (.quick-info--plain); the section's original text+photo pairing moved into the hero as .gateway-hero-about-card (below), and its own photo was dropped as redundant with the two new hero photos. */
+.about-weekend {
+  padding-top: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding-bottom: 0;
 }
 
-.path-copy {
-  max-width: 34rem;
+/* The base rule now sends the entire "space after the facts row" job to .choose-weekend-section's own top padding, so this section no longer needs its own bottom padding at any tier. */
+@media (min-width: 1400px) {
+  .gateway-page .about-weekend {
+    padding-bottom: 0;
+  }
 }
 
-.path-copy > p {
-  margin-top: calc(var(--font-size) * 0.75);
-  line-height: 1.6;
+/* Reused inside .gateway-hero-about-card now, not this section — see the hero rules above. */
+.about-weekend-lede {
+  margin: 0;
   color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
-.path-cards {
-  display: grid;
-  gap: 1rem;
-  align-content: center;
-}
-
-.path-cards article {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 0.2rem 1rem;
-  padding: calc(var(--font-size) * 1.1) calc(var(--font-size) * 1.25);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper-soft);
-}
-
-/* Spans both content rows (grid-row: 1 / span 2) and centers within that span — previously auto-placed into row 1 alone, which pinned it against the heading instead of centering against the label + paragraph together. */
-.path-icon {
-  display: grid;
-  place-items: center;
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  align-self: center;
+.about-weekend-rule {
   width: 3rem;
-  height: 3rem;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--hero-gold);
+  height: 1px;
+  margin: 17px 0 18px;
+  background: var(--hero-gold);
 }
 
-/* SVG-icon variant of .path-icon (gateway's "Build confidence" cards use real icon files instead of the text glyphs the event pages' path-cards use) — --icon-src is set per-instance inline, masked to currentColor so it picks up the gold from .path-icon above. */
-.path-icon--svg::after {
-  content: "";
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: currentColor;
-  -webkit-mask: var(--icon-src) center / contain no-repeat;
-  mask: var(--icon-src) center / contain no-repeat;
+.about-weekend-note {
+  margin: 0;
+  max-width: 32rem;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 
-/* Font styling: .eyebrow-lesser (_global.css). */
-.path-cards h3 {
-  grid-column: 2;
-  grid-row: 1;
+/* GATEWAY INFO CARD (.quick-info--plain) — fully self-contained, does not inherit any layout or type from the event-pages' .quick-info above. That base rule and this one used to share the same specificity on a couple of selectors (.quick-info--plain::before vs .quick-info::before, both one class + one pseudo-element), which meant plain source order silently decided the winner — that's what let the torn-paper mask actually render on the gateway page despite the "content: none" meant to turn it off. Every selector here carries .gateway-page + .quick-info--plain (and often a third class) specifically so it always outranks the event-page rules regardless of where either block sits in the file.
+
+   Appearance and placement are deliberately separate concerns. .gateway-overlay-card (defined above, near .gateway-hero-about-card) is the shared paper look, for cards that are ALWAYS a card. .quick-info--plain isn't — it only reads as a paper card in vertical mode (below 969px, single column); at ≥969px it's a plain horizontal strip with no shadow, same idea as the original inline four-column layout. So it doesn't opt into the shared rule up top at all — background/box-shadow are set only inside the <969px block further down, alongside the layout switch to a single column. .gateway-overlay-card--overlap (also above) is the optional negative-margin placement modifier; nothing on this page currently wears it — at ≥969px this strip stays in normal flow with no overlap, and below that it keeps its own existing breakpoint-specific placement (the ≤639px tier overlaps the second photo using the same margin recipe as .gateway-hero-about-card, but by repeating those values directly rather than via the modifier class, since HTML isn't being restructured to add classes here right now). */
+
+.gateway-page .quick-info--plain::before {
+  content: none;
+}
+
+.gateway-page .quick-info--plain h3 {
   margin-bottom: calc(var(--font-size) * 0.3);
 }
 
-.path-cards p {
-  grid-column: 2;
-  grid-row: 2;
-  line-height: 1.4;
-  color: var(--ink-soft);
+.gateway-page .quick-info--plain p {
+  max-width: none;
+  margin: 0;
+  color: color-mix(in srgb, var(--charcoal) 80%, transparent);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.gateway-page .quick-info-rule {
+  width: 2rem;
+  height: 1px;
+  margin: 0 0 0.85rem;
+  background: color-mix(in srgb, var(--hero-gold) 40%, transparent);
+}
+
+/* HORIZONTAL, NORMAL FLOW (640px and up) — the reusable four-column paper strip in its default placement: no overlap, no negative margin, contained width rather than a full-bleed 100vw section. Column dividers are simple side borders since there's no image directly above at this width for the strip to relate to. Threshold matches the site's existing 640px tablet/mobile boundary rather than an arbitrary one-off, so it lines up with every other component's breakpoint. */
+@media (min-width: 640px) {
+  .gateway-page .quick-info--plain {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+    border: 0;
+  }
+
+  .gateway-page .quick-info--plain .content {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 2rem);
+    padding: 0;
+  }
+
+  .gateway-page .quick-info--plain article {
+    padding: 0 clamp(0.75rem, 1.5vw, 1.5rem);
+    border: 0;
+    border-left: 1px solid var(--line);
+    text-align: left;
+  }
+
+  .gateway-page .quick-info--plain article:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .gateway-page .quick-info--plain article:last-child {
+    padding-right: 0;
+  }
+}
+
+/* TIGHTER COLLAGE (1200-1399px) — small type bump matching the hero's own delta pass at this tier. Layered on top of the 969px+ base above, not a replacement for it. */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .gateway-page .quick-info--plain h3 {
+    font-size: calc(0.85rem + 0.5px);
+  }
+
+  .gateway-page .quick-info-rule {
+    background: color-mix(in srgb, var(--hero-gold) 50%, transparent);
+  }
+}
+
+/* LARGE EDITORIAL DESKTOP (1400px+) — the row was reading as too faint beneath the strong photography above it; a small type bump and a darker rule give it enough presence to act as a real transition, without approaching a dominant feature. Column dividers switch from side borders to a top border per item, to read as a calmer, wider strip at this size. */
+@media (min-width: 1400px) {
+  .gateway-page .quick-info--plain .content {
+    gap: 24px;
+  }
+
+  .gateway-page .quick-info--plain article {
+    padding-inline: 0;
+    padding-top: 24px;
+    border-left: none;
+  }
+
+  .gateway-page .quick-info--plain h3 {
+    font-size: calc(0.85rem + 1px);
+  }
+
+  .gateway-page .quick-info--plain p {
+    font-size: calc(0.94rem + 0.75px);
+  }
+
+  .gateway-page .quick-info-rule {
+    background: color-mix(in srgb, var(--hero-gold) 58%, transparent);
+  }
+}
+
+/* VERTICAL LAYOUT (≤639px only) — below the 640px horizontal threshold, this narrows to match the same range as the MOBILE overlay-card block right after it (which overrides most of these properties again for the overlap effect); kept as its own block mainly for the single-column .content grid-template-columns, which the mobile block doesn't restate. */
+@media (max-width: 639px) {
+  .gateway-page .quick-info--plain {
+    position: relative;
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--page);
+    box-shadow: 0 16px 38px rgba(42, 31, 22, 0.065);
+  }
+
+  .gateway-page .quick-info--plain .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-block: 2rem;
+    padding-inline: var(--wide-pad);
+  }
+
+  .gateway-page .quick-info--plain article {
+    padding: 0 0 1.25rem;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+}
+
+/* MOBILE (≤639px) — the secondary (weaving) photo is now the last thing before this card with nothing between them (see .gateway-hero/.about-weekend padding zeroing above), so instead of a full-bleed strip this becomes an overlay card on that photo, matching the About card's own outer geometry: equal left/right insets (not the old left-only indent, which read as flush-right and unlike the About card), a small negative top margin overlapping the image, and the same paper background/padding/shadow. Internal spacing is deliberately quieter than the About card (smaller rule, smaller label, lighter dividers) so four stacked facts don't out-weigh the two-paragraph card above it. */
+@media (max-width: 639px) {
+  .gateway-page .quick-info--plain {
+    position: relative;
+    z-index: 2;
+    width: auto;
+    /* Matches the About card's actual effective inset, not just a similar-looking value: the About card lives inside .gateway-hero-collage (which uses --gateway-pad as its own padding-inline), then adds 0.65rem more — so its true distance from the viewport edge is --gateway-pad + 0.65rem. This card sits outside that collage, so it has to reproduce both parts itself to land on the same outer edge. --gateway-overlap keeps the overlap itself in sync with the About card's too. */
+    margin: var(--gateway-overlap) calc(var(--gateway-pad) + 0.65rem) 0;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 0;
+    background: var(--page);
+    box-shadow: 0 16px 38px rgba(42, 31, 22, 0.065);
+  }
+
+  .gateway-page .quick-info--plain .content {
+    padding: 0;
+  }
+
+  .gateway-page .quick-info--plain article {
+    padding: 0 0 1rem;
+    border: 0;
+  }
+
+  .gateway-page .quick-info--plain article + article {
+    padding-top: 1rem;
+    border-top: 1px solid color-mix(in srgb, var(--charcoal) 12%, transparent);
+  }
+
+  .gateway-page .quick-info--plain article:last-child {
+    padding-bottom: 0;
+  }
+
+  .gateway-page .quick-info-rule {
+    width: 1.75rem;
+    margin-bottom: 0.7rem;
+    background: color-mix(in srgb, var(--hero-gold) 70%, transparent);
+  }
+
+  .gateway-page .quick-info--plain h3 {
+    margin-bottom: 0.55rem;
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+  }
+
+  .gateway-page .quick-info--plain p {
+    color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 }
 
 /* BUTTONS */
 
 .primary-button,
-.secondary-button,
-.outline-button,
-.date-button {
+.secondary-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -231,89 +893,13 @@
   color: var(--hero-cream);
 }
 
-.outline-button {
-  background: transparent;
-  color: var(--ink);
-}
-
-/* The hero buttons (primary + secondary) glow on hover the same way the index page's newsletter submit button does — brighten toward cream and pick up a soft blurred shadow, not just a flat colour swap. Buttons already on the light daylight page (outline, date-button) just keep the lift. */
+/* The hero buttons (primary + secondary) glow on hover the same way the index page's newsletter submit button does — brighten toward cream and pick up a soft blurred shadow, not just a flat colour swap. */
 .primary-button:hover,
 .secondary-button:hover {
   background: var(--hero-cream);
   box-shadow: 0 0.1em 1em var(--hero-gold);
   color: var(--ink);
-}
-
-.primary-button:hover,
-.secondary-button:hover,
-.outline-button:hover,
-.date-button:hover {
   transform: translateY(-2px);
-}
-
-/* Same button family as the solid-green workshop CTAs now — solid earthy fill, cream text, pill shape — rather than the outlined chip look, which read as a different visual language. Base rule below is mostly a fallback shape; .date-button-green/.date-button-clay (always paired with it in the markup) supply the actual fill/text colour per month. border-color: transparent — no gold ring in either the hero or footer instance, at rest or on hover; like .primary-button (whose border colour always matches its own fill), it just disappears. */
-.date-button {
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 15.5rem;
-  min-height: 4.7rem;
-  gap: 0.18rem;
-  padding: 0.8rem 1.25rem;
-  border-width: 1px;
-  border-color: transparent;
-  border-radius: var(--pill);
-  background: var(--moss);
-  color: var(--hero-cream);
-  box-shadow: 0 0.35rem 0.9rem rgba(44, 41, 37, 0.08);
-  text-align: left;
-}
-
-.date-button strong {
-  color: inherit;
-  font-size: calc(var(--font-size) * 0.73);
-  letter-spacing: 0.08em;
-}
-
-.date-button span {
-  color: inherit;
-  font-size: calc(var(--font-size) * 0.76);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-/* One shared hover for both the hero and footer instances — cream fill, ink text, and a layered atmospheric blur (stone-grey key colour, not gold) so it reads as soft ambient light rather than a golden glow or a visible ring. */
-.date-button:hover,
-.date-button:focus-visible {
-  transform: translateY(-2px);
-  background: var(--hero-cream);
-  border-color: transparent;
-  box-shadow:
-    0 0 0.45rem rgba(246, 239, 232, 0.5),
-    0 0 1rem rgba(229, 225, 218, 0.34),
-    0 0 1.8rem rgba(210, 190, 149, 0.1),
-    0 0.4rem 0.9rem rgba(44, 41, 37, 0.07);
-  color: var(--ink);
-}
-
-/* September. */
-.date-button-green {
-  background: var(--moss);
-  color: var(--hero-cream);
-}
-
-.date-button-green strong {
-  color: inherit;
-}
-
-/* November — a distinct clay tone, same geometry as September. */
-.date-button-clay {
-  background: color-mix(in srgb, var(--warm-clay) 62%, var(--bark) 38%);
-  color: var(--hero-cream);
-}
-
-.date-button-clay strong {
-  color: inherit;
 }
 
 /* Font styling: .tag (_global.css). */
@@ -322,166 +908,233 @@
   text-decoration: none;
 }
 
-/* CHOOSE A WORKSHOP LEVEL (gateway) */
-
-.level-section {
-  padding-top: 4rem;
-  padding-bottom: 1.75rem;
-  border-top: 1px solid var(--line);
+/* CHOOSE YOUR WEEKEND (gateway only) — asymmetrical staggered composition: September consistently the broader/dominant card, November narrower, taller, more contemplative — never a rigid shared row. 12-column grid mirrors the spec's own column language directly; each tier reassigns grid-column/row rather than using absolute positioning, since nothing here overlaps (unlike the hero's floating card), items just stagger via placement and differing image ratios. */
+/* No top border here — the quick-info row directly above already closes with its own bottom rule, so the empty band between the two sections stays a single clean rule + open space + the next eyebrow, not two rules bracketing it. */
+.choose-weekend-section {
+  padding: clamp(3.5rem, 6vw, 6rem) 0;
 }
 
-.level-section > .content > h2 {
-  box-sizing: border-box;
-  width: min(100%, 112rem);
-  margin-inline: auto;
-  margin-bottom: calc(var(--font-size) * 0.65);
-  padding-inline: clamp(1rem, 3vw, 2.5rem);
+.choose-weekend-section > .content > h2 {
+  margin: 0 0 1.25rem;
 }
 
-/* Aligned to the same centred 112rem area as .level-progression-wrap below, rather than left-aligned/full-width, so heading, intro, and progression all share one edge on wide screens. */
-.level-section > .content > .section-intro {
-  box-sizing: border-box;
-  width: min(100%, 112rem);
-  max-width: none;
-  margin-inline: auto;
-  margin-bottom: calc(var(--font-size) * 0.25);
-  padding-inline: clamp(1rem, 3vw, 2.5rem);
+.choose-weekend-section > .content > .section-intro {
+  margin-inline: 0;
+  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  max-width: 34rem;
 }
 
-/* .level-horizon is a plain (non-grid) sibling of .level-progression, both inside this wrapper — deliberately NOT a grid item itself, since CSS Grid's containing-block rules for absolutely-positioned items made width: 100% resolve unreliably in an earlier attempt. A plain block wrapper has no such ambiguity. Capped at 96rem and centred so the three levels don't drift too far apart on wide screens. */
-.level-progression-wrap {
-  position: relative;
-  width: min(100%, 112rem);
-  margin-inline: auto;
-}
-
-/* A journey along one path rather than three separate cards — a decorative horizon line runs behind the row, with each level's branch icon and number sitting on top of it like a waypoint. */
-.level-progression {
+.choose-weekend-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  gap: clamp(2rem, 3vw, 4rem);
-  min-height: 17rem;
-  padding: 0 clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 5rem);
 }
 
-/* Purely decorative — sits behind the three steps (z-index below their content), spanning the row within the same horizontal padding as the branches. Recoloured to the same gold as each title's underline (below) via CSS mask instead of the SVG's own baked-in black fill, so the colour stays controllable from here rather than the source file. mask-size: 100% 100% stretches it reliably edge to edge (an <img> with object-fit: fill did not, in practice — turned out to need preserveAspectRatio="none" set on the SVG itself, since SVGs default to preserving aspect ratio in a way plain CSS sizing can't override). left/right (rather than left + width: 100%) keeps it pinned to .level-progression's own padding at any width. */
-.level-horizon {
-  position: absolute;
-  z-index: 0;
-  top: 7.45rem;
-  left: clamp(2.5rem, 5vw, 5rem);
-  right: clamp(2.5rem, 5vw, 5rem);
-  width: auto;
-  height: 4rem;
-  background-color: color-mix(in srgb, var(--hero-gold) 48%, var(--ink-soft) 52%);
-  -webkit-mask-image: url("/images/svgs/level-horizon.svg");
-  mask-image: url("/images/svgs/level-horizon.svg");
-  -webkit-mask-size: 110% 100%;
-  mask-size: 110% 100%;
-  -webkit-mask-position: calc(50% + 2rem) center;
-  mask-position: calc(50% + 2rem) center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  pointer-events: none;
+.choose-weekend-item {
+  display: block;
+  color: inherit;
+  text-decoration: none;
 }
 
-.level-step {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-rows: 8.5rem auto auto auto;
-  justify-items: center;
-  min-width: 0;
-  text-align: center;
+/* September — the wider, dominant card. */
+.choose-weekend-item.is-primary {
+  grid-column: 1 / 8;
 }
 
-/* Recoloured to --moss via CSS mask instead of an <img src="...">, since an externally-referenced SVG loaded through <img> can't be recoloured from CSS at all (browsers treat it as an opaque image, not something colour/currentColor can reach into) — same technique as .level-horizon above. The wrapper itself stays a fixed 8.5rem (matching .level-step's grid-template-rows first row) regardless of variant; mask-size: auto <height> + mask-position: center bottom on each variant below reproduces the old img's height/bottom-alignment behaviour — taller variants (intermediate) simply extend upward past the row, which is fine since the mask isn't clipped by it. */
-.level-branch {
+/* November — narrower, taller, more contemplative. */
+.choose-weekend-item.is-secondary {
+  grid-column: 8 / 13;
+}
+
+.choose-weekend-item figure {
+  margin: 0 0 1.75rem;
+  overflow: hidden;
+}
+
+.choose-weekend-item.is-primary figure {
+  aspect-ratio: 2.2;
+}
+
+.choose-weekend-item.is-secondary figure {
+  aspect-ratio: 1.6;
+}
+
+.choose-weekend-item img {
   display: block;
   width: 100%;
-  height: 7.5rem;
-  margin-bottom: 0;
-  background-color: color-mix(in srgb, var(--moss) 58%, var(--ink) 42%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center bottom;
-  mask-position: center bottom;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
 }
 
-/* Each branch is a different height, tallest for the most advanced level — the taller stem is what visually carries the "further along the path" feeling, not just the label/colour. */
-.level-step--gentle .level-branch {
-  -webkit-mask-image: url("/images/svgs/branch-gentle.svg");
-  mask-image: url("/images/svgs/branch-gentle.svg");
-  -webkit-mask-size: auto 6.25rem;
-  mask-size: auto 6.25rem;
+.choose-weekend-item:hover img {
+  transform: scale(1.02);
 }
 
-.level-step--beginner .level-branch {
-  -webkit-mask-image: url("/images/svgs/branch-beginner.svg");
-  mask-image: url("/images/svgs/branch-beginner.svg");
-  -webkit-mask-size: auto 7.75rem;
-  mask-size: auto 7.75rem;
-  -webkit-mask-position: calc(50% + 0.5rem) bottom;
-  mask-position: calc(50% + 0.5rem) bottom;
+.choose-weekend-text {
+  max-width: 26rem;
 }
 
-.level-step--intermediate .level-branch {
-  height: 10.25rem;
-  margin-top: -2.75rem;
-  -webkit-mask-image: url("/images/svgs/branch-intermediate.svg");
-  mask-image: url("/images/svgs/branch-intermediate.svg");
-  -webkit-mask-size: auto 10.25rem;
-  mask-size: auto 10.25rem;
-  -webkit-mask-position: calc(50% + 0.5rem) bottom;
-  mask-position: calc(50% + 0.5rem) bottom;
+.choose-weekend-tagline {
+  margin: 0 0 0.6rem;
+  color: var(--hero-gold);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
-.level-number {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  margin-bottom: calc(var(--font-size) * 0.7);
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--moss) 70%, var(--ink) 30%);
-  box-shadow: 0 0.08rem 0.18rem rgba(44, 41, 37, 0.12);
-  color: var(--paper-soft);
-  font-family: var(--font-body);
-  font-size: calc(var(--font-size) * 0.68);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.level-step h3 {
-  position: relative;
-  margin: 0 0 calc(var(--font-size) * 1.05);
+.choose-weekend-item h3 {
+  margin: 0 0 0.5rem;
   font-family: var(--font-display);
-  font-size: calc(var(--font-size) * 1.5);
-  font-weight: 500;
+  font-size: clamp(2.5rem, 3vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
-.level-step h3::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: calc(var(--font-size) * -0.6);
-  width: 2.25rem;
+.choose-weekend-rule {
+  width: 2.4rem;
   height: 1px;
+  margin: 0 0 1.1rem;
   background: var(--hero-gold);
-  transform: translateX(-50%);
 }
 
-.level-step p {
-  max-width: 18rem;
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: calc(var(--font-size) * 0.98);
-  line-height: 1.5;
+.choose-weekend-text > p {
+  margin: 0 0 1.2rem;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  line-height: 1.55;
+  font-size: 1rem;
+}
+
+.choose-weekend-cta {
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--hero-gold);
+  color: var(--hero-gold);
+  font-weight: 650;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+}
+
+/* The eyebrow directly above "Choose your weekend" was nearly vanishing at these large widths — a fractional size bump and slightly tighter tracking, rust colour and wording both untouched. */
+@media (min-width: 1400px) {
+  .choose-weekend-section > .content > .eyebrow {
+    font-size: calc(0.75 * var(--font-size) + 0.5px);
+    letter-spacing: 0.15em;
+  }
+}
+
+/* SMALLER DESKTOP (900-1199px) — three-part row: intro (in normal flow above) reads narrower, September dominant and central, November smaller and stepped lower/right. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .choose-weekend-section {
+    padding-top: 3.5rem;
+  }
+
+  .choose-weekend-section > .content > .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .choose-weekend-section > .content > h2 {
+    margin-bottom: 15px;
+  }
+
+  .choose-weekend-section > .content > .section-intro {
+    margin-bottom: 38px;
+  }
+
+  .choose-weekend-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .choose-weekend-item.is-primary {
+    grid-column: 1 / 8;
+  }
+
+  .choose-weekend-item.is-secondary {
+    grid-column: 8 / 13;
+    align-self: start;
+    margin-top: calc(3rem + 18px);
+  }
+
+  .choose-weekend-item.is-primary figure {
+    aspect-ratio: 1.6;
+  }
+
+  .choose-weekend-item.is-secondary figure {
+    aspect-ratio: 1.2;
+    border-radius: 0;
+  }
+
+  .choose-weekend-item figure {
+    margin-bottom: 14px;
+  }
+
+  .choose-weekend-tagline {
+    letter-spacing: 0.11em;
+  }
+}
+
+/* TABLET (640-899px) — vertical sequence: September full width, November inset from the right with its own text aligned to its image's left edge, not the page edge. */
+@media (max-width: 899px) {
+  .choose-weekend-grid {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+
+  .choose-weekend-item.is-primary,
+  .choose-weekend-item.is-secondary {
+    grid-column: 1;
+  }
+
+  .choose-weekend-item.is-primary figure {
+    aspect-ratio: 1.6;
+  }
+
+  .choose-weekend-item.is-secondary {
+    width: 70%;
+    margin-left: auto;
+  }
+
+  .choose-weekend-item.is-secondary figure {
+    aspect-ratio: 1.4;
+  }
+}
+
+/* Closes the one area of this tablet layout that reads as accidental emptiness — the diagonal gap between the September copy and the inset November image — without tightening the whole section (which would flatten the deliberate stagger). September stays exactly where it is; only November moves. */
+@media (min-width: 640px) and (max-width: 899px) {
+  .choose-weekend-grid {
+    row-gap: 2rem;
+  }
+
+  .choose-weekend-item.is-secondary {
+    width: 72%;
+    margin-top: -1rem;
+  }
+
+  .choose-weekend-item figure {
+    margin-bottom: 1.35rem;
+  }
+}
+
+/* MOBILE (below 640px) — September full width and wide (4:3); November narrower, right-aligned, and taller for contrast. */
+@media (max-width: 639px) {
+  .choose-weekend-item.is-primary figure {
+    aspect-ratio: 4 / 3;
+  }
+
+  .choose-weekend-item.is-secondary {
+    width: 84%;
+  }
+
+  .choose-weekend-item.is-secondary figure {
+    aspect-ratio: 4 / 3;
+  }
+
+  .choose-weekend-text {
+    max-width: none;
+  }
 }
 
 /* VISITOR INFO (gateway) */
@@ -489,14 +1142,18 @@
 .visitor-info {
   padding-top: 3rem;
   padding-bottom: 4rem;
-  border-top: 1px solid var(--line);
 }
 
-/* The real fix for the giant left/right gap was the wrapper below (content full → content wide) — .grid-section (What to Bring / Children & Youth / Policies), which has the same "several short info columns" shape as .visitor-info-grid, already caps at content wide rather than full; .visitor-info was the outlier. With the section capped at a sane max-width again, the original fr-based columns work fine — no fixed px column needed. */
-.visitor-info .content {
+/* Capped tighter than the sitewide --wide (1480px): the intro column has its own natural/intrinsic width (.visitor-info-intro's own 37rem max-width below), so past the viewport this was actually tuned against (~1400px), the sitewide cap just kept stretching the gap between the intro and the practical-details grid wider and wider — reading as the intro floating disconnected on the left rather than a balanced two-column row. */
+.content.wide.visitor-info-top {
+  max-width: 1360px;
+}
+
+/* Simple 2-column layout — intro (with the site's own lodge illustration, kept in place of the handoff's photo) alongside the 5-column practical strip as its own grid in column 2. */
+.visitor-info-top {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
   gap: clamp(3rem, 6vw, 6rem);
 }
 
@@ -506,10 +1163,24 @@
 
 .visitor-info-intro h2 {
   max-width: 11ch;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.visitor-info-rule {
+  width: 2.4rem;
+  height: 1px;
+  margin: 0 0 1.5rem;
+  background: var(--hero-gold);
+}
+
+/* Vertical stack by default (illustration visually above the copy, via order — DOM order is copy-then-illustration so the smaller-desktop 2-column tier below can lay them out left-to-right with no reordering needed). */
+.visitor-info-feature {
+  display: flex;
+  flex-direction: column;
 }
 
 .visitor-lodge-illustration {
+  order: -1;
   width: min(100%, 21rem);
   max-width: 21rem;
   margin: 0.85rem 0 1.35rem;
@@ -523,52 +1194,346 @@
   mix-blend-mode: multiply;
 }
 
-.visitor-info-intro > p {
-  max-width: 34rem;
-  margin-top: 0.85rem;
-  line-height: 1.55;
+.visitor-info-intro-copy > p {
+  margin: 0 0 1.1rem;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  line-height: 1.6;
+}
+
+.visitor-info-intro-copy > p:last-of-type {
+  margin-bottom: 1.4rem;
 }
 
 .map-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.4rem;
-}
-
-.map-links .outline-button {
-  min-height: 2.65rem;
-  padding: 0.68rem 1.15rem;
-  font-size: calc(var(--font-size) * 0.68);
-  letter-spacing: 0.1em;
-}
-
-.visitor-info-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem 2rem;
-  margin-top: 0;
+  justify-items: start;
+  gap: 1rem;
+  align-content: start;
 }
 
-.visitor-info-grid article {
-  padding-top: 1.15rem;
+/* Right-hand column of the lodge/practical-info split — three collapsible groups (Before you come / On the day / Policies) instead of nine always-open blocks that all shared the same label styling and gave the eye nothing to scan. Native <details>/<summary> for built-in keyboard and screen-reader support, no manual ARIA needed. Default closed. */
+.visitor-info-accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.visitor-info-group {
   border-top: 1px solid var(--line);
 }
 
-.visitor-info-grid h3 {
-  margin-bottom: 0.7rem;
+.visitor-info-group:last-child {
+  border-bottom: 1px solid var(--line);
 }
 
-.visitor-info-grid p,
-.visitor-info-grid li {
+.visitor-info-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.15rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.visitor-info-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.visitor-info-group summary::after {
+  content: "+";
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.visitor-info-group[open] summary::after {
+  content: "–";
+}
+
+.visitor-info-group-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-bottom: 1.75rem;
+}
+
+.visitor-info-group-content h3 {
+  margin-bottom: 0.6rem;
+}
+
+.visitor-info-group-content p,
+.visitor-info-group-content li {
+  color: color-mix(in srgb, var(--charcoal) 80%, transparent);
+  font-size: 0.92rem;
   line-height: 1.5;
 }
 
-.visitor-info-grid ul,
-.info-grid ul {
+.visitor-info-group-content ul {
   margin: calc(var(--font-size) * 0.4) 0 0;
   padding-left: 1.1rem;
   color: var(--ink-soft);
+}
+
+/* The accordion is a mobile-only pattern — at ≥640px it hides in favour of .visitor-info-columns below, the plain 3-column grid this section used before the accordion rewrite, so .visitor-info-group-content never needs a 2-column variant of its own. */
+.visitor-info-columns {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .visitor-info-accordion {
+    display: none;
+  }
+
+  .visitor-info-columns {
+    display: grid;
+  }
+
+  .visitor-info-columns h3 {
+    margin-bottom: 0.6rem;
+  }
+
+  .visitor-info-columns p,
+  .visitor-info-columns li {
+    color: color-mix(in srgb, var(--charcoal) 80%, transparent);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .visitor-info-columns ul {
+    margin: calc(var(--font-size) * 0.4) 0 0;
+    padding-left: 1.1rem;
+    color: var(--ink-soft);
+  }
+}
+
+/* Three tiers instead of one static 3-column grid: 640-899 (2x4), 900-1199 (3 across, last two centred), 1200+ (4x2). Eight items total (the ninth/mini-CTA slot from the pre-accordion version was intentionally dropped as duplicate content — see .choose-weekend-section further down the page). */
+@media (min-width: 640px) and (max-width: 899px) {
+  .visitor-info-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 2rem;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .visitor-info-columns {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .visitor-info-columns > :nth-child(-n + 6) {
+    grid-column: span 2;
+  }
+
+  .visitor-info-columns > :nth-child(7) {
+    grid-column: 1 / 3;
+  }
+
+  .visitor-info-columns > :nth-child(8) {
+    grid-column: 3 / 5;
+  }
+}
+
+@media (min-width: 1200px) {
+  .visitor-info-columns {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem 1.75rem;
+  }
+}
+
+/* NEWSLETTER + CLOSING QUOTE (gateway only) — real Buttondown integration, same action/field-name/popup pattern as source/pages/email.html's working form. */
+.newsletter-section {
+  padding: clamp(4rem, 6vw, 6.5rem) 0 clamp(3.5rem, 5vw, 5rem);
+}
+
+/* Capped tighter than the sitewide --wide (1480px): this is a two-column split where the left column (the heading) has its own natural/intrinsic width, so past the viewport this was actually tuned against (~1400px), the sitewide cap just kept stretching the gap between the heading and the form wider and wider — reading as the heading floating disconnected on the left rather than a balanced two-column row. */
+.content.wide.newsletter-grid {
+  max-width: 1360px;
+}
+
+.newsletter-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) 1px minmax(0, 1.2fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: center;
+}
+
+/* Grid items default to a content-based automatic minimum width, not 0 — without this, the form column refuses to shrink past its own intrinsic content width (the email input's placeholder text, the button's nowrap label) and overflows the page horizontally at narrow widths instead of the input actually getting narrower. */
+.newsletter-grid > * {
+  min-width: 0;
+}
+
+.newsletter-grid > h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.newsletter-divider {
+  width: 1px;
+  height: 4.5rem;
+  background: color-mix(in srgb, var(--hero-gold) 35%, transparent);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 30rem;
+}
+
+/* flex: 1 1 0 (not the flex: 1 shorthand's default 1 1 0%, which still leaves the item's automatic min-width — a separate property — free to win) plus min-width: 0 is what actually lets this shrink below its placeholder text's own width. */
+.newsletter-form input[type="email"] {
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  min-height: 54px;
+  padding: 0 1rem;
+  border: 1px solid color-mix(in srgb, var(--hero-gold) 40%, transparent);
+  background: var(--pale-ground);
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* The sitewide input:focus-visible style (_global.css) draws a white outline — tuned for forms sitting on a dark background elsewhere on the site, but it reads as a stray white glow against this field's pale-ground fill. Kept focus indication (never remove it outright) but recoloured it to match this page. */
+.newsletter-form input[type="email"]:focus-visible {
+  outline: 2px solid var(--hero-gold);
+  outline-offset: -2px;
+}
+
+/* Deliberately an outline, not a solid fill — the workshop booking CTAs (.gateway-button) are the heaviest elements on the page; the newsletter signup is a secondary action and shouldn't compete with them. */
+.newsletter-form button {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  min-height: 54px;
+  padding: 0 1.5rem;
+  border: 1px solid var(--hero-gold);
+  background: transparent;
+  color: var(--hero-gold);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.newsletter-form button:hover {
+  background: var(--hero-gold);
+  color: var(--page);
+}
+
+.newsletter-caption {
+  margin: 0.75rem 0 0;
+  max-width: 30rem;
+  color: color-mix(in srgb, var(--charcoal) 68%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.closing-quote {
+  padding: clamp(2.75rem, 4vw, 4rem) 0 clamp(4rem, 6vw, 5.5rem);
+  text-align: center;
+}
+
+.closing-quote p {
+  margin: 0 0 1.1rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.closing-quote-rule {
+  width: 2.4rem;
+  height: 1px;
+  margin: 0 auto;
+  background: var(--hero-gold);
+}
+
+/* Two explicit tracks, not three with the middle one hidden — visibility: hidden kept the divider's own 1px column plus both its surrounding gaps reserved even though nothing rendered there, which was part of the excess space around this section. display: none plus dropping the middle track removes that dead space outright. */
+@media (min-width: 1400px) {
+  .newsletter-grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 3vw, 3.5rem);
+  }
+
+  .newsletter-divider {
+    display: none;
+  }
+}
+
+/* At ~1080px the newsletter + closing quote still ran taller than the content needed. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .newsletter-section {
+    padding-top: 4.5rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .closing-quote {
+    padding-top: 3rem;
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* Airy but not stretched. */
+@media (min-width: 721px) and (max-width: 899px) {
+  .newsletter-section {
+    padding-top: 4rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .newsletter-grid {
+    gap: 1.75rem;
+  }
+
+  .closing-quote {
+    padding-top: 2.75rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .newsletter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* The divider only makes sense separating two side-by-side columns — stacked into a single column, it becomes its own 4.5rem-tall row with grid gap on both sides, reading as an odd, oversized gap rather than a rule. display: none (not the 1400px+ tier's visibility: hidden) since there's no neighbouring column track to preserve here. */
+  .newsletter-divider {
+    display: none;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
 }
 
 /* SCHEDULE / TIMELINE (event pages) */
@@ -1072,15 +2037,6 @@
   line-height: 1.5;
 }
 
-.quote-card {
-  padding: calc(var(--font-size) * 1.25);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper-soft);
-}
-
-/* Font styling: .quote (_global.css), applied directly on the <p> in HTML. */
-
 /* POLICIES (event pages) */
 
 .policies-section {
@@ -1107,31 +2063,6 @@
   gap: 3.25rem;
   padding-block: 1.5rem 3rem;
   padding-inline: var(--wide-pad);
-}
-
-/* .date-picker variant (gateway page's "Choose your weaving weekend" footer) — a plain centred stack instead of the moon-button CTA's side-by-side layout, with the date cards pulled up close under the intro rather than floating in a tall flex row. Extra .date-picker class (rather than reusing .level-section, which is a *different* section on this same page) keeps this from bleeding onto anything else that shares .bottom-cta. */
-.bottom-cta.date-picker .content {
-  display: block;
-  padding-block: 3.4rem 4rem;
-  text-align: center;
-}
-
-.bottom-cta.date-picker h2 {
-  margin-bottom: calc(var(--font-size) * 0.65);
-}
-
-.bottom-cta.date-picker .section-intro {
-  max-width: 44rem;
-  margin: 0 auto calc(var(--font-size) * 1.8);
-  color: var(--ink-soft);
-  font-weight: 400;
-}
-
-.date-options {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
 }
 
 /* Slightly smaller than the standard section h2 — beautiful at full size, but oversized for how short this section is; this gives the supporting line and button more room to participate. */
@@ -1232,86 +2163,22 @@
   }
 }
 
-@media (max-width: 1100px) {
-  .level-progression {
-    gap: 1.5rem;
-  }
-
-  .level-step p {
-    max-width: 17rem;
-  }
-}
-
+/* .quick-info here is deliberately :not(.quick-info--plain) — the gateway page's variant is fully self-contained (see "GATEWAY INFO CARD") and has its own collapse rules at every tier, so it shouldn't also pick these up. */
 @media (max-width: 900px) {
-  .quick-info .content,
-  .path-section .content,
-  .visitor-info .content,
-  .visitor-info-grid,
+  .quick-info:not(.quick-info--plain) .content,
   .event-note-grid .content,
   .info-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Heading/intro constrained to their own width so they don't run underneath the intermediate branch, which at this width sits much closer to the text above it. */
-  .level-section > .content > h2,
-  .level-section > .content > .section-intro {
-    width: 100%;
-    padding-inline: 1.5rem;
-  }
-
-  .level-section > .content > .section-intro {
-    max-width: 42rem;
-    margin-inline: 0;
-  }
-
-  .level-progression-wrap {
-    margin-top: 1.75rem;
-  }
-
-  .level-step--gentle .level-branch {
-    -webkit-mask-size: auto 5rem;
-    mask-size: auto 5rem;
-  }
-
-  .level-step--beginner .level-branch {
-    -webkit-mask-size: auto 6.25rem;
-    mask-size: auto 6.25rem;
-  }
-
-  .level-step--intermediate .level-branch {
-    height: 8.5rem;
-    margin-top: 0;
-    -webkit-mask-size: auto 8.5rem;
-    mask-size: auto 8.5rem;
-  }
-
-  /* .level-progression stays 3 columns here — it only collapses at the 520px phone breakpoint below — just tightened up a little for tablet width. */
-  .level-progression {
-    gap: 0.5rem;
-    padding-inline: 1rem;
-  }
-
-  .level-horizon {
-    left: 0;
-    right: 0;
-  }
-
-  .level-step h3 {
-    font-size: calc(var(--font-size) * 1.18);
-  }
-
-  .level-step p {
-    max-width: 13rem;
-    font-size: calc(var(--font-size) * 0.82);
-    line-height: 1.45;
-  }
-
-  .quick-info article,
+  .quick-info:not(.quick-info--plain) article,
   .event-note-grid article,
   .info-grid > * {
     padding-right: 0;
+    padding-left: 0;
     padding-bottom: 1.25rem;
     border-right: 0;
+    border-left: 0;
     border-bottom: 1px solid var(--line);
   }
 
@@ -1321,60 +2188,90 @@
   }
 }
 
-/* Gateway page phone layout — the two date cards stack cleanly instead of wrapping unevenly. */
-@media (max-width: 680px) {
-  .date-options {
-    display: grid;
+/* SMALLER DESKTOP (900-1199px) — a deliberate full-width editorial reset for the Location section rather than just "the wide layout with fewer columns": the venue feature spans the page with the illustration enlarged beside the copy, the practical grid regroups to 3/3/centred-2, and the mini-CTA is replaced by two full-width event cards. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .visitor-info-top {
+    grid-template-columns: 1fr;
   }
 
-  .date-button {
+  .visitor-info-intro {
+    max-width: none;
+  }
+
+  /* Kept large ("editorial shape": Pioneer / Lodge in Red / Deer) rather than shrunk — a deliberate ch-based measure controls the wrap instead. */
+  .visitor-info-intro h2 {
+    max-width: 7.5ch;
+    margin-bottom: 1rem;
+  }
+
+  /* Two columns instead of a vertical stack: putting the illustration beside the full text block (not between the heading and the paragraphs) lets it grow substantially larger without pushing the practical-details grid further down the page. 0.72fr/1.28fr deliberately favours the illustration. No border/padding-bottom of its own — .visitor-info-top's own grid `gap` (it applies as a row-gap once this tier collapses to a single stacked column) already separates this from .visitor-info-columns below; adding a second gap here on top of that was the "excess space" the border line was trying to bracket. */
+  .visitor-info-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    grid-template-areas: "copy illustration";
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .visitor-info-intro-copy {
+    grid-area: copy;
+    max-width: 29rem;
+  }
+
+  .visitor-info-rule {
+    margin-bottom: 1.5rem;
+  }
+
+  .visitor-info-intro-copy > p {
+    margin-bottom: 1rem;
+  }
+
+  .visitor-info-intro-copy > p:last-of-type {
+    margin-bottom: 1.3rem;
+  }
+
+  /* Grown well past its own grid column (115%) with a matching negative left margin, so it reads as a true visual feature integrated with the heading rather than a small illustration floating in its own box. */
+  .visitor-lodge-illustration {
+    grid-area: illustration;
+    order: 0;
+    width: 115%;
+    max-width: none;
+    margin: 0 0 0 -8%;
+  }
+
+  .visitor-lodge-illustration img {
+    display: block;
     width: 100%;
-    min-width: 0;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  /* Compact editorial text links again, not the full-width outlined buttons this tier used when the illustration sat below a much taller vertical stack — buttons here would make the left column too heavy next to the enlarged illustration. */
+  .map-links {
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .map-links a {
+    display: inline-block;
+    width: auto;
+    padding: 0 0 0.25rem;
+    border: 0;
+    border-bottom: 1px solid var(--hero-gold);
+    text-align: left;
   }
 }
 
-/* Level progression collapses to one column with the horizon line hidden (drawn for a horizontal row, not meaningful once stacked) and each branch/heading/paragraph resized down a step further from the 850px tablet pass above. Held off until 520px (later than the date-card stacking above) so the 3-column layout gets more room to breathe before giving up on it. */
-@media (max-width: 520px) {
-  .level-section > .content > h2 {
-    margin-bottom: calc(var(--font-size) * 1.5);
-  }
-
-  .level-progression {
+/* TABLET (640-899px) — full-width feature stack (medium illustration, left-aligned, back to compact text links) above the same proven 2-column practical grid used down through mobile. */
+@media (max-width: 899px) {
+  .visitor-info-top {
     grid-template-columns: 1fr;
-    gap: 2.75rem;
-    min-height: 0;
-    padding: 0;
   }
 
-  .level-horizon {
-    display: none;
-  }
-
-  .level-step {
-    grid-template-rows: auto auto auto auto;
-  }
-
-  .level-branch {
-    height: 7rem;
-  }
-
-  .level-step--gentle .level-branch {
-    -webkit-mask-size: auto 4.75rem;
-    mask-size: auto 4.75rem;
-  }
-
-  .level-step--beginner .level-branch {
-    -webkit-mask-size: auto 6rem;
-    mask-size: auto 6rem;
-  }
-
-  .level-step--intermediate .level-branch {
-    -webkit-mask-size: auto 7.5rem;
-    mask-size: auto 7.5rem;
-  }
-
-  .level-step p {
-    max-width: 24rem;
+  .visitor-lodge-illustration {
+    width: min(60%, 26rem);
+    max-width: none;
   }
 }
 
@@ -1433,5 +2330,14 @@
   .register-label {
     justify-self: start;
     margin-top: 0.1rem;
+  }
+}
+
+/* MOBILE (below 640px) — single-column stack for the practical grid; the illustration grows to near-full column width and centres itself, while the surrounding copy stays left-aligned. */
+@media (max-width: 639px) {
+  .visitor-lodge-illustration {
+    width: min(100%, 26rem);
+    max-width: none;
+    margin-inline: auto;
   }
 }

@@ -20,11 +20,12 @@
     4. .schedule-legend's material <span> classes (e.g. willow, cattail, bulrush)
        must match whatever classes you use on .timeline-event elements — the set
        varies per event (2-4 so far), it isn't fixed either.
-    5. Once the page is live, add a matching <a class="date-button date-button-[color]">
-       link in TWO places on weekend-of-weaving-red-deer.html (the gateway page):
-       the hero .site-hero-actions block and the bottom-cta .site-hero-actions
-       block. Easy to forget since it's a separate file from everything above.
-    6. Every class here (.site-hero, .quick-info, .path-section, .schedule-*,
+    5. Once the page is live, add a matching entry in TWO places on
+       weekend-of-weaving-red-deer.html (the gateway page): the
+       .gateway-hero-dates block in the hero, and a new .choose-weekend-item
+       in the .choose-weekend-grid. Easy to forget since it's a separate file
+       from everything above.
+    6. Every class here (.site-hero, .quick-info, .schedule-*,
        .timeline-*, .workshop-detail-*, .info-grid, .policies-section,
        .bottom-cta, etc.) is already styled in _global.css / main.css and shared
        across the gateway + both real event pages — no new CSS should be needed
@@ -86,48 +87,6 @@
           <h3 class="label">Materials</h3>
           <p>Prepared natural materials and tools are included.</p>
         </article>
-      </div>
-    </section>
-
-    <section id="choose-your-path" class="path-section">
-      <div class="content wide">
-        <div class="path-copy">
-          <p class="eyebrow">Choose your path</p>
-          <h2 class="section-title">Which workshop is right for you?</h2>
-          <p class="section-intro">[One or two sentences summarizing the range of workshops on offer, gentlest to fullest.]</p>
-          <p>You can register for a single workshop, combine a few shorter sessions, or spend the weekend moving between different materials and forms.</p>
-        </div>
-
-        <!--
-          PATH CARDS — both real events use exactly 3 of these (gentlest start /
-          practice-or-pattern / fuller day, svgs ☾ ✶ ✧ in that order), but that's
-          not a hard rule — add or remove as the event's workshop spread calls for.
-        -->
-        <div class="path-cards" aria-label="Workshop choice suggestions">
-          <article>
-            <div class="path-icon" aria-hidden="true">☾</div>
-            <div>
-              <h3 class="eyebrow-lesser">For the gentlest start</h3>
-              <p>[Suggested gentle-beginner workshop(s).]</p>
-            </div>
-          </article>
-
-          <article>
-            <div class="path-icon" aria-hidden="true">✶</div>
-            <div>
-              <h3 class="eyebrow-lesser">[e.g. "For willow practice" / "For pattern and focus"]</h3>
-              <p>[Suggested beginner workshop(s).]</p>
-            </div>
-          </article>
-
-          <article>
-            <div class="path-icon" aria-hidden="true">✧</div>
-            <div>
-              <h3 class="eyebrow-lesser">For a fuller day</h3>
-              <p>[Suggested intermediate/longer workshop(s).]</p>
-            </div>
-          </article>
-        </div>
       </div>
     </section>
 

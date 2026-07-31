@@ -183,9 +183,8 @@ p {
   text-transform: uppercase;
 }
 
-/* An eyebrow that introduces a section-title reads as a quiet label, not a second headline — darker and a touch smaller/tighter than the standard eyebrow so it doesn't compete with the heading right below it. */
+/* An eyebrow that introduces a section-title reads as a quiet label, not a second headline — a touch smaller/tighter than the standard eyebrow so it doesn't compete with the heading right below it. Stays Bark (not darkened toward Ink) per the typography spec's "warm brown, not black" rule for small editorial labels. */
 .eyebrow:has(+ .section-title) {
-  color: color-mix(in srgb, var(--hero-gold) 50%, var(--ink) 50%);
   font-size: calc(var(--font-size) * 0.75);
   letter-spacing: 0.16em;
 }
