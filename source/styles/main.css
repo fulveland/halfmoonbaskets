@@ -36,7 +36,7 @@
   color: var(--bark-hover);
 }
 
-/* Nav re-asserted at equal-or-higher specificity than the generic link rule just above, since .site-nav a's own _global.css default (cream, for overlaying a dark hero photo) would otherwise lose a same-specificity tie to the later-loaded rule above. True for both event pages here; the gateway overrides to ink below since its new hero has no photo behind the nav. */
+/* Nav re-asserted at equal-or-higher specificity than the generic link rule just above, since .site-nav a's own _global.css default (cream, for overlaying a dark hero photo) would otherwise lose a same-specificity tie to the later-loaded rule above. True for both event pages here; gateway/about override to ink below since neither has a photo behind the nav. */
 .weekend-page .site-nav a {
   color: var(--hero-cream);
 }
@@ -44,7 +44,9 @@
 .gateway-page .site-logo,
 .gateway-page .site-nav a,
 .event-hero-page .site-logo,
-.event-hero-page .site-nav a {
+.event-hero-page .site-nav a,
+.about-page .site-logo,
+.about-page .site-nav a {
   color: var(--ink);
 }
 
@@ -2842,5 +2844,327 @@
     width: min(100%, 26rem);
     max-width: none;
     margin-inline: auto;
+  }
+}
+
+/* ABOUT PAGE — a single long-form editorial page, not a booking flow: no filled buttons, just an eyebrow/h1/lede opening (plain .site-header, no photo behind it, unlike the event pages), one full-bleed photograph as a breather, then a sequence of h2-headed prose sections stacked in one readable column. Fine hairline rules separate the sections instead of cards or panels, matching the rest of the site's editorial pages. */
+.about-hero {
+  padding-block: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem);
+}
+
+/* Qualified with .content to match .content.wide's specificity (both live on the same element) and win via source order, since a plain .about-hero-copy class alone loses that fight and the 44rem cap silently never applies. */
+.content.about-hero-copy {
+  max-width: 44rem;
+}
+
+.about-hero-h1 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(calc(var(--font-size) * 2.5), 4.5vw, calc(var(--font-size) * 3.96));
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.about-hero-lede {
+  max-width: 38rem;
+  color: var(--ink);
+}
+
+/* Full-bleed break-out — same 100vw/negative-margin technique as .quick-info and .event-note-grid elsewhere on the site. A single documentary photograph, not a hero background; the photo treatment (grayscale/saturate/brightness/contrast) matches the workshop detail images so it doesn't read as a separate visual system. */
+.about-photo {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  margin-block: clamp(2rem, 5vw, 4rem);
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
+}
+
+.about-body {
+  padding-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+/* Qualified with .content, same reason as .content.about-hero-copy above. */
+.content.about-section-inner {
+  max-width: 40rem;
+}
+
+.about-section + .about-section .about-section-inner {
+  margin-top: clamp(3rem, 5vw, 4.5rem);
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.about-section h2 {
+  margin-bottom: 1.15rem;
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.about-section p {
+  margin: 0 0 1.15em;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.about-section p:last-child {
+  margin-bottom: 0;
+}
+
+.about-section p.about-cta,
+.about-section p.about-links {
+  margin-top: 1.6rem;
+  color: var(--ink-soft);
+}
+
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.25rem;
+}
+
+@media (max-width: 480px) {
+  .about-hero-h1 {
+    letter-spacing: -0.02em;
+  }
+
+  .about-photo img {
+    aspect-ratio: 4 / 5;
+    object-position: center 20%;
+  }
+}
+
+/* CALENDAR — moved from the old standalone /calendar page into a .weekend-page-scoped block on index.html, directly below the night-sky placeholder. Rows, not tiles; fine rules, not boxes; text links, not filled buttons — same principles as the rest of the site. The placeholder's padded, background-cover styling lives on its own .index-hero wrapper now (index.css) rather than on the body, so #calendar is a plain sibling with nothing to break out of — just needs its own opaque background so the night sky above doesn't show through. */
+#calendar {
+  background: var(--page);
+}
+
+.cal-hero {
+  padding-block: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+.cal-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.cal-hero-copy {
+  max-width: 32rem;
+}
+
+.cal-hero-h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(calc(var(--font-size) * 2.2), 4vw, calc(var(--font-size) * 3.4));
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.cal-hero-intro {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.cal-hero-figure {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+}
+
+.cal-hero-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
+}
+
+.cal-season {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+}
+
+.cal-season--quiet {
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.cal-season-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* Italic display-serif in Bark Rust, matching .accent-heading (_global.css) — appropriate here since a season name is exactly the kind of "day, date, moment" that class is meant for. */
+.cal-season-title {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--hero-gold);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 1.1rem + 1vw, 1.8rem);
+}
+
+.cal-season-rule {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--line);
+}
+
+.cal-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cal-row {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.cal-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.cal-when {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.cal-month {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cal-days {
+  display: block;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+
+.cal-what {
+  min-width: 0;
+}
+
+.cal-title {
+  margin: 0 0 0.3rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.cal-where {
+  margin: 0 0 0.2rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.cal-status {
+  margin: 0;
+  color: var(--warm-clay);
+  font-size: 0.85rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cal-go {
+  margin: 0;
+  justify-self: end;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cal-link {
+  display: inline-block;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--hero-gold);
+  color: var(--hero-gold);
+  font-weight: 650;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.cal-empty {
+  max-width: 32rem;
+}
+
+.cal-empty-lead {
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.cal-close {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+}
+
+.cal-close-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.cal-close-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.cal-close-note {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .cal-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cal-hero-figure {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .cal-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    padding-block: 1rem;
+  }
+
+  .cal-go {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .cal-close-inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

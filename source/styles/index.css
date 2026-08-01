@@ -1,7 +1,9 @@
 /* INDEX */
 
-#index {
+/* Was #index (the whole body) — moved to its own wrapper around just the original placeholder content so the calendar section added below it (main.css) doesn't change this element's height. background-size: cover and the percentage background-position both scale/crop based on THIS element's own box, not the viewport — with the old #index selector, adding a tall calendar section below made the body (and therefore the "cover"-sized photo) stretch to a much greater height, throwing off the precise crop tuning below. Scoped to its own box instead, so it stays exactly the height it always was regardless of what else is on the page. */
+.index-hero {
   margin: 0;
+  min-height: 100vh;
   background: url("/images/half-moon-baskets-moon-stars.webp");
 
   /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */

@@ -1,0 +1,317 @@
+/* CALENDAR PAGE — the public "what's coming up" list. Not to be confused with
+   /workshops, which is the host-facing availability page for venues booking a
+   workshop; this one is for someone deciding which gathering to attend.
+
+   Everything is scoped to .calendar-page. The page also carries .weekend-page,
+   which supplies the Bark/Paper/Ink token overrides from main.css, so
+   var(--moss), var(--hero-gold), var(--line) etc. all resolve to the redesign
+   palette here without redeclaring them.
+
+   Two rules from the design guidelines drive the whole layout:
+     · rows, not tiles — a calendar has an unpredictable number of items, and a
+       grid leaves broken cells the moment a month has three events instead of
+       four (same reasoning as the repeated-registration-button rule in main.css)
+     · text links, not filled buttons — every action on this page navigates
+       somewhere else, and "a filled button that only moves someone to another
+       page is a text link wearing the wrong clothes". It also keeps Bark Rust
+       inside its ~6% allowance on a page that would otherwise carry a dozen
+       saturated marks. */
+
+.calendar-page {
+  background: var(--page);
+}
+
+/* The sitewide nav defaults to cream for overlaying dark hero photos
+   (_global.css), and main.css re-asserts that at .weekend-page scope. This page
+   has no hero photo behind the header, so both need out-specifying: main.css is
+   concatenated after this file, so an equal-specificity rule would lose the tie.
+   Hence the doubled class rather than .calendar-page alone. */
+.calendar-page.weekend-page .site-logo,
+.calendar-page.weekend-page .site-nav a {
+  color: var(--ink);
+}
+
+.calendar-page.weekend-page .site-nav a[aria-current="page"] {
+  color: var(--hero-gold);
+}
+
+/* _global.css sets a display-scale font-size on bare h1/h2/h3, so every heading
+   on this page declares its own size rather than inheriting that. */
+
+/* ── Opening ──────────────────────────────────────────────────────────────
+   One gathering's worth of photograph and a title, so the page opens as an
+   editorial page rather than as a table. Asymmetric on desktop per the layout
+   language: copy narrower than the image, text outside the photo. */
+
+.calendar-page .cal-hero {
+  padding-block: clamp(2rem, 5vw, 4.5rem) clamp(3rem, 7vw, 6rem);
+}
+
+.calendar-page .cal-hero-inner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .calendar-page .cal-hero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+}
+
+.calendar-page .cal-hero-h1 {
+  margin-block: 0.6rem 0;
+  font-size: clamp(calc(var(--font-size) * 3.4), 9vw, calc(var(--font-size) * 6.2));
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+.calendar-page .cal-hero-intro {
+  max-width: 34rem;
+  margin-top: 1.6rem;
+  color: var(--charcoal);
+  font-size: clamp(calc(var(--font-size) * 0.92), 1.4vw, calc(var(--font-size) * 1.05));
+  line-height: 1.58;
+}
+
+.calendar-page .cal-hero-figure {
+  margin: 0;
+}
+
+.calendar-page .cal-hero-figure img {
+  display: block;
+  width: 100%;
+  height: clamp(15rem, 34vw, 26rem);
+  object-fit: cover;
+  border: 1px solid rgba(134, 83, 51, 0.16);
+}
+
+/* ── Season blocks ────────────────────────────────────────────────────────
+   A short Bark Rust rule under the season heading, matching the 40–58px accent
+   rules used elsewhere in the system. */
+
+.calendar-page .cal-season {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.calendar-page .cal-season--quiet {
+  padding-block: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.calendar-page .cal-season-head {
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.calendar-page .cal-season-title {
+  font-size: clamp(calc(var(--font-size) * 1.9), 3.4vw, calc(var(--font-size) * 2.9));
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+.calendar-page .cal-season-rule {
+  width: 48px;
+  height: 1px;
+  margin-top: 1.1rem;
+  background: var(--hero-gold);
+}
+
+/* ── The row ──────────────────────────────────────────────────────────────
+   Date left, event centre, action right, hairline between. Rows scale to any
+   number of events and never leave a broken cell.
+
+   On desktop the date column is fixed so every date lines up down the page —
+   that column edge is what makes the list scannable, and it is the only
+   alignment device here. No borders, no backgrounds. */
+
+.calendar-page .cal-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.calendar-page .cal-row {
+  display: grid;
+  gap: 0.4rem 2rem;
+  align-items: baseline;
+  padding-block: clamp(1.5rem, 2.6vw, 2.1rem);
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 760px) {
+  .calendar-page .cal-row {
+    grid-template-columns: 8.5rem minmax(0, 1fr) auto;
+  }
+}
+
+/* Dates in the display serif, per the type roles: dates are display type. */
+.calendar-page .cal-when {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(calc(var(--font-size) * 1.15), 2vw, calc(var(--font-size) * 1.5));
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.calendar-page .cal-month {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.calendar-page .cal-what {
+  min-width: 0;
+}
+
+.calendar-page .cal-title {
+  font-size: clamp(calc(var(--font-size) * 1.15), 2vw, calc(var(--font-size) * 1.5));
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.calendar-page .cal-where {
+  margin: 0.35rem 0 0;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.82);
+  line-height: 1.5;
+}
+
+/* Status is information, not an action, so it never takes the accent colour —
+   otherwise "Sold out" competes with the link beside it for the same attention. */
+.calendar-page .cal-status {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-size: calc(var(--font-size) * 0.74);
+  letter-spacing: 0.02em;
+}
+
+.calendar-page .cal-status--soldout {
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+/* ── The link ─────────────────────────────────────────────────────────────
+   Every label names its destination. Someone who clicks "Register on Luma"
+   and lands on Luma is fine; someone who clicks "Register" and lands on a
+   stranger's checkout stops and reconsiders. */
+
+.calendar-page .cal-go {
+  margin: 0.5rem 0 0;
+}
+
+@media (min-width: 760px) {
+  .calendar-page .cal-go {
+    margin-top: 0;
+    text-align: right;
+  }
+}
+
+.calendar-page .cal-link {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding-bottom: 0.28rem;
+  border-bottom: 1px solid var(--hero-gold);
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: calc(var(--font-size) * 0.7);
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.calendar-page .cal-link span {
+  transition: transform 0.2s ease;
+}
+
+.calendar-page .cal-link:hover,
+.calendar-page .cal-link:focus-visible {
+  border-color: var(--bark-hover);
+  color: var(--bark-hover);
+}
+
+.calendar-page .cal-link:hover span {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar-page .cal-link,
+  .calendar-page .cal-link span {
+    transition: none;
+  }
+}
+
+/* A row whose date has passed, or whose seats are gone, stays on the page until
+   the date passes. The sell-out does its own signalling; nothing has to claim it. */
+.calendar-page .cal-row--past .cal-when,
+.calendar-page .cal-row--past .cal-title {
+  color: var(--ink-soft);
+}
+
+/* ── Empty season ─────────────────────────────────────────────────────────
+   A season with nothing in it yet still gets a block, because an absent heading
+   reads as an oversight and a present one reads as a season not yet announced. */
+
+.calendar-page .cal-empty {
+  display: grid;
+  gap: 1.25rem;
+  padding-block: clamp(1rem, 2vw, 1.75rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .calendar-page .cal-empty {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.calendar-page .cal-empty-lead {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.88);
+  line-height: 1.55;
+}
+
+/* ── Closing ──────────────────────────────────────────────────────────────
+   Points the other audience (venues who want to host) at /workshops, so the two
+   calendars on this site never have to share a page or a name. */
+
+.calendar-page .cal-close {
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 9vw, 8rem);
+}
+
+.calendar-page .cal-close-inner {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 760px) {
+  .calendar-page .cal-close-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 3rem;
+  }
+}
+
+.calendar-page .cal-close-title {
+  font-size: clamp(calc(var(--font-size) * 1.7), 3vw, calc(var(--font-size) * 2.4));
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.calendar-page .cal-close-note {
+  max-width: 40rem;
+  margin-top: 1rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.88);
+  line-height: 1.58;
+}

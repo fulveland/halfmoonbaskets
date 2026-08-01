@@ -1,0 +1,264 @@
+/* ABOUT PAGE — Freyja's own page: who she is, how to reach her, where to buy a
+   basket, and then the story.
+
+   Scoped to .about-page. The page also carries .weekend-page for the Bark/Paper/
+   Ink token overrides in main.css, so var(--hero-gold), var(--line),
+   var(--charcoal) etc. resolve to the redesign palette.
+
+   Ordering principle behind the layout: two readers arrive at an about page and
+   they want opposite things. One wants a basket, a date, or an email address and
+   will leave in ten seconds if the page makes them hunt. The other wants to know
+   who they'd be spending a weekend with and will read fifteen hundred words. The
+   answer block near the top serves the first without costing the second anything
+   more than one scroll. */
+
+.about-page {
+  background: var(--page);
+}
+
+/* Same specificity note as calendar.css: main.css re-asserts cream nav links at
+   .weekend-page scope and loads after this file, so the doubled class is needed
+   rather than .about-page alone. */
+.about-page.weekend-page .site-logo,
+.about-page.weekend-page .site-nav a {
+  color: var(--ink);
+}
+
+.about-page.weekend-page .site-nav a[aria-current="page"] {
+  color: var(--hero-gold);
+}
+
+/* _global.css puts a display-scale font-size on bare h1/h2/h3, so every heading
+   here sets its own. */
+
+/* ── Who ──────────────────────────────────────────────────────────────── */
+
+.about-page .ab-hero {
+  padding-block: clamp(2rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.about-page .ab-hero-inner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .about-page .ab-hero-inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+.about-page .ab-hero-h1 {
+  margin-block: 0.7rem 0;
+  font-size: clamp(calc(var(--font-size) * 3.2), 8vw, calc(var(--font-size) * 5.6));
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+.about-page .ab-hero-intro {
+  max-width: 33rem;
+  margin-top: 1.6rem;
+  color: var(--charcoal);
+  font-size: clamp(calc(var(--font-size) * 0.95), 1.5vw, calc(var(--font-size) * 1.12));
+  line-height: 1.55;
+}
+
+.about-page .ab-hero-figure {
+  margin: 0;
+}
+
+.about-page .ab-hero-figure img {
+  display: block;
+  width: 100%;
+  height: clamp(18rem, 40vw, 32rem);
+  object-fit: cover;
+  border: 1px solid rgba(134, 83, 51, 0.16);
+}
+
+/* ── The three answers ────────────────────────────────────────────────────
+   Fine vertical rules between columns and nothing else: no cards, no fills, no
+   shadows. The rules are what keep this from reading as a business card. */
+
+.about-page .ab-answers {
+  padding-block: clamp(1rem, 2vw, 1.5rem) clamp(3rem, 6vw, 5rem);
+}
+
+.about-page .ab-answers-grid {
+  display: grid;
+  gap: 2rem;
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 780px) {
+  .about-page .ab-answers-grid {
+    gap: clamp(2rem, 4vw, 3.5rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .about-page .ab-answers-grid article + article {
+    padding-left: clamp(2rem, 4vw, 3.5rem);
+    border-left: 1px solid var(--line);
+  }
+}
+
+.about-page .ab-answers-grid p {
+  margin: 0.75rem 0 0;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.85);
+  line-height: 1.55;
+}
+
+/* ── The story ────────────────────────────────────────────────────────── */
+
+.about-page .ab-story {
+  padding-block: clamp(1rem, 2vw, 2rem) clamp(3rem, 6vw, 5rem);
+}
+
+.about-page .ab-story-head {
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.about-page .ab-story-title {
+  font-size: clamp(calc(var(--font-size) * 2.1), 4.4vw, calc(var(--font-size) * 3.6));
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.about-page .ab-rule {
+  width: 52px;
+  height: 1px;
+  margin-top: 1.4rem;
+  background: var(--hero-gold);
+}
+
+/* One narrow measure for the whole story. The guidelines cap body lines at about
+   70 characters; 36rem at this base size lands just under that. */
+.about-page .ab-prose {
+  max-width: 36rem;
+}
+
+.about-page .ab-prose h3 {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 0.4rem;
+  font-size: clamp(calc(var(--font-size) * 1.35), 2.2vw, calc(var(--font-size) * 1.75));
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.about-page .ab-prose h3:first-child {
+  margin-top: 0;
+}
+
+.about-page .ab-prose p {
+  margin: 1.1rem 0 0;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.9);
+  line-height: 1.68;
+}
+
+.about-page .ab-prose em {
+  font-style: italic;
+}
+
+.about-page .ab-prose-link {
+  margin-top: 1.75rem;
+}
+
+/* Full-bleed photograph between the two halves of the story: a rest, and the
+   only place the page goes edge to edge. */
+.about-page .ab-break {
+  margin: clamp(3rem, 7vw, 6rem) 0;
+}
+
+.about-page .ab-break img {
+  display: block;
+  width: 100%;
+  height: clamp(14rem, 32vw, 26rem);
+  object-fit: cover;
+}
+
+/* ── Links ────────────────────────────────────────────────────────────── */
+
+.about-page .ab-link {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding-bottom: 0.28rem;
+  border-bottom: 1px solid var(--hero-gold);
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: calc(var(--font-size) * 0.7);
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.about-page .ab-link span {
+  transition: transform 0.2s ease;
+}
+
+.about-page .ab-link:hover,
+.about-page .ab-link:focus-visible {
+  border-color: var(--bark-hover);
+  color: var(--bark-hover);
+}
+
+.about-page .ab-link:hover span {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .ab-link,
+  .about-page .ab-link span {
+    transition: none;
+  }
+}
+
+/* ── Closing ──────────────────────────────────────────────────────────── */
+
+.about-page .ab-close {
+  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 9vw, 8rem);
+}
+
+.about-page .ab-close-inner {
+  display: grid;
+  gap: 2rem;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 780px) {
+  .about-page .ab-close-inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+}
+
+.about-page .ab-close-title {
+  font-size: clamp(calc(var(--font-size) * 1.6), 2.8vw, calc(var(--font-size) * 2.2));
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.about-page .ab-close-inner p {
+  max-width: 36rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.88);
+  line-height: 1.6;
+}
+
+.about-page .ab-close-links {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.about-page .ab-close-links p {
+  margin: 0.6rem 0 0;
+}

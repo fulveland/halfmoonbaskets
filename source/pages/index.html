@@ -3,34 +3,162 @@
 <header class="site-header site-header--overlay">
     <a href="/" class="site-logo">Half Moon<br /><span>Baskets</span></a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/">Home</a>
-      <!-- <a href="/about">About</a>
-      <a href="/calendar">Calendar</a> -->
-      <a href="/wild-roses">Wild Roses</a>
+      <a href="/#calendar">Calendar</a>
+      <a href="/about">About</a>
       <a href="/email">Newsletter</a>
+      <a href="https://www.shopalbertacraft.com/collections/freyja-ulveland" target="_blank" rel="noopener noreferrer">Shop</a>
     </nav>
   </header> 
   <main>
-    <!-- <h1>Half Moon Baskets</h1> -->
-    <p class="moon">Welcome to the future home of Half Moon Baskets.</p>
-    <p class="moon">
-      You can find my upcoming workshops on
-      <a href="https://luma.com/LearntoWeave">Luma</a> and see what I’ve been up to on
-      <a href="https://www.instagram.com/halfmoonbaskets/">Instagram.</a>
-    </p>
-    <p class="moon">To get a note each time I launch a new workshop use the <a href="/email">email sign-up</a>. This is the best way to get in, but just a heads-up that during busy seasons you might hear from me once or twice a week.</p>
-    <form class="dark" action="https://buttondown.com/api/emails/embed-subscribe/halfmoonbaskets" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/halfmoonbaskets', 'popupwindow')">
-      <div>
-        <input type="email" name="email" placeholder="Email address" id="bd-email" />
-        <input type="submit" value="Subscribe" />
-      </div>
-    </form>
-    <!-- <p>
-      If you prefer monthly round ups, I would reccomend signing up for the Alberta Basketry Guild
-      <a href="https://albertabasketry.com">newsletter</a>.
-    </p> -->
-    <p class="moon">Email halfmoonbaskets@gmail.com if you’d like to chat baskets, workshops, or any new adventures you've been woven into.</p>
-    <p class="moon">~Freyja Ulveland</p>
+    <div class="index-hero">
+      <!-- <h1>Half Moon Baskets</h1> -->
+      <p class="moon">Welcome to the future home of Half Moon Baskets.</p>
+      <p class="moon">
+        You can find my upcoming workshops on
+        <a href="https://luma.com/LearntoWeave">Luma</a> and see what I’ve been up to on
+        <a href="https://www.instagram.com/halfmoonbaskets/">Instagram.</a>
+      </p>
+      <p class="moon">To get a note each time I launch a new workshop use the <a href="/email">email sign-up</a>. This is the best way to get in, but just a heads-up that during busy seasons you might hear from me once or twice a week.</p>
+      <form class="dark" action="https://buttondown.com/api/emails/embed-subscribe/halfmoonbaskets" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/halfmoonbaskets', 'popupwindow')">
+        <div>
+          <input type="email" name="email" placeholder="Email address" id="bd-email" />
+          <input type="submit" value="Subscribe" />
+        </div>
+      </form>
+      <!-- <p>
+        If you prefer monthly round ups, I would reccomend signing up for the Alberta Basketry Guild
+        <a href="https://albertabasketry.com">newsletter</a>.
+      </p> -->
+      <p class="moon">Email halfmoonbaskets@gmail.com if you’d like to chat baskets, workshops, or any new adventures you've been woven into.</p>
+      <p class="moon">~Freyja Ulveland</p>
+    </div>
+
+    <!--
+      Calendar — moved here from the old standalone /calendar page (now
+      retired; nav links across the site point to /#calendar). Scoped in its
+      own .weekend-page wrapper rather than adding that class to the body tag,
+      so it picks up the Bark/Paper/Ink tokens without touching the night-sky
+      placeholder section above, which relies on the old root defaults.
+
+      PLACEHOLDERS, all marked TODO inline:
+        · Weave and Nourish registration URL
+        · Baskets in the Garden URL (basketsinthegarden.com assumed)
+        · every status line (sold out / open / opens later) — set these from what's true
+        · the workshop count in the closing line
+    -->
+    <div class="weekend-page" id="calendar">
+      <!-- ── Opening: one gathering, not the list ─────────────────────────── -->
+      <section class="cal-hero" aria-labelledby="cal-hero-title">
+        <div class="content wide cal-hero-inner">
+          <div class="cal-hero-copy">
+            <p class="eyebrow">What&rsquo;s coming up</p>
+            <h2 id="cal-hero-title" class="cal-hero-h1">Gatherings</h2>
+            <p class="cal-hero-intro">Workshops, weekends, and retreats across Alberta. Some are mine, some I co-host, and some are hosted by other people who have invited me to teach. Every listing says where you&rsquo;ll be sent to register.</p>
+          </div>
+
+          <figure class="cal-hero-figure">
+            <img src="/images/events/weekend-of-weaving-red-deer/pioneer-lodge-1.png" alt="A weaver carrying freshly made willow baskets across a field" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ── Autumn ───────────────────────────────────────────────────────── -->
+      <section class="cal-season" aria-labelledby="season-autumn">
+        <div class="content wide">
+          <div class="cal-season-head">
+            <h3 id="season-autumn" class="cal-season-title">Autumn 2026</h3>
+            <div class="cal-season-rule" aria-hidden="true"></div>
+          </div>
+
+          <ol class="cal-list">
+            <li class="cal-row">
+              <p class="cal-when"><span class="cal-month">Sep</span> <span class="cal-days">11&ndash;13</span></p>
+              <div class="cal-what">
+                <h4 class="cal-title">Baskets in the Garden</h4>
+                <p class="cal-where">Tofield &middot; a gathering I help organize</p>
+                <!-- TODO: real status -->
+                <p class="cal-status">Registration open</p>
+              </div>
+              <p class="cal-go">
+                <!-- TODO: confirm URL -->
+                <a class="cal-link" href="https://www.basketsinthegarden.com/">Details at Baskets in the Garden <span aria-hidden="true">&rarr;</span></a>
+              </p>
+            </li>
+
+            <li class="cal-row">
+              <p class="cal-when"><span class="cal-month">Sep</span> <span class="cal-days">25&ndash;27</span></p>
+              <div class="cal-what">
+                <h4 class="cal-title">Weekend of Weaving</h4>
+                <p class="cal-where">Pioneer Lodge, Red Deer &middot; softer materials</p>
+                <!-- TODO: real status -->
+                <p class="cal-status">Five workshops, book by the session</p>
+              </div>
+              <p class="cal-go">
+                <a class="cal-link" href="/weekend-of-weaving-september-2026">See the workshops <span aria-hidden="true">&rarr;</span></a>
+              </p>
+            </li>
+
+            <li class="cal-row">
+              <p class="cal-when"><span class="cal-month">Oct</span> <span class="cal-days">16&ndash;18</span></p>
+              <div class="cal-what">
+                <h4 class="cal-title">Weave and Nourish</h4>
+                <p class="cal-where">Folk Tree Lodge, Bragg Creek &middot; co-hosted with Roni Zaide</p>
+                <!-- TODO: real status -->
+                <p class="cal-status">Large twisted willow baskets</p>
+              </div>
+              <p class="cal-go">
+                <!-- TODO: real registration URL -->
+                <a class="cal-link" href="#weave-and-nourish">Register on Luma <span aria-hidden="true">&rarr;</span></a>
+              </p>
+            </li>
+
+            <li class="cal-row">
+              <p class="cal-when"><span class="cal-month">Nov</span> <span class="cal-days">13&ndash;15</span></p>
+              <div class="cal-what">
+                <h4 class="cal-title">Weekend of Weaving</h4>
+                <p class="cal-where">Pioneer Lodge, Red Deer &middot; willow</p>
+                <!-- TODO: real status -->
+                <p class="cal-status">Seven workshops, book by the session</p>
+              </div>
+              <p class="cal-go">
+                <a class="cal-link" href="/weekend-of-weaving-november-2026">See the workshops <span aria-hidden="true">&rarr;</span></a>
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ── What's next ──────────────────────────────────────────────────── -->
+      <section class="cal-season cal-season--quiet" aria-labelledby="season-winter">
+        <div class="content wide">
+          <div class="cal-season-head">
+            <h3 id="season-winter" class="cal-season-title">Winter and beyond</h3>
+            <div class="cal-season-rule" aria-hidden="true"></div>
+          </div>
+
+          <div class="cal-empty">
+            <p class="cal-empty-lead">Winter is when the willow is cut, and when most of the weaving happens. Those dates go up as they are set.</p>
+            <p class="cal-go">
+              <a class="cal-link" href="/email">Hear about them first <span aria-hidden="true">&rarr;</span></a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Closing ──────────────────────────────────────────────────────── -->
+      <section class="cal-close" aria-labelledby="cal-close-title">
+        <div class="content wide cal-close-inner">
+          <div>
+            <h3 id="cal-close-title" class="cal-close-title">Somewhere else?</h3>
+            <!-- TODO: verify the count before this goes live -->
+            <p class="cal-close-note">Since January 2025 I have taught thirty-one workshops across the province, in craft schools and community halls, on a ranch, and around more than one fire. If you would like to bring one to your own place, I would love to help you make it happen.</p>
+          </div>
+          <p class="cal-go">
+            <a class="cal-link" href="/workshops">Host a workshop <span aria-hidden="true">&rarr;</span></a>
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
 </body>
 
