@@ -4,6 +4,7 @@ public
 CLAUDE.md
 .screenshots
 .playwright-mcp
+docs
 
 # Safety net: no image should ever live loose at repo root — real assets live under source/.
 /*.png

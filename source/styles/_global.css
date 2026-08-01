@@ -7,21 +7,14 @@
 
   /* Night sky — hero + nav only. */
   --hero-dark: #020710;
-  --hero-soft: #151820;
   --hero-cream: #f6efe8;
   --hero-gold: #d2be95;
 
   /* Daylight palette — everything below the hero lives here. */
   --page: #f6efe8;
-  --page-warm: #eadccb;
-  --page-dark-highlight: rgba(229, 225, 218, 0.5);
-  --paper-soft: rgba(255, 249, 241, 0.82);
-  --paper-strong: rgba(255, 249, 241, 0.94);
 
   --ink: #2c2925;
   --ink-soft: rgba(44, 41, 37, 0.72);
-  --ink-muted: rgba(44, 41, 37, 0.58);
-  --cedar: #25251d;
 
   /* Schedule is colour-coded by material. */
   --moss: #555b3b;
@@ -30,12 +23,9 @@
   --bark: #7c533c;
   --bulrush: #5f7680;
   --cattail: var(--sage);
-  --rose-clay: #b98778;
   --warm-clay: #a8755f;
-  --lavender-smoke: #9c8a9b;
 
   --line: rgba(124, 83, 60, 0.18);
-  --line-strong: rgba(124, 83, 60, 0.3);
   --shadow: 0 0.8rem 1.8rem rgba(98, 74, 55, 0.06);
 
   --max: 1180px;

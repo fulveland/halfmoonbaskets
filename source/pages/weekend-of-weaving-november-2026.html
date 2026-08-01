@@ -22,8 +22,8 @@
           <p class="event-hero-intro">A weekend of hands-on basketry workshops in willow, cattail, and other natural materials. Come for one workshop, a full day, or build your own weekend of weaving.</p>
 
           <div class="event-hero-actions" aria-label="November page links">
-            <a href="#schedule" class="event-hero-button event-hero-button--primary">View Schedule</a>
-            <a href="#workshops" class="event-hero-button event-hero-button--secondary">Browse Workshops</a>
+            <a href="#schedule" class="gateway-button">View Schedule</a>
+            <a href="#workshops" class="gateway-button">Browse Workshops</a>
           </div>
         </div>
 
@@ -90,25 +90,25 @@
             </div>
 
             <div class="timeline-events">
-              <a href="#cattail-berry-basket" class="timeline-event gentle" style="--start: 1; --span: 4; --lane: 1">
+              <a href="#cattail-berry-basket" class="timeline-event gentle" style="--start: 1; --span: 4; --lane: 1; --v-col: 1">
                 <time>9 AM–1 PM</time>
                 <strong>Cattail Berry Basket</strong>
                 <span class="tag">Gentle Beginner</span>
               </a>
 
-              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 5; --span: 2; --lane: 1">
+              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 5; --span: 2; --lane: 1; --v-col: 1">
                 <time>1 PM–3 PM</time>
                 <strong>Bird Feeder</strong>
                 <span class="tag">Beginner</span>
               </a>
 
-              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 7; --span: 2; --lane: 1">
+              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 7; --span: 2; --lane: 1; --v-col: 1">
                 <time>3 PM–5 PM</time>
                 <strong>Bird Feeder</strong>
                 <span class="tag">Beginner</span>
               </a>
 
-              <a href="#wreath-making" class="timeline-event beginner" style="--start: 9; --span: 3; --lane: 1">
+              <a href="#wreath-making" class="timeline-event beginner" style="--start: 9; --span: 3; --lane: 1; --v-col: 1">
                 <time>5 PM–8 PM</time>
                 <strong>Wreath Making</strong>
                 <span class="tag">Beginner</span>
@@ -139,13 +139,13 @@
             </div>
 
             <div class="timeline-events">
-              <a href="#berry-boat" class="timeline-event beginner" style="--start: 1; --span: 5; --lane: 1">
+              <a href="#berry-boat" class="timeline-event beginner" style="--start: 1; --span: 5; --lane: 1; --v-col: 1">
                 <time>9 AM–2 PM</time>
                 <strong>Berry Boat</strong>
                 <span class="tag">Beginner</span>
               </a>
 
-              <a href="#butt-cheek-basket" class="timeline-event intermediate" style="--start: 3; --span: 7; --lane: 2">
+              <a href="#butt-cheek-basket" class="timeline-event intermediate" style="--start: 3; --span: 7; --lane: 2; --v-col: 2">
                 <time>11 AM–6 PM</time>
                 <strong>Butt Cheek Basket</strong>
                 <span class="tag">Intermediate</span>
@@ -157,7 +157,7 @@
                 <span class="tag">Intermediate</span>
               </a>
 
-              <a href="#tiny-willow-bowl" class="timeline-event beginner" style="--start: 10; --span: 3; --lane: 1">
+              <a href="#tiny-willow-bowl" class="timeline-event beginner" style="--start: 10; --span: 3; --lane: 1; --v-col: 1">
                 <time>6 PM–9 PM</time>
                 <strong>Tiny Willow Bowl</strong>
                 <span class="tag">Beginner</span>
@@ -188,19 +188,19 @@
             </div>
 
             <div class="timeline-events">
-              <a href="#berry-boat" class="timeline-event beginner" style="--start: 1; --span: 4; --lane: 1">
+              <a href="#berry-boat" class="timeline-event beginner" style="--start: 1; --span: 4; --lane: 1; --v-col: 1">
                 <time>9 AM–1 PM</time>
                 <strong>Berry Boat</strong>
                 <span class="tag">Beginner</span>
               </a>
 
-              <a href="#tiny-trug" class="timeline-event intermediate" style="--start: 2; --span: 8; --lane: 2">
+              <a href="#tiny-trug" class="timeline-event intermediate" style="--start: 2; --span: 8; --lane: 2; --v-col: 2">
                 <time>10 AM–6 PM</time>
                 <strong>Tiny Trug</strong>
                 <span class="tag">Intermediate</span>
               </a>
 
-              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 10; --span: 2; --lane: 1">
+              <a href="#bird-feeder" class="timeline-event beginner" style="--start: 10; --span: 2; --lane: 1; --v-col: 1">
                 <time>6 PM–8 PM</time>
                 <strong>Bird Feeder</strong>
                 <span class="tag">Beginner</span>
@@ -212,26 +212,86 @@
       </div>
     </section>
 
-    <section class="event-note-grid" aria-label="November practical registration notes">
-      <div class="content wide">
+    <section class="event-note-grid" aria-label="November workshop levels">
+      <div class="content wide workshop-level-grid">
+        <!--
+          Commented out for now, not deleted — re-enable if this section
+          should introduce itself again later (was: eyebrow "Choose your
+          path", h2 "Which workshop is right for you?", and a section-intro
+          paragraph above the three level cards below).
+          <p class="eyebrow">Choose your path</p>
+          <h2 class="section-title">Which workshop is right for you?</h2>
+          <p class="section-intro">The November weekend includes a gentle introduction to cattail, shorter beginner willow projects, and fuller intermediate workshops for those ready to spend more time with willow.</p>
+        -->
+
         <article>
-          <h3 class="label">Longer Workshops</h3>
-          <p>Workshops over 5 hours include a 1-hour break partway through. Bring something to store in the fridge or heat in the microwave, or head out for a bite nearby.</p>
+          <img src="/images/svgs/branch-gentle.svg" alt="" class="workshop-level-icon" aria-hidden="true" />
+          <h3 class="eyebrow-lesser">Gentle Beginner</h3>
+          <p>Cattail, bulrush, willow bark — soft materials that bend where your hands take them. A good place to start.</p>
         </article>
 
         <article>
-          <h3 class="label">Registration</h3>
-          <p>Choose the date and time that works for you, then use the registration button for that specific offering.</p>
-          <p>Registrations are managed through Luma and payments are processed through Stripe.</p>
+          <img src="/images/svgs/branch-beginner.svg" alt="" class="workshop-level-icon" aria-hidden="true" />
+          <h3 class="eyebrow-lesser">Beginner</h3>
+          <p>Approachable willow projects — short enough to finish without putting too much strain on your hands, long enough to learn the feel of the rod.</p>
+        </article>
+
+        <article>
+          <img src="/images/svgs/branch-intermediate.svg" alt="" class="workshop-level-icon" aria-hidden="true" />
+          <h3 class="eyebrow-lesser">Intermediate</h3>
+          <p>A full day that asks more of your hands and your focus — settle in and let the rhythm take hold.</p>
         </article>
       </div>
     </section>
 
     <section id="workshops" class="workshop-detail-section">
       <div class="content wide">
-      <p class="eyebrow">November Workshop Details</p>
+      <p class="eyebrow">Seven Workshops · One Weekend</p>
       <h2 class="section-title">November Workshop Details</h2>
-      <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering.</p>
+      <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering. Registrations are managed through Luma and payments are processed through Stripe.</p>
+
+      <div class="workshop-nav-wrapper">
+        <div class="workshop-nav-row">
+          <button type="button" class="workshop-nav-hint workshop-nav-hint--left" aria-label="Scroll to earlier workshops">←</button>
+          <nav class="workshop-nav-bar" aria-label="Jump to a workshop">
+            <a href="#cattail-berry-basket" class="workshop-nav-item" data-workshop="cattail-berry-basket">
+              <img src="/images/events/weekend-of-weaving-red-deer/cattail-berry-basket.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Cattail</span>
+              <span class="nav-label nav-label--full">Berry Basket</span>
+            </a>
+            <a href="#bird-feeder" class="workshop-nav-item" data-workshop="bird-feeder">
+              <img src="/images/events/weekend-of-weaving-red-deer/bird-feeder.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Feeder</span>
+              <span class="nav-label nav-label--full">Bird Feeder</span>
+            </a>
+            <a href="#wreath-making" class="workshop-nav-item" data-workshop="wreath-making">
+              <img src="/images/events/weekend-of-weaving-red-deer/wreath-making.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Wreath</span>
+              <span class="nav-label nav-label--full">Wreath</span>
+            </a>
+            <a href="#berry-boat" class="workshop-nav-item" data-workshop="berry-boat">
+              <img src="/images/events/weekend-of-weaving-red-deer/berry-boat.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Boat</span>
+              <span class="nav-label nav-label--full">Berry Boat</span>
+            </a>
+            <a href="#butt-cheek-basket" class="workshop-nav-item" data-workshop="butt-cheek-basket">
+              <img src="/images/events/weekend-of-weaving-red-deer/butt-cheek-basket.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Cheek</span>
+              <span class="nav-label nav-label--full">Butt Cheek</span>
+            </a>
+            <a href="#tiny-willow-bowl" class="workshop-nav-item" data-workshop="tiny-willow-bowl">
+              <img src="/images/willow-place-holder.webp" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Bowl</span>
+              <span class="nav-label nav-label--full">Willow Bowl</span>
+            </a>
+            <a href="#tiny-trug" class="workshop-nav-item" data-workshop="tiny-trug">
+              <img src="/images/events/weekend-of-weaving-red-deer/tiny-trug.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Trug</span>
+              <span class="nav-label nav-label--full">Tiny Trug</span>
+            </a>
+          </nav>
+          <button type="button" class="workshop-nav-hint workshop-nav-hint--right" aria-label="Scroll to more workshops">→</button>
+        </div>
 
       <div class="workshop-detail-list">
         <article id="cattail-berry-basket" class="workshop-detail-card">
@@ -240,21 +300,17 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Gentle Beginner · $115</p>
+            <p class="workshop-detail-level eyebrow-lesser">Gentle Beginner</p>
             <h2 class="card-title">Cattail Berry Basket</h2>
 
+            <p class="workshop-detail-price">$115</p>
             <div class="workshop-date-buttons" aria-label="Cattail Berry Basket registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">9 AM–1 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">9 AM–1 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>What if the rustling cattails that line the marshes could be coaxed into carrying your berries home?</p>
             <p>Join us to find out, as we transform these green blades into a small vessel for gathering summer’s sweetest moments.</p>
             <p>In this hands-on workshop, you will learn how to weave cattails over a wooden form, practicing timeless techniques such as the checkerboard weave, pairing, and waling. Together, we will finish the basket with a simple trac border, creating a sturdy, beautiful basket made entirely from cattails.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 4-hour workshop with approximately 3 hours of guided instruction. We will take a 15-minute break partway through for tea and cake.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -266,6 +322,12 @@
                 <li>Finishing with a simple trac border</li>
               </ul>
             </div>
+
+            <!-- Rhythm line rules: middot-separated, one line, never a comma. Drop "guided instruction" if it's derivable from total − break (e.g. Bird Feeder: 1h45m + 15m = 2h exactly). Break: 15-min for tea and cake at ≤5h, 1-hour · includes tea and cake over 5h. Full rules + examples in _weekend-of-weaving-template.html. -->
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>4 hours · 3 hours guided instruction · 15-minute break for tea and cake</p>
+            </div>
           </div>
         </article>
 
@@ -275,22 +337,18 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Beginner · $145</p>
+            <p class="workshop-detail-level eyebrow-lesser">Beginner</p>
             <h2 class="card-title">Bird Feeder</h2>
 
+            <p class="workshop-detail-price">$145</p>
             <div class="workshop-date-buttons" aria-label="Bird Feeder registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">1 PM–3 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">3 PM–5 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">6 PM–8 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">1 PM–3 PM</span></span> <span class="register-label">Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">3 PM–5 PM</span></span> <span class="register-label">Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">6 PM–8 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>Craft a suet bird feeder from locally harvested willow. This workshop is perfect for anyone curious about weaving with natural materials who would like to begin with a simple project.</p>
             <p>During this session, you will get to know willow and learn a foundational weave called pairing. Price includes a brick of high-quality suet so you can set it up as soon as you get home.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 2-hour workshop with 1 hour and 45 minutes of guided instruction. We will take a 15-minute break partway through for tea and cake.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -303,6 +361,11 @@
                 <li>Creating a functional garden object</li>
               </ul>
             </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>2 hours · 15-minute break for tea and cake</p>
+            </div>
           </div>
         </article>
 
@@ -312,22 +375,18 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Beginner · $165</p>
+            <p class="workshop-detail-level eyebrow-lesser">Beginner</p>
             <h2 class="card-title">Wreath Making</h2>
 
+            <p class="workshop-detail-price">$165</p>
             <div class="workshop-date-buttons" aria-label="Wreath Making registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">5 PM–8 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Friday,</span> <span class="date-button-date">November 13</span></span> <span class="date-button-time">5 PM–8 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>Spend the evening getting to know locally harvested willow through the simple, satisfying work of bending and binding rods into wreaths.</p>
             <p>We will practice shaping, wrapping, and securing willow while learning how tension, angle, and pressure affect the finished form.</p>
             <p>Workshop price includes enough willow to make 5 wreaths. We will create 2 together in the workshop, and you can bring the rest of your willow home to continue practicing.</p>
             <p>For those hoping to weave a Butt Cheek Basket on Saturday, this workshop is also an opportunity to make a custom handle and rim for your basket.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 3-hour workshop with 2 hours and 45 minutes of guided instruction. We will take a 15-minute break partway through for tea and cake.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -339,6 +398,11 @@
                 <li>Adjusting the design to make handles and hoops for baskets</li>
               </ul>
             </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>3 hours · 15-minute break for tea and cake</p>
+            </div>
           </div>
         </article>
 
@@ -348,23 +412,19 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Beginner · $145</p>
+            <p class="workshop-detail-level eyebrow-lesser">Beginner</p>
             <h2 class="card-title">Berry Boat</h2>
 
+            <p class="workshop-detail-price">$145</p>
             <div class="workshop-date-buttons" aria-label="Berry Boat registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">9 AM–2 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">9 AM–1 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">9 AM–2 PM</span></span> <span class="register-label">Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">9 AM–1 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>There is something about willow that can only be understood through your hands: the way a rod bends, the scent released as you twist it into shape, and the gradual rhythm that develops as you weave. This workshop offers a few quiet hours to really get to know the material.</p>
             <p>I love using this small willow tray to gather quick snacks from the garden. Its shallow, curved shape is especially well suited to berries. By holding the boat beneath a branch as I harvest, I can catch the fruit that falls as my hand brushes past.</p>
             <p>In this beginner-friendly workshop, you will learn to shape the berry boat using a simple wooden jig, allowing its form to emerge naturally as you weave. We will also explore how to find and identify willow for harvesting, how to gather it responsibly, and how to dry, store, and prepare it for weaving.</p>
-            <p>After a short guided tutorial, you will settle into the rhythm of weaving and spend the remainder of the workshop filling in your boat. This is a gentle first project and a lovely introduction to working with willow.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 4–5 hour workshop that begins with a short guided tutorial, followed by a 15-minute break for tea and cake, after which you can continue weaving at your own pace. You are welcome to stay and complete a second boat if time permits.</p>
-            </div>
+            <p>After a short guided tutorial, you will settle into the rhythm of weaving and spend the remainder of the workshop filling in your boat — with time to complete a second boat if it permits. This is a gentle first project and a lovely introduction to working with willow.</p>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -373,6 +433,11 @@
                 <li>Working off a jig</li>
                 <li>Ways to support willow and prevent snapping during tight bends</li>
               </ul>
+            </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>4–5 hours · 1 hour guided instruction · 15-minute break for tea and cake</p>
             </div>
           </div>
         </article>
@@ -383,23 +448,19 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Intermediate · $195</p>
+            <p class="workshop-detail-level eyebrow-lesser">Intermediate</p>
             <h2 class="card-title">Butt Cheek Basket</h2>
 
+            <p class="workshop-detail-price">$195</p>
             <div class="workshop-date-buttons" aria-label="Butt Cheek Basket registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">11 AM–6 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
-              <a href="#" class="workshop-date-button" hidden><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">2 PM–9 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">11 AM–6 PM</span></span> <span class="register-label">Register</span></a>
+              <a href="#" class="workshop-date-button" hidden><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">2 PM–9 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>A melon basket, or “buttocks basket,” curves and rounds in all the right ways. Playful and practical, its form settles naturally against your hip as you wander.</p>
             <p>We will explore how willow can be encouraged into fullness, learning the techniques that allow the form to dip, swell, and rise with intention. Watching slender rods become a rounded, sturdy vessel is one of the small joys of working with willow.</p>
             <p>A beautiful everyday basket for wandering, gathering, and carrying what you love. If your basket grows especially cheeky, you may have a little homework to complete it.</p>
             <p>If you are interested in creating a custom-shaped basket, join us Friday evening to make your own wreaths to use as the hoop and handle in your basket.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 7-hour workshop with 3 hours of guided instruction, followed by a 1-hour break. After the break, you can settle back into the weave and continue at your own pace.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -411,6 +472,11 @@
                 <li>Using hoops to shape the dip, swell, and rise of the basket</li>
               </ul>
             </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>7 hours · 3 hours guided instruction · 1-hour break · includes tea and cake</p>
+            </div>
           </div>
         </article>
 
@@ -420,21 +486,17 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Beginner · $115</p>
+            <p class="workshop-detail-level eyebrow-lesser">Beginner</p>
             <h2 class="card-title">Tiny Willow Bowl</h2>
 
+            <p class="workshop-detail-price">$115</p>
             <div class="workshop-date-buttons" aria-label="Tiny Willow Bowl registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">6 PM–9 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Saturday,</span> <span class="date-button-date">November 14</span></span> <span class="date-button-time">6 PM–9 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>Join us to weave a small willow bowl for your desk, entryway, bedside table, or wherever little things tend to gather.</p>
             <p>Designed with first-time weavers in mind, this workshop will guide you through selecting, bending, and weaving willow rods as you create a useful bowl to take home.</p>
             <p>Along the way, you will learn the foundational steps of weaving a basket base, begin to understand how willow behaves in your hands, and build the comfort and confidence to take on larger projects.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is a 3-hour workshop. We will take a 15-minute break partway through for tea and cake.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -446,6 +508,11 @@
                 <li>Twisted rope border</li>
               </ul>
             </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>3 hours · 15-minute break for tea and cake</p>
+            </div>
           </div>
         </article>
 
@@ -455,21 +522,17 @@
           </figure>
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">Intermediate · $185</p>
+            <p class="workshop-detail-level eyebrow-lesser">Intermediate</p>
             <h2 class="card-title">Tiny Trug</h2>
 
+            <p class="workshop-detail-price">$185</p>
             <div class="workshop-date-buttons" aria-label="Tiny Trug registration options">
-              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">10 AM–6 PM</span></span> <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span></a>
+              <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">November 15</span></span> <span class="date-button-time">10 AM–6 PM</span></span> <span class="register-label">Register</span></a>
             </div>
 
             <p>In this workshop, we will shape a tiny willow trug, a small basket made to cradle soft petals, fragrant herbs, and small gathered treasures.</p>
             <p>This workshop is an invitation to slow down, work with your hands, and share in the quiet beauty of weaving with willow.</p>
             <p>An approachable intermediate project for those ready to build confidence with willow while shaping a small, functional trug.</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>This is an 8-hour workshop with 7 hours of guided instruction and a 1-hour break partway through.</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -480,8 +543,14 @@
                 <li>Attaching and tying a simple functional handle</li>
               </ul>
             </div>
+
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>8 hours · 1-hour break · includes tea and cake</p>
+            </div>
           </div>
         </article>
+      </div>
       </div>
       </div>
     </section>
@@ -543,11 +612,89 @@
           <p>Choose your workshop, save your spot, and spend the weekend weaving with natural materials.</p>
         </div>
 
-        <a href="#workshops" class="primary-button">
-          <span class="moon-mark" aria-hidden="true">☾</span>
-          <span>View November Workshops</span>
-        </a>
+        <a href="#workshops" class="gateway-button">View November workshops</a>
       </div>
     </section>
   </main>
+
+  <script>
+    // Marks the current workshop's nav item active as it scrolls into view (IntersectionObserver, not a scroll listener) and drives the nav bar itself: the left/right peek-hint visibility and the click-to-scroll/auto-align behaviour below it.
+    document.addEventListener("DOMContentLoaded", function () {
+      var navBar = document.querySelector(".workshop-nav-bar");
+      var navItems = document.querySelectorAll(".workshop-nav-item");
+      var cards = document.querySelectorAll(".workshop-detail-card");
+      if (!navBar || !navItems.length || !cards.length) return;
+
+      var navItemsById = {};
+      navItems.forEach(function (item) {
+        navItemsById[item.dataset.workshop] = item;
+      });
+
+      // Left/right scroll hints: only shown once there's actually somewhere to scroll to on that side, via the bar's own scroll position — this is the one legitimate use of a scroll listener here (distinct from the active-item tracking below, which stays IntersectionObserver-only).
+      var hintLeft = document.querySelector(".workshop-nav-hint--left");
+      var hintRight = document.querySelector(".workshop-nav-hint--right");
+      if (hintLeft && hintRight) {
+        var updateHints = function () {
+          var maxScroll = navBar.scrollWidth - navBar.clientWidth;
+          var atStart = navBar.scrollLeft <= 4;
+          var atEnd = navBar.scrollLeft >= maxScroll - 4;
+          hintLeft.classList.toggle("is-visible", !atStart);
+          hintLeft.setAttribute("aria-hidden", atStart ? "true" : "false");
+          hintRight.classList.toggle("is-visible", !atEnd);
+          hintRight.setAttribute("aria-hidden", atEnd ? "true" : "false");
+        };
+
+        navBar.addEventListener("scroll", updateHints, { passive: true });
+        window.addEventListener("resize", updateHints);
+        updateHints();
+
+        hintLeft.addEventListener("click", function () {
+          navBar.scrollBy({ left: navBar.clientWidth * -0.8, behavior: "smooth" });
+        });
+        hintRight.addEventListener("click", function () {
+          navBar.scrollBy({ left: navBar.clientWidth * 0.8, behavior: "smooth" });
+        });
+      }
+
+      var barHeight = navBar.getBoundingClientRect().height;
+      var buffer = 16;
+
+      // Only scrolls the bar when the newly-active item isn't already fully in view (not on every change) — otherwise this would fight the user's own swipe through the thumbnails. When it does need to move, it aligns the item to the bar's own left edge, same side the peek hint points from.
+      function ensureActiveItemVisible(item) {
+        var itemRect = item.getBoundingClientRect();
+        var barRect = navBar.getBoundingClientRect();
+        var alreadyVisible = itemRect.left >= barRect.left && itemRect.right <= barRect.right;
+        if (alreadyVisible) return;
+        var targetScrollLeft = navBar.scrollLeft + (itemRect.left - barRect.left);
+        navBar.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          // A fast/instant jump (fling scroll, or clicking a nav item far down the list) can cross several cards' thresholds within a single batch — picking just the topmost intersecting one and updating once avoids firing the nav-bar alignment scroll multiple times in a row, each interrupting the last with a different target.
+          var intersecting = entries.filter(function (e) {
+            return e.isIntersecting;
+          });
+          if (!intersecting.length) return;
+          intersecting.sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+          var item = navItemsById[intersecting[0].target.id];
+          if (!item) return;
+          navItems.forEach(function (i) {
+            i.classList.remove("is-active");
+            i.removeAttribute("aria-current");
+          });
+          item.classList.add("is-active");
+          item.setAttribute("aria-current", "true");
+          ensureActiveItemVisible(item);
+        },
+        { rootMargin: "-" + (barHeight + buffer) + "px 0px -60% 0px", threshold: 0 }
+      );
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    });
+  </script>
 </body>

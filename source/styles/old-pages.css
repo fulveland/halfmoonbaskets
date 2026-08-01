@@ -8,7 +8,7 @@
   font-size: 17px;
   line-height: 1.4;
   color: var(--ink);
-  background-color: #f2f2f2;
+  background-color: var(--page);
   margin-top: 5em;
 
   /* Nav defaults to cream (for pages with a dark hero) — override for this page's light background. */
@@ -28,7 +28,7 @@
   }
 
   a {
-    color: #2c3673;
+    color: var(--hero-gold);
   }
 
   .remembering-card {
@@ -139,7 +139,7 @@
     text-wrap: balance;
   }
   a.basic-button {
-    background-color: #4d593c;
+    background-color: var(--moss);
   }
 
   /* Photos are one continuous column (all 4 images together) instead of split across rows.
@@ -248,17 +248,11 @@
     width: 100%;
     margin: 0rem 0rem 0rem 0rem;
     padding: 3rem 8rem 8rem 8rem;
-    background-color: var(--page-dark-highlight);
+    background-color: color-mix(in srgb, var(--hero-cream) 50%, transparent);
   }
 
   .roses-n-box p {
   }
-
-  /* --page: #f6efe8;
-  --page-warm: #eadccb;
-  --paper: #fff9f1;
-  --paper-soft: rgba(255, 249, 241, 0.82);
-  --paper-strong: rgba(255, 249, 241, 0.94); */
 
   @media (max-width: 800px) {
     #roses-card {
@@ -359,7 +353,7 @@ body#workshops {
   font-family: garamond;
   line-height: 1.4;
   color: var(--ink);
-  background-color: #f2f2f2;
+  background-color: var(--page);
   max-width: 1500px;
   margin: 0 auto;
   padding: 20px;
@@ -504,16 +498,16 @@ body#workshops {
   font-family: garamond;
   line-height: 1.4;
   color: var(--ink);
-  background-color: #f2f2f2;
+  background-color: var(--page);
   max-width: 755px;
   margin: 0 auto;
   padding: 20px;
 
   a {
-    color: #2c3673;
+    color: var(--hero-gold);
   }
 
-  /* Nav defaults to cream (for pages with a dark hero); this page's own a{color:#2c3673} above would otherwise win by specificity and turn the nav blue instead. */
+  /* Nav defaults to cream (for pages with a dark hero); this page's own a{color:var(--hero-gold)} above would otherwise win by specificity and turn the nav blue instead. */
   .site-logo,
   .site-nav a {
     color: var(--ink);
@@ -526,7 +520,7 @@ body#workshops {
 
   /* Warm paper tone instead of the old lavender/blue-purple tint, which read as off-brand against the rest of the site's earthy palette. Dark ink instead of color: inherit, since it no longer needs to work as light text on a saturated background. */
   h2 {
-    background-color: var(--page-warm);
+    background-color: var(--page);
     padding: 0.3em 0.6em;
     border-radius: var(--radius);
     font-family: "Cormorant Garamond";

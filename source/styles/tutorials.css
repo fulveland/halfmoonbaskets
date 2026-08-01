@@ -10,7 +10,7 @@ html {
 }
 
 body.tutorial-page {
-  background: radial-gradient(circle at top left, rgba(210, 190, 149, 0.2), transparent 30rem), linear-gradient(180deg, var(--page) 0%, #efe3d2 100%);
+  background: radial-gradient(circle at top left, color-mix(in srgb, var(--hero-gold) 20%, transparent), transparent 30rem), linear-gradient(180deg, var(--page) 0%, color-mix(in srgb, var(--page) 75%, var(--hero-gold) 25%) 100%);
   color: var(--ink);
 }
 
@@ -21,11 +21,11 @@ body.tutorial-page {
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  border: 1px solid rgba(246, 239, 232, 0.44);
+  border: 1px solid color-mix(in srgb, var(--hero-cream) 44%, transparent);
   border-radius: var(--pill);
   padding: 0.75rem 1.35rem;
   color: var(--hero-cream);
-  background: rgba(246, 239, 232, 0.1);
+  background: color-mix(in srgb, var(--hero-cream) 10%, transparent);
   text-decoration: none;
   font-family: var(--font-body);
   font-size: 0.78rem;
@@ -132,7 +132,7 @@ body.tutorial-page {
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) * 2);
   padding: clamp(1rem, 3vw, 2rem);
-  background: var(--paper-soft);
+  background: color-mix(in srgb, var(--hero-cream) 82%, transparent);
   box-shadow: var(--shadow);
 }
 
@@ -196,7 +196,7 @@ body.tutorial-page {
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) * 2);
   padding: clamp(0.5rem, 1.5vw, 0.85rem);
-  background: rgba(255, 249, 241, 0.75);
+  background: color-mix(in srgb, var(--hero-cream) 75%, transparent);
   box-shadow: var(--shadow);
 }
 
@@ -217,7 +217,7 @@ body.tutorial-page {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1rem 1.2rem;
-  background: rgba(255, 249, 241, 0.68);
+  background: color-mix(in srgb, var(--hero-cream) 68%, transparent);
   color: var(--ink-soft);
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.5rem);
@@ -231,7 +231,7 @@ body.tutorial-page {
   border-left: 4px solid var(--willow);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1.2rem 1.4rem;
-  background: rgba(177, 129, 82, 0.11);
+  background: color-mix(in srgb, var(--willow) 11%, transparent);
 }
 
 .rhythm-card p {
@@ -257,7 +257,7 @@ body.tutorial-page {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.2rem;
-  background: var(--paper-strong);
+  background: color-mix(in srgb, var(--hero-cream) 94%, transparent);
   box-shadow: var(--shadow);
 }
 
@@ -319,7 +319,7 @@ body.tutorial-page {
 
 .image-break figcaption {
   margin-top: 0.6rem;
-  color: var(--ink-muted);
+  color: var(--ink-soft);
   font-size: 0.95rem;
 }
 
@@ -368,7 +368,7 @@ body.tutorial-page .closing-panel .tutorial-button {
   width: auto;
   min-height: 2.75rem;
   margin-top: 1.75rem;
-  border-color: var(--line-strong);
+  border-color: color-mix(in srgb, var(--ink) 25%, transparent);
   color: var(--ink);
   background: transparent !important;
 }

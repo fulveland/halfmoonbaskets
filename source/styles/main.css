@@ -2,7 +2,7 @@
 
 /* BARK/PAPER/INK REDESIGN — shadows the shared :root tokens (_global.css) locally within .weekend-page rather than changing them globally, since those same tokens are the default for tutorial pages too. Every existing var(--hero-gold)/var(--moss)/var(--line)/etc. reference below picks up these values automatically on any page whose <body> carries .weekend-page (gateway + both event pages), with zero changes needed to the ~45 individual usages. --moss and --hero-gold both converge on the same Bark Rust accent since this design has a single accent colour rather than a gold/green pair. --pill and --radius go to 0 for "square corners, no rounded corners anywhere" — 50%-radius circles (level-number, path-icon, moon-mark) are left alone since those are round badges/glyphs, not the button chrome the rule is about.
 
-   Palette per the typography spec's 7-colour system (core: Paper/Ink/Graphite/Bark Rust; supporting: Pale Ground/Quiet Rule/Willow Grey; functional/hidden: Bark Hover/Deep Bark). --pale-ground now backs --paper-soft/--paper-strong (occasional alt surfaces + form fields) and --quiet-rule backs --line (structural borders/dividers) rather than a bark tint, per the spec's role split between short accent rules (Bark Rust) and structural lines (Quiet Rule). --willow-grey is defined but currently unused — the three willow illustrations it's reserved for don't exist on any live page right now. */
+   Palette per the typography spec's 7-colour system (core: Paper/Ink/Graphite/Bark Rust; supporting: Pale Ground/Quiet Rule/Willow Grey; functional/hidden: Bark Hover/Deep Bark). --quiet-rule backs --line (structural borders/dividers) rather than a bark tint, per the spec's role split between short accent rules (Bark Rust) and structural lines (Quiet Rule). --willow-grey is defined but currently unused — the three willow illustrations it's reserved for don't exist on any live page right now. */
 .weekend-page {
   --hero-gold: #865333;
   --moss: #865333;
@@ -10,8 +10,6 @@
   --deep-bark: #4f2d1d;
   --page: #f7f4ef;
   --pale-ground: #ece8e2;
-  --paper-soft: #ece8e2;
-  --paper-strong: #ece8e2;
   --ink: #151719;
   --ink-soft: rgba(60, 59, 57, 0.72);
   --charcoal: #3c3b39;
@@ -219,14 +217,15 @@
   margin-bottom: 1.5rem;
 }
 
-/* Solid, colour-filled rust buttons, side by side, at every width — the heaviest elements on the page since booking a weekend is the actual goal. */
-/* .gateway-hero-dates .gateway-button (not just .gateway-button) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which would otherwise silently repaint this text the same colour as its own background. Same bug as the earlier .primary-button invisible-text issue this session. */
-.gateway-hero-dates .gateway-button {
+/* Solid, colour-filled rust buttons, side by side, at every width — the heaviest elements on the page since booking a weekend is the actual goal. This is the site's one canonical button style (docs/design-guidelines.md) — reused as-is (not a lookalike) on the event-page hero actions and the bottom-cta, via the combined selector below, rather than each context growing its own near-identical button class. */
+/* Scoped through a parent (not just .gateway-button alone) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which would otherwise silently repaint this text the same colour as its own background. Same bug as the earlier .primary-button invisible-text issue this session. */
+.gateway-hero-dates .gateway-button,
+.event-hero-actions .gateway-button,
+.bottom-cta .gateway-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  width: 100%;
   min-height: 44px;
   padding: 0.9rem 1.5rem;
   background: var(--hero-gold);
@@ -245,11 +244,18 @@
     transform 180ms ease;
 }
 
-.gateway-hero-dates .gateway-button:hover {
+.gateway-hero-dates .gateway-button:hover,
+.event-hero-actions .gateway-button:hover,
+.bottom-cta .gateway-button:hover {
   background: var(--bark-hover);
   border-color: var(--bark-hover);
   color: var(--page);
   transform: translateY(-1px);
+}
+
+/* Full-width/stacked-to-row behaviour is specific to the two hero contexts (multiple buttons offered side by side) — .bottom-cta's single button stays sized to its own content instead, centred by its flex parent. */
+.gateway-hero-dates .gateway-button {
+  width: 100%;
 }
 
 @media (min-width: 480px) {
@@ -578,7 +584,7 @@
 /* EVENT HERO (event pages) — replaces .site-hero for the weekend-of-weaving event pages (September + November), both migrated to the Bark/Paper/Ink redesign. Echoes the gateway hero's language — Paper background, Ink headline, flat Bark Rust actions, no gradient/glow — but simpler: one event photo instead of a multi-photo collage, since there's no "About the weekend" card content to float here. */
 .event-hero {
   padding-top: clamp(5.5rem, 7vw, 6rem);
-  padding-bottom: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(4rem, 6vw, 6rem);
 }
 
 .event-hero-grid {
@@ -587,6 +593,24 @@
   align-items: center;
   gap: clamp(2rem, 4vw, 4rem);
   padding-inline: clamp(1.5rem, 5vw, 6rem);
+}
+
+/* Desktop: image widened to become the dominant visual anchor (was an even 0.85/1.15 split) and set lower than the copy (align-items: start, plus the copy's own top padding) rather than vertically centred — echoes Red Deer's asymmetry instead of two evenly-behaved columns. */
+@media (min-width: 900px) {
+  .event-hero-grid {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .event-hero-copy {
+    padding-top: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .event-hero-figure {
+    aspect-ratio: 1.08;
+    margin-top: 1rem;
+  }
 }
 
 .event-hero-copy {
@@ -614,7 +638,7 @@
 
 .event-hero-intro {
   max-width: 32rem;
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem 0 2.25rem;
   color: var(--charcoal);
   font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
   line-height: 1.58;
@@ -624,51 +648,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-/* .event-hero-actions .event-hero-button (not just .event-hero-button) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which would otherwise silently repaint this text the same colour as its own background. Same bug pattern as .gateway-button earlier this session. */
-.event-hero-actions .event-hero-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.9rem 1.75rem;
-  border: 1px solid var(--hero-gold);
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-weight: 650;
-  font-size: 0.95rem;
-  letter-spacing: 0.01em;
-  text-align: center;
-  text-decoration: none;
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.event-hero-actions .event-hero-button--primary {
-  background: var(--hero-gold);
-  color: var(--page);
-}
-
-.event-hero-actions .event-hero-button--primary:hover {
-  background: var(--bark-hover);
-  border-color: var(--bark-hover);
-  color: var(--page);
-  transform: translateY(-1px);
-}
-
-.event-hero-actions .event-hero-button--secondary {
-  background: transparent;
-  color: var(--hero-gold);
-}
-
-.event-hero-actions .event-hero-button--secondary:hover {
-  background: var(--hero-gold);
-  color: var(--page);
-  transform: translateY(-1px);
 }
 
 .event-hero-figure {
@@ -724,7 +703,7 @@
     flex-direction: column;
   }
 
-  .event-hero-actions .event-hero-button {
+  .event-hero-actions .gateway-button {
     width: 100%;
   }
 }
@@ -756,25 +735,26 @@
   position: relative;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
 .quick-info .content {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding-block: 2rem;
+  padding-block: 1.65rem;
   padding-inline: var(--wide-pad);
 }
 
+/* Short top rules instead of full-height side dividers, left-aligned instead of centred — a quieter fact row closer to Red Deer's Location/Workshops/Materials/Experience strip than a standard boxed four-column feature bar. */
 .quick-info article {
-  padding: 0 1.5rem;
-  border-right: 1px solid var(--line);
-  text-align: center;
+  padding: 1.25rem 0 0;
+  border-right: 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
 }
 
-.quick-info article:last-child {
-  border-right: 0;
+.quick-info article + article {
+  margin-left: 1.5rem;
 }
 
 /* Font styling: .label (_global.css). */
@@ -783,8 +763,8 @@
 }
 
 .quick-info p {
-  max-width: 13rem;
-  margin: 0 auto;
+  margin: 0;
+  max-width: none;
   color: var(--ink-soft);
   line-height: 1.4;
 }
@@ -1712,6 +1692,24 @@
   color: var(--ink-soft);
 }
 
+/* Desktop: left-aligned instead of centred — the schedule (like almost every other November section) read as centred/formal, while Red Deer alternates between centred and left-aligned compositions. The timeline itself stays untouched (already left-aligned, full width, via .schedule-days). */
+@media (min-width: 900px) {
+  .schedule-section {
+    text-align: left;
+  }
+
+  .schedule-section > .content > .eyebrow,
+  .schedule-section > .content > h2,
+  .schedule-note {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .schedule-note {
+    max-width: 42rem;
+  }
+}
+
 .schedule-days {
   display: grid;
   grid-template-columns: 1fr;
@@ -1719,13 +1717,15 @@
   text-align: left;
 }
 
-/* Panel fill kept close to the page colour rather than a distinct pale rectangle — this section reads as editorial, not application UI, so the day groupings shouldn't compete visually with the workshop cards inside them. */
+/* No fill/border box anymore — the page itself is the paper (matching the rest of the site's editorial pages), a top rule and the day heading do the separating instead of a grey panel. */
 .schedule-day {
-  padding-block: calc(var(--font-size) * 1.1);
-  padding-inline: 1rem;
-  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--pale-ground) 55%, var(--page) 45%);
+  padding-top: calc(var(--font-size) * 1.1);
+  border-top: 1px solid var(--line);
+}
+
+.schedule-day:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
 /* Font styling: .accent-heading (_global.css). Carries more of the section's hierarchy now that the panel itself is quieter. */
@@ -1808,7 +1808,7 @@
   border-top: 1px solid var(--line);
 }
 
-/* Full border simplified to just the coloured material edge — the day panel above already got quieter, and a full outline plus pale fill plus that edge read as too much chrome for what's otherwise an editorial page. Background kept a shade different from the day panel's own fill so the card still reads as distinct from it, just without the extra border weight. */
+/* No grey fill — a thin Quiet Rule frame, the coloured material edge, and a soft warm-toned shadow (same rgba family as .gateway-hero-about-card's, scaled down for this chip's size) lift each card just slightly off the page instead. The hairline border gives it a closed boundary; the shadow adds a touch of depth without reading as a heavy panel. */
 .timeline-event {
   grid-column: var(--start) / span var(--span);
   grid-row: var(--lane);
@@ -1817,15 +1817,16 @@
   justify-content: center;
   gap: 0.15rem;
   padding: 0.9rem 1rem;
-  border: 0;
+  border: 1px solid var(--line);
   border-left: 0.3rem solid var(--hero-gold);
-  border-radius: 0.2rem;
-  background: color-mix(in srgb, var(--page) 72%, var(--pale-ground) 28%);
+  background: var(--page);
+  box-shadow: 0 2px 6px rgba(42, 31, 22, 0.07);
   text-decoration: none;
-  transition: transform 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .timeline-event:hover {
+  box-shadow: 0 4px 10px rgba(42, 31, 22, 0.09);
   transform: translateY(-1px);
 }
 
@@ -1921,11 +1922,11 @@
 /* PRACTICAL NOTES */
 
 /* Quiet transition rather than a separate feature — no grey field or boxed-white-panel effect, just the two rules containing a two-column note that sits directly on the page. */
+/* Tightened further — a quiet bridge between the schedule and workshop details, not another major panel to pause at. */
 .event-note-grid {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  padding-block: clamp(2rem, 3vw, 3rem);
-  border-top: 1px solid var(--line);
+  padding-block: 2.25rem;
   border-bottom: 1px solid var(--line);
   background: transparent;
 }
@@ -1935,8 +1936,20 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+/* Three level cards instead of the shared two-column note layout — same divider/spacing rules below still apply (:first-child/:last-child already generalize past two items), just a wider grid. */
+.event-note-grid .content.workshop-level-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.workshop-level-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.85rem;
+}
+
 .event-note-grid article {
-  padding: clamp(1.25rem, 2vw, 2rem);
+  padding: 0.5rem clamp(1.25rem, 2vw, 2rem);
   background: transparent;
   border-right: 1px solid var(--line);
 }
@@ -1987,20 +2000,272 @@
   line-height: 1.5;
 }
 
+/* Desktop: left-aligned within a contained intro, echoing Red Deer's "Choose your weekend" introduction (also left-aligned, including its eyebrow) instead of this section's fully centred block. A wider gap before the first workshop entry now stands in for what used to be the first card's own top border. */
+@media (min-width: 900px) {
+  .workshop-detail-section > .content > .eyebrow,
+  .workshop-detail-section > .content > h2,
+  .workshop-detail-intro {
+    max-width: 42rem;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  .workshop-detail-intro {
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+}
+
+/* WORKSHOP NAV BAR — sticky jump-bar of thumbnails, scoped to the November page. --workshop-nav-height drives both the bar's own height and every card's scroll-margin-top below, so the two numbers can't drift apart. The wrapper holds only the nav and the card list, so the sticky bar releases automatically at the wrapper's bottom edge (the info/policies/CTA sections after it) without any scroll-listener bookkeeping. */
+.november-event-page {
+  --workshop-nav-height: 88px;
+}
+
+.workshop-nav-wrapper {
+  position: relative;
+}
+
+/* The sticky/background/border live on the row (not the scrolling bar itself), so the fixed-position arrow button can sit outside the scrollable thumbnails as a plain sibling and still share the same stuck-to-top behaviour. transform/backface-visibility force this onto its own compositing layer — without it, iOS Safari (not reproducible in desktop responsive-mode emulation, which doesn't share WebKit's actual sticky/compositing implementation) can fail to repaint a sticky element that has a horizontally-scrolling child plus DOM mutations happening inside it during scroll (the active-item class toggling below), rendering it blank until the next interaction. */
+.workshop-nav-row {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  height: var(--workshop-nav-height);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  background: var(--page);
+  border-bottom: 1px solid var(--line);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.workshop-nav-bar {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: clamp(0.4rem, 1.2vw, 1.5rem);
+  align-items: center;
+  padding-inline: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.workshop-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* transform/backface-visibility: same iOS Safari sticky-repaint fix as .workshop-nav-row — the .is-active class below is toggled by JS on whichever item is current *during* scroll, inside that same sticky element, so it's exposed to the identical blank/stale-repaint bug if left off. */
+.workshop-nav-item {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 84px;
+  max-width: 170px;
+  text-decoration: none;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Fixed thumbnail size, decoupled from the item's slot width (76-170px, sized for the label below it) — sizing the image to 100% of that width would make it far taller than the 88px bar budget. 76px wide (was 64px) takes advantage of the extra room available above the ≤640px mobile tier, where items regularly flex well past that. Horizontal 5:4 crop (width:height, i.e. wider than tall) rather than square — height auto-computes from the ratio. */
+.workshop-nav-item img {
+  display: block;
+  width: 76px;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* Two labels per item, only one shown at a time — .nav-label--full (e.g. "Cattail Basket") above 730px, where there's room for it; .nav-label--short (e.g. "Cattail") below it, where there isn't (see the mobile tier further down, which swaps the visibility). display: none is enough on its own to keep the hidden one out of the accessible name — no extra aria-hidden needed. */
+.nav-label--short {
+  display: none;
+}
+
+.nav-label--full {
+  white-space: nowrap;
+}
+
+.workshop-nav-item .nav-label {
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  color: var(--charcoal);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.workshop-nav-item:hover .nav-label,
+.workshop-nav-item:focus-visible .nav-label {
+  color: var(--hero-gold);
+}
+
+.workshop-nav-item.is-active .nav-label {
+  border-bottom-color: var(--hero-gold);
+  color: var(--ink);
+}
+
+/* Scroll affordance for the mobile-only horizontal scroll — plain text, no box/chrome, matching the site's arrow-on-a-link convention (docs/design-guidelines.md), but real buttons: clicking one scrolls the bar that direction. Each side fades in/out via .is-visible (toggled in JS from the bar's actual scrollLeft/scrollWidth) rather than always showing both — a hint pointing a direction with nothing left to scroll to would be misleading. Hidden entirely on desktop, where all 7 items fit without scrolling. */
+.workshop-nav-hint {
+  display: none;
+}
+
+/* 430px — below this, even the short labels ("Wreath", the widest at ~46px) plus a 42px image don't leave room for all 7 items at once (measured: ~370px of content alone, before page padding), so scrolling with the peek hint genuinely earns its keep here. Above 430px there's enough room to just show all 7 without scrolling — see the no-scroll mid-tier further down — so the scroll/peek/arrow machinery in this block is scoped tightly to where it's actually needed, not the full mobile range up to 730px. */
+@media (max-width: 430px) {
+  .november-event-page {
+    --workshop-nav-height: 76px;
+    /* Pure-CSS "peek" hint, no JS/measured pixels: item width and gap are both defined as a share of 100vw (not a fixed px value), so "how many items fit before the edge cuts one off" is a fixed ratio at any screen width, not whatever happens to be left over by chance. 4 full thumbnails plus exactly two-thirds of a 5th should fit: with N full items, a gap-to-item ratio of g, and a peek fraction of p, the available width divides as N*item + N*gap + p*item = item * (N + p + N*g) — solved for item width below with N=4, p=2/3, g=0.2. (Gap is 2/3 of a *unit*, i.e. item+gap combined, not 2/3 of the item alone — those are different numbers once gap is in the mix, which is what threw the first version of this off.) */
+    --nav-item-width: calc((100vw - 2 * var(--page-pad) - 6px) / 5.467);
+    --nav-gap: calc(var(--nav-item-width) * 0.2);
+  }
+
+  /* Full-bleed, edge to edge — same 100vw/negative-margin break-out .quick-info and .event-note-grid already use elsewhere on this page, rather than staying inset inside .content's side padding like the rest of this section. */
+  .workshop-nav-row {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .workshop-nav-bar {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 8px;
+    gap: var(--nav-gap);
+  }
+
+  /* At rest, with the left arrow hidden/collapsed, the bar's own edge-to-edge bleed would otherwise let the first thumbnail start further left than the large workshop photo below it (which stays inset by --page-pad inside .content). This reserves that same page-pad worth of space on the bar itself only while the left arrow isn't there to reserve it — once it fades in during scroll, the arrow's own width already pushes the thumbnails past this point, so the two don't stack. */
+  .workshop-nav-row:has(.workshop-nav-hint--left:not(.is-visible)) .workshop-nav-bar {
+    padding-left: var(--page-pad);
+  }
+
+  /* Mirror of the above for the trailing edge: once scrolled all the way to the last thumbnail, the right arrow collapses (nothing left to scroll to), so without this the bar's edge-to-edge bleed would let the last thumbnail's right edge run past the large photo's own right edge (also inset by --page-pad). */
+  .workshop-nav-row:has(.workshop-nav-hint--right:not(.is-visible)) .workshop-nav-bar {
+    padding-right: var(--page-pad);
+  }
+
+  /* Height stays the same as the mobile thumbnail below (42px, 8px inset) so its centre lines up with the picture, not the taller image+label block. Width is deliberately no bigger than the page's own side gutter (--page-pad) — a small edge hint rather than an inviting tap target, so swiping the thumbnails themselves reads as the primary way to move through them. Hidden (display:none, not just opacity) until JS adds .is-visible once there's actually somewhere to scroll to on that side — the thumbnails start flush at the true edge rather than leaving dead reserved space for a hint that isn't showing yet. */
+  .workshop-nav-hint {
+    display: none;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    width: var(--page-pad);
+    height: 42px;
+    margin-top: 8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--hero-gold);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .workshop-nav-hint.is-visible {
+    display: flex;
+  }
+
+  /* Glyph centred within its --page-pad-wide box (the shared .workshop-nav-hint rule's default justify-content) rather than hugging either edge. */
+  .workshop-nav-hint--left {
+    margin-left: 0;
+    margin-right: 6px;
+  }
+
+  .workshop-nav-hint--right {
+    margin-left: 6px;
+    margin-right: 0;
+  }
+
+  .workshop-nav-hint:hover,
+  .workshop-nav-hint:focus-visible {
+    color: var(--bark-hover);
+  }
+
+  /* --nav-item-width (defined above, ~55-65px depending on viewport) rather than a fixed px value — keeps the 4-full-plus-two-thirds-peek ratio constant at any screen size. Comfortably clears every single-word label ("Wreath", the longest, is ~46px) without wrapping. */
+  .workshop-nav-item {
+    flex: 0 0 auto;
+    width: var(--nav-item-width);
+    min-width: var(--nav-item-width);
+  }
+
+  /* Swaps which label shows — short ("Cattail") here and in the no-scroll mid-tier just below, where the full-ish version (used above 730px) doesn't fit. */
+  .nav-label--short {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .nav-label--full {
+    display: none;
+  }
+
+  .workshop-nav-item img {
+    width: 42px;
+    height: auto;
+  }
+}
+
+/* No-scroll mid-tier — same short labels and 42px images as the ≤430px tier above (there's not enough room yet for the full-ish labels/76px images used past 730px), but enough width here to lay out all 7 in one row without scrolling, so none of the scroll/peek/arrow machinery from the tier above applies: no full-bleed row, no --nav-item-width peek formula, arrows stay display:none (the shared default). Items just flex evenly between a floor wide enough for "Wreath" (the widest short label) and a reasonable ceiling. */
+@media (min-width: 431px) and (max-width: 730px) {
+  .november-event-page {
+    --workshop-nav-height: 76px;
+  }
+
+  .workshop-nav-item {
+    flex: 1 1 0;
+    min-width: 50px;
+    max-width: 120px;
+  }
+
+  .nav-label--short {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .nav-label--full {
+    display: none;
+  }
+
+  .workshop-nav-item img {
+    width: 42px;
+    height: auto;
+  }
+}
+
+/* Generous space between entries — each workshop gets its own moment (a rule, not a repeated boxed panel) rather than reading as a catalogue of identical cards. */
 .workshop-detail-list {
   display: grid;
-  gap: 1.75rem;
+  gap: clamp(2.5rem, 5vw, 5rem);
   text-align: left;
 }
 
+/* No full-card background/border anymore — the page itself is the paper (Red Deer's language), the photograph is the visual block, and .workshop-note/.skills-list (below) are both plain hairline-divided blocks rather than boxes. A plain rule between entries does the separating instead of a repeated panel. scroll-margin-top clears the sticky nav bar above (.workshop-nav-height + 24px) so a jump link doesn't land the title underneath it. */
 .workshop-detail-card {
   display: grid;
   grid-template-columns: minmax(20rem, 28rem) minmax(24rem, 1fr);
   align-items: stretch;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--paper-soft) 58%, var(--page) 42%);
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  scroll-margin-top: calc(var(--workshop-nav-height) + 24px);
+}
+
+.workshop-detail-card + .workshop-detail-card {
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+  border-top: 1px solid var(--line);
 }
 
 /* No photo yet for this workshop — let the copy run full-width instead of leaving a blank column. */
@@ -2008,11 +2273,11 @@
   grid-template-columns: 1fr;
 }
 
-/* <figure> carries a default 1em/40px browser margin — zero it so the photo fills its grid column instead of floating in a narrower box. A fixed 4:5 editorial ratio, not stretched to match the (often much taller, text-heavy) copy column — align-self: start overrides the card's own align-items: stretch so the image keeps its own calm, consistent shape instead of growing to whatever height the copy happens to need. */
+/* <figure> carries a default 1em/40px browser margin — zero it so the photo fills its grid column instead of floating in a narrower box. A fixed editorial ratio, not stretched to match the (often much taller, text-heavy) copy column — align-self: start overrides the card's own align-items: stretch so the image keeps its own calm, consistent shape instead of growing to whatever height the copy happens to need. Taller than the original 4:5 specifically to close some of the gap that opens up on longer cards (3+ sessions, a rhythm note, a full skills list) between where the image ends and where the copy column actually ends. */
 .workshop-detail-media {
   margin: 0;
   align-self: start;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
 }
 
 .workshop-detail-media img {
@@ -2023,16 +2288,56 @@
   filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
 }
 
+/* Copy sits directly on the page now, not inside an enclosed card — no side/vertical padding of its own beyond a little breathing room top/bottom. */
 .workshop-detail-copy {
-  padding: clamp(1.65rem, 2.35vw, 2.4rem);
+  padding: clamp(1rem, 2vw, 2rem) 0;
 }
 
-/* Font styling: .eyebrow-lesser (_global.css), with its own colour override below (warm-clay, not eyebrow-lesser's gold). */
-/* Darker than a plain --warm-clay so this reads as legible information (price/level), not a decorative accent like the section eyebrow above it. */
+/* Desktop only (matches the 1000px stacking breakpoint below): image widened slightly and column gap opened up so photo and copy read as two independent blocks rather than equal cells in a rigid panel. Alternates the image side every other card for a touch of Red Deer's asymmetry — skipped for .workshop-detail-card--no-image, which has no image column to move. */
+@media (min-width: 1001px) {
+  .workshop-detail-card {
+    grid-template-columns: minmax(20rem, 0.82fr) minmax(0, 1.18fr);
+    column-gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .workshop-detail-card:nth-child(even):not(.workshop-detail-card--no-image) {
+    grid-template-columns: minmax(0, 1.18fr) minmax(20rem, 0.82fr);
+  }
+
+  .workshop-detail-card:nth-child(even):not(.workshop-detail-card--no-image) .workshop-detail-media {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .workshop-detail-card:nth-child(even):not(.workshop-detail-card--no-image) .workshop-detail-copy {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Genuine width variation, not just a side-flip — every third entry gets a noticeably wider image column instead of repeating the same 0.82/1.18 split every time, so the sequence reads as real asymmetry rather than a matched-tile zigzag (side alternates, proportions never do). Same specificity as the even-card rule above (one class + one pseudo-class + one :not()) so it still wins on cards that are both even and a multiple of three, via source order. */
+  .workshop-detail-card:nth-child(3n):not(.workshop-detail-card--no-image) {
+    grid-template-columns: minmax(20rem, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .workshop-detail-card:nth-child(3n):nth-child(even):not(.workshop-detail-card--no-image) {
+    grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 1.05fr);
+  }
+}
+
+/* Font styling: .eyebrow-lesser (_global.css), with its own colour override below (warm-clay, not eyebrow-lesser's gold). Price no longer lives here — a label doing double duty as both category (Beginner) and price made it read as two jobs at once. It's set beside the sessions instead, where the cost is actually relevant. */
 .workshop-detail-level {
   margin-bottom: 0.45rem;
   color: color-mix(in srgb, var(--warm-clay) 55%, var(--ink) 45%);
   letter-spacing: 0.1em;
+}
+
+/* Sits directly above the sessions list it prices, close enough to read as attached to it rather than as a second label under the title. */
+.workshop-detail-price {
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 /* Font styling lives in .card-title (_global.css) — this is just this component's spacing. More room below now so the date/registration row beneath doesn't crowd it. */
@@ -2040,19 +2345,32 @@
   margin-bottom: 1.25rem;
 }
 
-/* > (not a descendant selector) so this only ever touches this card's own paragraphs — never leaks into the nested .workshop-note/.skills-list boxes. :not() excludes the price badge, which is also a direct-child <p> but has its own sizing via .eyebrow-lesser. Sized up slightly (was 0.98/1.5) — the body copy was reading a little small relative to the large image and heading beside it. */
-.workshop-detail-copy > p:not(.workshop-detail-level) {
-  margin: 0 0 calc(var(--font-size) * 0.83);
-  color: var(--ink);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.58;
+/* The short opening beat every workshop title was missing — a small Bark Rust rule, same idea as .choose-weekend-rule/.about-weekend-rule elsewhere on the site, rather than the title dropping straight into body copy. */
+.card-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin-top: 0.9rem;
+  background: var(--hero-gold);
 }
 
-/* The price badge is always the first <p>, so the true opening description line is the second — a slightly larger size invites you in, and a tight gap below it keeps it and the paragraph right after reading as one continuous introduction (a question, then its answer). */
+/* Two sizes for all body copy in this card, not four — this used to step down at every level (lead question, then description, then Skills Learned, then the Rhythm note, each smaller than the last), which made everything past the first sentence read as fine print, including the practical details people actually need. One lead size (the true opening line, right after the price badge) and one body size shared by every other paragraph, Skills Learned, and the Rhythm note — the label styling on each block carries the hierarchy instead of font-size doing it too. max-width caps the measure at ~65 characters so the line length stays consistent regardless of the exact column width a given card's image ratio leaves it. */
+/* > (not a descendant selector) so this only ever touches this card's own paragraphs — never leaks into the nested .workshop-note/.skills-list boxes. :not() excludes the price badge, which is also a direct-child <p> but has its own sizing via .eyebrow-lesser. */
+.workshop-detail-copy > p:not(.workshop-detail-level) {
+  max-width: 34rem;
+  margin: 0 0 calc(var(--font-size) * 0.83);
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* The price badge is always the first <p>, so the true opening description line is the second — the one lead size, larger than the shared body size above, inviting you in before the rest reads at one consistent size. */
 .workshop-detail-copy > p:nth-of-type(2) {
-  margin-bottom: calc(var(--font-size) * 0.35);
-  font-size: calc(var(--font-size) * 1.03);
+  margin-bottom: calc(var(--font-size) * 0.4);
+  font-size: 1.35rem;
+  line-height: 1.45;
 }
 
 /* A bit more clearance above the final, more practical paragraph — separates it from the inviting intro pair above. */
@@ -2060,28 +2378,25 @@
   margin-top: calc(var(--font-size) * 0.4);
 }
 
-/* auto-fit + a minimum column width, rather than a hardcoded 2 columns — some dates ("Saturday, September 26 · 6 PM–10 PM") are long enough that two rigid 50% columns would force an overflow. Kept at 20rem: auto-fit picks its column count from only the minimum in minmax(), before knowing each button's real content width (grid-template-columns: max-content max-content inside .workshop-date-button, which can't shrink) — a smaller minimum (15rem, and max-content in place of 1fr) was tried here, but both let auto-fit commit to more columns than the buttons actually fit into, overlapping 3-offering cards (Bird Feeder) instead of wrapping them. 20rem is the smallest minimum that reliably wraps before that happens. justify-items: start keeps each button's own grid from stretching to fill its column. */
+/* Each session is a full-width row — date/time on the left, a plain Register text link on the right — separated by Quiet Rule hairlines, rather than a grid of filled pill buttons. Scales to any number of sessions without a grid needing to guess column counts (the old auto-fit grid could commit to more columns than the buttons actually fit, overlapping 3-session cards like Bird Feeder), and reads as a scannable list instead of repeated buttons. */
 .workshop-date-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  align-items: center;
-  justify-items: start;
-  gap: 0.7rem 1.25rem;
+  display: flex;
+  flex-direction: column;
   margin: 0 0 1.25rem;
+  border-top: 1px solid var(--line);
 }
 
-/* A 2-column grid (info, register) instead of a wrapping flex row — the day/date and time now stack as their own two grid rows inside .date-button-info, so the button's shape stays predictable regardless of how long the date string is, rather than depending on where flex-wrap happens to break. */
-.workshop-date-button {
-  display: inline-grid;
-  grid-template-columns: max-content max-content;
-  align-items: center;
-  justify-content: start;
-  gap: 0.65rem;
-  padding-block: 0.35rem;
-  color: var(--ink);
+/* .workshop-date-buttons .workshop-date-button (not just .workshop-date-button) — a single-class selector on an <a> loses a specificity tie to .weekend-page a (class + type), which silently overrode this to Bark Rust instead of Ink. Same bug pattern as .gateway-button/.event-hero-button earlier this session — this was the real source of most of the "too much rust" density on this block, not a deliberate color choice. */
+.workshop-date-buttons .workshop-date-button {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--charcoal);
   font-weight: 600;
   text-decoration: none;
-  transition: transform 180ms ease;
 }
 
 .date-button-info {
@@ -2089,110 +2404,86 @@
   gap: 0.1rem;
 }
 
-.date-button-daydate,
-.date-button-time {
-  white-space: nowrap;
-}
+/* No white-space: nowrap on .date-button-daydate/.date-button-time (removed) — normal text flow already stays on one line whenever there's room, and lets the day/date wrap gracefully at very narrow widths (~300px) instead of forcing the whole row (and the card containing it) wider than the viewport to keep an unbreakable line next to the Register button. */
 
-/* Day/date is lighter than the button's base weight so the eye lands on the time first — the time is the detail people actually scan for. */
+/* Day/date is lighter than the button's base weight so the eye lands on the time first — the time is the detail people actually scan for. Both Graphite now, not Bark Rust — with Register the only rust mark left in this block, it's the one thing that still signals as an action. */
 .date-button-daydate {
+  color: var(--ink-soft);
   font-weight: 400;
 }
 
 .date-button-time {
+  color: var(--ink);
   font-size: calc(var(--font-size) * 1.02);
   font-weight: 700;
 }
 
-.workshop-date-button:hover {
-  transform: translateY(-2px);
-}
-
-/* Font styling: .tag (_global.css). Shorter, narrower, and closer to the date now — mostly moss with a touch of warm clay so it isn't flat grey beside the warm cream page — so it reads as part of the schedule row rather than a second major call-to-action. position: relative + overflow: visible support the .moon-mark reveal below (shared component, _global.css) — its rest state is invisible, so it doesn't need its own left padding reserved here at rest, only on hover (see .workshop-date-button:hover .register-label below). */
+/* Back to a compact filled button (was a plain text link, briefly) — filled buttons should stay reserved for one high-priority action, but a paid registration control needs more presence than a text link at reading size gives it. Compact rather than the old glow-pill: enough to read as a control, small enough that three stacked (Bird Feeder) don't accumulate weight. */
 .register-label {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.25em;
+  justify-content: center;
   flex-shrink: 0;
-  overflow: visible;
-  margin-top: -0.15rem;
-  padding: calc(var(--font-size) * 0.42) calc(var(--font-size) * 1.05);
-  border-radius: var(--pill);
-  background: color-mix(in srgb, var(--moss) 90%, var(--warm-clay) 10%);
-  color: var(--hero-cream);
-  font-size: calc(var(--font-size) * 0.7);
-  box-shadow: 0 0.3rem 0.75rem rgba(44, 41, 37, 0.09);
-  transition:
-    padding 180ms ease,
-    background 180ms ease,
-    transform 180ms ease,
-    box-shadow 180ms ease;
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border-radius: var(--radius);
+  background: var(--hero-gold);
+  color: var(--page);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  transition: background 180ms ease;
 }
 
-/* Slightly smaller than before to match the tighter pill. Cream fill, moss-tinted glyph so it stays legible against its own circle. */
-.register-label .moon-mark {
-  width: 1.45rem;
-  height: 1.45rem;
-  font-size: 0.86rem;
-  background: var(--hero-cream);
-  color: color-mix(in srgb, var(--moss) 88%, var(--ink) 12%);
-}
-
-/* Same "pool of light" treatment as the bottom-cta button (main.css) — layered, offset-left box-shadows spilling out from where the moon appears, plus a deeper (cedar-tinted) version of the resting background. padding-left only grows on hover (not at rest) so the capsule stays compact until the moon needs the room — paired with the `transition: padding` above so it eases in rather than jumping. */
 .workshop-date-button:hover .register-label,
 .workshop-date-button:focus-visible .register-label {
-  padding-left: calc(var(--font-size) * 1.25);
-  background: color-mix(in srgb, var(--moss) 92%, var(--cedar) 8%);
-  box-shadow:
-    -0.3rem 0 0.6rem rgba(246, 239, 232, 0.45),
-    -0.7rem 0 1.2rem rgba(246, 239, 232, 0.3),
-    0 0.5rem 1.1rem rgba(85, 91, 59, 0.28);
+  background: var(--bark-hover);
 }
 
-/* Smaller, tighter halo scaled to this smaller moon — less spread and rotation than the bottom-cta button's version. Moved slightly farther left (-32% vs -24%) now that the pill's hover padding gives it room to breathe instead of crowding "REGISTER". */
-.workshop-date-button:hover .moon-mark,
-.workshop-date-button:focus-visible .moon-mark {
-  opacity: 1;
-  box-shadow:
-    0 0 0.4rem rgba(246, 239, 232, 0.95),
-    0 0 0.9rem rgba(210, 190, 149, 0.48);
-  transform: translate(-32%, -50%) scale(1) rotate(-3deg);
-}
 
-/* Two bordered boxes of equal weight stacked at the bottom read as a form, not a card — kept .workshop-note as a soft note (background + border, no full box needed since it's a single short paragraph) and dropped .skills-list's box entirely in favour of a plain top rule, so the bottom of the card resolves as one soft note plus one simple list rather than two competing boxes. */
-.workshop-note {
-  margin-top: 1rem;
-  padding: 0.8rem 0.95rem;
-  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-  border-radius: 0.3rem;
-  background: color-mix(in srgb, var(--page) 72%, transparent);
-}
-
+/* A filled paper card here contradicted the system's own "fine rules, not boxes" rule (Pale Ground is for forms and rare exceptions, not a repeated content block) — Workshop Rhythm is the same shape of content as Skills Learned (a label plus a short block), so it now gets the exact same hairline treatment instead of one being boxed and the other plain. */
+.workshop-note,
 .skills-list {
-  margin-top: 0.75rem;
-  padding: 0.8rem 0 0;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
   border: 0;
   border-top: 1px solid var(--line);
   background: transparent;
 }
 
+/* Same body size as the rest of the card's copy (was its own smaller size, the fourth step-down) — the hairline + label above already mark this as a supporting block, so the text itself doesn't also need to shrink. */
 .workshop-note p,
 .skills-list li {
   margin: 0;
   color: var(--ink-soft);
-  font-size: calc(var(--font-size) * 0.88);
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
+/* Fine dash + hanging indent instead of default round bullets — the system leans on typography over decoration everywhere else, and round bullets were the one place still borrowing browser-default disc styling. */
 .skills-list ul {
   margin: 0;
-  padding-left: var(--font-size);
+  padding: 0;
+  list-style: none;
+}
+
+.skills-list li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.skills-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--hero-gold);
 }
 
 /* GRID SECTION — full-width section wrapper with the standard top border + vertical padding, reused wherever a bordered content block sits between two sections. */
+/* More separation before this than before — coming straight off the workshop list with the same three-column formatting as Policies right after it made the whole lower half of the page read as one dense block. */
 .grid-section {
-  padding-block: 3rem;
+  padding-block: clamp(4rem, 7vw, 7rem);
   border-top: 1px solid var(--line);
 }
 
@@ -2219,6 +2510,14 @@
   margin-bottom: calc(var(--font-size) * 0.5);
 }
 
+/* Quieter than .label's default rust — the page already repeats rust labels for the section eyebrow and the workshop level/price; these internal card labels don't need to compete at the same volume. */
+.workshop-note h3,
+.skills-list h3 {
+  color: color-mix(in srgb, var(--charcoal) 72%, transparent);
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+}
+
 .info-grid p,
 .info-grid li {
   color: var(--ink-soft);
@@ -2233,8 +2532,10 @@
   border-top: 1px solid var(--line);
 }
 
+/* Scaled down from the shared poster-size heading (_global.css/main.css, shared with .visitor-info-intro h2 on the gateway page) — full poster scale here would start another major visual chapter right after the workshop list, rather than reading as a closing section. */
 .policies-section > .content > h2 {
   margin-bottom: calc(var(--font-size) * 1.25);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
 }
 
 /* BOTTOM CTA */
@@ -2266,73 +2567,6 @@
   font-weight: 500;
 }
 
-/* Solid moss pill — padding is asymmetric again (more room on the left) now that the moon has its own scoped size/protrusion below rather than relying on the shared _global.css default. */
-.bottom-cta .primary-button {
-  position: relative;
-  align-self: center;
-  min-height: 3.35rem;
-  margin-top: -0.15rem;
-  padding: 0.78rem 1.45rem 0.78rem 2.15rem;
-  overflow: visible;
-  border: 1px solid var(--moss);
-  background: var(--moss);
-  color: var(--hero-cream);
-  box-shadow: 0 0.35rem 0.9rem rgba(44, 41, 37, 0.08);
-  font-size: calc(var(--font-size) * 0.78);
-  transition:
-    transform 180ms ease,
-    box-shadow 240ms ease;
-}
-
-/* Scoped smaller than the shared _global.css default (2.35rem) and a tighter offset (-28% vs -35%) — protrudes less so it reads as attached to the capsule rather than floating free of it. */
-.bottom-cta .primary-button .moon-mark {
-  width: 2.25rem;
-  height: 2.25rem;
-  font-size: 1.28rem;
-  box-shadow: none;
-  transform: translate(-28%, -50%) scale(0.78);
-}
-
-/* Layered, offset-left box-shadows create a soft pool of light spilling out behind the left side of the capsule — strongest near the moon, fading outward. Tinted toward --hero-cream/--hero-gold rather than plain white, which read as slightly cold/digital against this warm cream page. The final shadow (no horizontal offset) keeps the capsule grounded, same as its resting shadow. */
-.bottom-cta .primary-button:hover,
-.bottom-cta .primary-button:focus-visible {
-  transform: translateY(-2px);
-  box-shadow:
-    -0.3rem 0 0.65rem rgba(246, 239, 232, 0.58),
-    -0.8rem 0 1.45rem rgba(246, 239, 232, 0.38),
-    -1.3rem 0 2.4rem rgba(210, 190, 149, 0.2),
-    0 0.45rem 1rem rgba(44, 41, 37, 0.1);
-}
-
-/* Bright cream centre fading to soft gold at the edges — warm moonlight rather than a cold white halo. */
-.bottom-cta .primary-button:hover .moon-mark,
-.bottom-cta .primary-button:focus-visible .moon-mark {
-  opacity: 1;
-  background: var(--hero-cream);
-  color: var(--moss);
-  box-shadow:
-    0 0 0.6rem rgba(246, 239, 232, 0.98),
-    0 0 1.4rem rgba(246, 239, 232, 0.78),
-    0 0 2.5rem rgba(210, 190, 149, 0.38);
-  transform: translate(-28%, -50%) scale(1) rotate(-3deg);
-}
-
-.bottom-cta .primary-button span:last-child {
-  transition: transform 180ms ease;
-}
-
-.bottom-cta .primary-button:hover span:last-child,
-.bottom-cta .primary-button:focus-visible span:last-child {
-  transform: translateX(0.15rem);
-}
-
-/* Registration grid collapses to one column well before the photo/copy layout does — the date/time text needs a wider column than the auto-fit minmax(20rem, 1fr) two-up layout can give it once the card itself has narrowed this far, which was forcing "Friday, November 13" to break across lines despite still having plenty of room for the two-column photo/copy layout above it. */
-@media (max-width: 1200px) {
-  .workshop-date-buttons {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Workshop card stacks at 1000px, not 900px — between those two the text column was still narrow enough to wrap the title awkwardly and force tall, cramped body copy, while the image column (getting the leftover width) ran well past the bottom of the (shorter) copy. Stacking earlier keeps the text column from ever getting that squeezed. */
 @media (max-width: 1000px) {
   .workshop-detail-card {
@@ -2360,6 +2594,11 @@
     grid-template-columns: 1fr;
   }
 
+  /* Matches the specificity of the desktop 3-column override above (main.css) so it actually wins here instead of staying 3-across and cramped. */
+  .event-note-grid .content.workshop-level-grid {
+    grid-template-columns: 1fr;
+  }
+
   .quick-info:not(.quick-info--plain) article,
   .event-note-grid article,
   .info-grid > * {
@@ -2369,6 +2608,11 @@
     border-right: 0;
     border-left: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  /* Cancels the desktop left-margin between stacked facts — a single column has nothing to the left to separate from. */
+  .quick-info:not(.quick-info--plain) article + article {
+    margin-left: 0;
   }
 
   .bottom-cta .content {
@@ -2464,30 +2708,118 @@
   }
 }
 
+/* Below 700px the 13-hour-wide grid can't shrink to fit the viewport without cramming every event unreadably narrow, and horizontal scrolling isn't the answer here — instead this rotates the whole thing into a vertical day view (the pattern mobile calendar apps use): time runs top-to-bottom through the same 13 rows the desktop version uses as columns, and .timeline-event reuses --start/--span verbatim, just against grid-row instead of grid-column. Overlap is shown the same way desktop shows it, just on the other axis — concurrent workshops sit side by side in narrow columns instead of stacked in tall rows. Every event carries --v-col (hand-set in the HTML, not derived from --lane, since lane numbers get legitimately reused by non-conflicting siblings on desktop) so overlapping workshops land in different columns; every card is a single fixed column wide regardless of whether anything overlaps it, rather than solo cards stretching to fill the row. */
 @media (max-width: 700px) {
+  /* Hour column trimmed to just what "12" (the widest label) actually needs, with a tighter gap to the cards — reclaims width for the event column, which matters most at the narrowest phones (e.g. a tag like "Intermediate" has to actually fit). */
+  .timeline {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    column-gap: 0.4rem;
+  }
+
   .timeline-hours {
-    display: none;
+    position: static;
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-rows: repeat(13, minmax(3rem, auto));
+    height: auto;
+    text-align: right;
+  }
+
+  .timeline-hours span {
+    position: static;
+    align-self: start;
+    transform: none;
+  }
+
+  .timeline-hours span:nth-child(1) {
+    grid-row: 1;
+  }
+  .timeline-hours span:nth-child(2) {
+    grid-row: 2;
+  }
+  .timeline-hours span:nth-child(3) {
+    grid-row: 3;
+  }
+  .timeline-hours span:nth-child(4) {
+    grid-row: 4;
+  }
+  .timeline-hours span:nth-child(5) {
+    grid-row: 5;
+  }
+  .timeline-hours span:nth-child(6) {
+    grid-row: 6;
+  }
+  .timeline-hours span:nth-child(7) {
+    grid-row: 7;
+  }
+  .timeline-hours span:nth-child(8) {
+    grid-row: 8;
+  }
+  .timeline-hours span:nth-child(9) {
+    grid-row: 9;
+  }
+  .timeline-hours span:nth-child(10) {
+    grid-row: 10;
+  }
+  .timeline-hours span:nth-child(11) {
+    grid-row: 11;
+  }
+  .timeline-hours span:nth-child(12) {
+    grid-row: 12;
+  }
+  .timeline-hours span:nth-child(13) {
+    grid-row: 13;
+  }
+
+  .timeline-hours span:nth-child(14) {
+    grid-row: 13;
+    align-self: end;
   }
 
   .timeline-events {
-    grid-template-columns: 1fr;
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(13, minmax(3rem, auto));
+    padding-top: 0;
+    border-top: 0;
   }
 
   .timeline-event {
-    grid-column: 1 !important;
-    grid-row: auto !important;
+    grid-column: var(--v-col, 1) / span 1;
+    grid-row: var(--start) / span var(--span);
+    justify-content: flex-start;
+    padding-top: 0.75rem;
   }
+}
+
+/* NOVEMBER — RULE REDUCTION (scoped to this page only, not September/the template yet). Too many consecutive horizontal rules stop reading as section markers and start reading as decoration. Keeping full-width rules in exactly three places — beneath the hero quick-info strip, before the practical-info grid after the workshop list, and before the final CTA — everything else now relies on white space, scale, alignment, and (for the workshop cards) the image/alternating-layout shift to do the separating instead. */
+.november-event-page .schedule-section {
+  border-top: 0;
+}
+
+.november-event-page .event-note-grid {
+  border-bottom: 0;
+}
+
+.november-event-page .workshop-detail-section {
+  border-top: 0;
+}
+
+.november-event-page .workshop-detail-card + .workshop-detail-card {
+  border-top: 0;
+}
+
+/* Kept, but quieter — internal content dividers (description/skills and description/rhythm), not section boundaries. Workshop Rhythm shares .skills-list's exact rule now, so it gets the same quieter treatment here too. */
+.november-event-page .skills-list,
+.november-event-page .workshop-note {
+  border-top-color: color-mix(in srgb, var(--line) 58%, transparent);
 }
 
 /* Workshop detail card mobile tightening — the desktop spacing/type scale reads as generous there, but at phone widths it makes the card feel long and fragmented instead of calm. */
 @media (max-width: 680px) {
-  /* Info and Register stay side by side down to this width — full stacking (see the 420px block below) is reserved for widths where there truly isn't room. No gap/grid-template-columns override needed here anymore: the base rule's 1.1rem gap already covers the smaller moon's ~0.46rem hover overhang with room to spare. */
-
-  /* padding-right only (not padding-inline) — left stays whatever the base/hover state already sets (symmetric at rest, growing to 1.25x on hover for the moon), so this override only tightens the side that doesn't need to make room for anything. */
-  .register-label {
-    padding-right: calc(var(--font-size) * 0.8);
-  }
-
   /* Slightly smaller than the desktop clamp ceiling (~9% down) — "Cattail Berry Basket" was close enough to the card edge to feel squeezed rather than intentional. */
   .card-title {
     font-size: clamp(calc(var(--font-size) * 2.48), 8vw, calc(var(--font-size) * 3.7));
@@ -2501,24 +2833,6 @@
   /* Card-to-card gap can shrink to match the tighter card bottom above, rather than stacking two separate air gaps. */
   .workshop-detail-list {
     gap: 1.25rem;
-  }
-
-  .workshop-note,
-  .skills-list {
-    padding: calc(var(--font-size) * 0.6) calc(var(--font-size) * 0.75);
-  }
-}
-
-/* Below this, even the tightened 680px side-by-side gap runs out of room — Register drops to its own row under the date/time rather than squeezing the date column further. */
-@media (max-width: 420px) {
-  .workshop-date-button {
-    grid-template-columns: 1fr;
-    gap: 0.45rem;
-  }
-
-  .register-label {
-    justify-self: start;
-    margin-top: 0.1rem;
   }
 }
 

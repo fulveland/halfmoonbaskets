@@ -62,8 +62,8 @@
           <p class="event-hero-intro">[One or two sentences setting up the weekend and the materials it covers.]</p>
 
           <div class="event-hero-actions" aria-label="[Event Name] page links">
-            <a href="#schedule" class="event-hero-button event-hero-button--primary">View Schedule</a>
-            <a href="#workshops" class="event-hero-button event-hero-button--secondary">Browse Workshops</a>
+            <a href="#schedule" class="gateway-button">View Schedule</a>
+            <a href="#workshops" class="gateway-button">Browse Workshops</a>
           </div>
         </div>
 
@@ -194,7 +194,7 @@
 
     <section id="workshops" class="workshop-detail-section">
       <div class="content wide">
-      <p class="eyebrow">[Event Name] Workshop Details</p>
+      <p class="eyebrow">[Count] Workshops · One Weekend</p>
       <h2 class="section-title">[Event Name] Workshop Details</h2>
       <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering.</p>
 
@@ -226,9 +226,10 @@
           -->
 
           <div class="workshop-detail-copy">
-            <p class="workshop-detail-level eyebrow-lesser">[Level] · $[price]</p>
+            <p class="workshop-detail-level eyebrow-lesser">[Level]</p>
             <h2 class="card-title">[Workshop Name]</h2>
 
+            <p class="workshop-detail-price">$[price]</p>
             <div class="workshop-date-buttons" aria-label="[Workshop Name] registration options">
               <!-- Repeat this <a> once per time slot this workshop runs. -->
               <a href="#" class="workshop-date-button">
@@ -238,17 +239,12 @@
                   </span>
                   <span class="date-button-time">[Time Range]</span>
                 </span>
-                <span class="register-label tag"><span class="moon-mark" aria-hidden="true">☾</span>Register</span>
+                <span class="register-label">Register</span>
               </a>
             </div>
 
             <p>[Opening description paragraph — inviting, a question or a hook.]</p>
             <p>[1-3 more description paragraphs as needed.]</p>
-
-            <div class="workshop-note">
-              <h3 class="label">Workshop rhythm</h3>
-              <p>[Duration and break structure, e.g. "This is a 4-hour workshop with approximately 3 hours of guided instruction. We will take a 15-minute break partway through for tea and cake."]</p>
-            </div>
 
             <div class="skills-list">
               <h3 class="label">Skills learned</h3>
@@ -256,6 +252,27 @@
                 <li>[Skill]</li>
                 <!-- Repeat per skill — 3 to 6 seen across existing cards. -->
               </ul>
+            </div>
+
+            <!--
+              WORKSHOP RHYTHM — one line, middot-separated (" · ", spaces both
+              sides, never a comma), must fit on one line at the desktop text
+              column width:
+                [total duration] · [guided instruction] · [break]
+              - Guided instruction: only state it if NOT derivable from
+                total − break (i.e. there's real self-paced time beyond the
+                break). If guided + break already equals the total exactly,
+                drop this clause — it's redundant.
+              - Break: 15-minute break for tea and cake, workshops 5 hours
+                or under. Over 5 hours: 1-hour break · includes tea and cake.
+              Examples: "2 hours · 15-minute break for tea and cake" (guided
+              dropped — 1h45m + 15m = 2h exactly) vs. "7 hours · 3 hours
+              guided instruction · 1-hour break · includes tea and cake"
+              (guided kept — 3h + 1h break leaves 3h unaccounted for).
+            -->
+            <div class="workshop-note">
+              <h3 class="label">Workshop rhythm</h3>
+              <p>[duration] · [guided instruction, if not redundant] · [break]</p>
             </div>
           </div>
         </article>
@@ -330,10 +347,7 @@
           <p>Choose your workshop, save your spot, and spend the weekend weaving with natural materials.</p>
         </div>
 
-        <a href="#workshops" class="primary-button">
-          <span class="moon-mark" aria-hidden="true">☾</span>
-          <span>View [Month] Workshops</span>
-        </a>
+        <a href="#workshops" class="gateway-button">View [Month] workshops</a>
       </div>
     </section>
   </main>
