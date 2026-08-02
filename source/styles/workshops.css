@@ -258,26 +258,35 @@
 
 .host-page .hw-offerings {
   display: grid;
-  gap: clamp(2.5rem, 5vw, 4rem);
+  gap: clamp(2.75rem, 5vw, 4.5rem);
   grid-template-columns: minmax(0, 1fr);
 }
 
-@media (min-width: 820px) {
-  .host-page .hw-offerings {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+/* One workshop per row. The photo is shown large at its full 4:5 frame so the
+   piece reads as a product a host would want to book, rather than a thin crop.
+   Image beside the text on wider screens; stacked on narrow ones. */
+.host-page .hw-offering {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 680px) {
+  .host-page .hw-offering {
+    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
   }
 }
 
-/* Photograph above, text below — the preferred sequence in the layout language,
-   rather than text set over the image. */
 .host-page .hw-offering figure {
-  margin: 0 0 1.25rem;
+  margin: 0;
 }
 
 .host-page .hw-offering img {
   display: block;
   width: 100%;
-  height: clamp(12rem, 22vw, 18rem);
+  aspect-ratio: 4 / 5;
+  height: auto;
   object-fit: cover;
 }
 

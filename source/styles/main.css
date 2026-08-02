@@ -1862,7 +1862,8 @@
 .timeline-event[href="#berry-boat"],
 .timeline-event[href="#butt-cheek-basket"],
 .timeline-event[href="#tiny-willow-bowl"],
-.timeline-event[href="#tiny-trug"] {
+.timeline-event[href="#tiny-trug"],
+.timeline-event[href="#willow-berry-basket"] {
   border-left-color: var(--willow);
 }
 
@@ -1877,10 +1878,6 @@
 .timeline-event[href="#random-weave-willow-bark"],
 .timeline-event[href="#twill-berry-basket-willow-bark"] {
   border-left-color: var(--bark);
-}
-
-.timeline-event[href="#wild-foraged-basket"] {
-  border-left-color: var(--warm-clay);
 }
 
 .schedule-legend {
@@ -3028,12 +3025,14 @@
 }
 
 .cal-row {
+  position: relative;
   display: grid;
   grid-template-columns: 6rem minmax(0, 1fr) auto;
   align-items: baseline;
   gap: 1.5rem;
   padding-block: 1.25rem;
   border-top: 1px solid var(--line);
+  cursor: pointer;
 }
 
 .cal-row:last-child {
@@ -3102,6 +3101,13 @@
   font-weight: 650;
   font-size: 0.85rem;
   text-decoration: none;
+}
+
+/* Stretched-link pattern: an invisible overlay sized to .cal-row (its nearest positioned ancestor, via inset:0) extends the click target to the whole row, without changing .cal-link's own visible box/underline/arrow at all. */
+.cal-row .cal-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .cal-empty {
