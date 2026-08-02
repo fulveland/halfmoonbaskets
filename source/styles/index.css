@@ -4,7 +4,7 @@
 .index-hero {
   margin: 0;
   min-height: 100vh;
-  background: url("/images/half-moon-baskets-moon-stars.webp");
+  background: url("/images/heros/index-hero.webp");
 
   /* The image is a fixed size, so sometimes we see the bottom edge, and need to fill in the space behind it. */
   --bg: hsl(0, 0%, 2%);
