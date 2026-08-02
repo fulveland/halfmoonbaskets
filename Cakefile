@@ -64,7 +64,7 @@ renderOffering = (o, {showDuration = false} = {})->
             <div class="hw-offering-body">
               <h4>#{o.name}</h4>
               <p>#{o.description}</p>#{note}
-              <p class="hw-terms"><span>$#{o.price}</span> <span>#{o.minPeople} to #{o.maxPeople} people</span>#{duration}</p>
+              <p class="hw-terms"><span>#{o.minPeople} to #{o.maxPeople} people</span>#{duration}</p>
             </div>
           </article>
   """

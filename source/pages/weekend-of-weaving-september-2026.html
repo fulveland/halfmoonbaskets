@@ -238,7 +238,40 @@
       <div class="content wide">
       <p class="eyebrow">Five Workshops · One Weekend</p>
       <h2 class="section-title">September Workshop Details</h2>
-      <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering. Most workshops include a 15-minute break partway through for tea and cake.</p>
+      <p class="workshop-detail-intro">Each workshop is designed as a doorway into a particular material, technique, or basket form. All weaving materials and tools are provided. Choose the date and time that works for you, then use the registration button for that offering. Most workshops include a 15-minute break partway through for light snacks and tea.</p>
+
+      <div class="workshop-nav-wrapper">
+        <div class="workshop-nav-row">
+          <button type="button" class="workshop-nav-hint workshop-nav-hint--left" aria-label="Scroll to earlier workshops">←</button>
+          <nav class="workshop-nav-bar" aria-label="Jump to a workshop">
+            <a href="#random-weave-bulrush" class="workshop-nav-item" data-workshop="random-weave-bulrush">
+              <img src="/images/bulrush-random-weave-tray-2-4x5-v-1350.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Bulrush</span>
+              <span class="nav-label nav-label--full">Random Bulrush</span>
+            </a>
+            <a href="#random-weave-willow-bark" class="workshop-nav-item" data-workshop="random-weave-willow-bark">
+              <img src="/images/events/weekend-of-weaving-red-deer/random-weave-willow-bark.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Bark</span>
+              <span class="nav-label nav-label--full">Random Bark</span>
+            </a>
+            <a href="#cattail-berry-basket" class="workshop-nav-item" data-workshop="cattail-berry-basket">
+              <img src="/images/events/weekend-of-weaving-red-deer/cattail-berry-basket.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Cattail</span>
+              <span class="nav-label nav-label--full">Cattail Basket</span>
+            </a>
+            <a href="#twill-berry-basket-willow-bark" class="workshop-nav-item" data-workshop="twill-berry-basket-willow-bark">
+              <img src="/images/willow-bark-twill-berry-basket-4-maseter-1350.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Twill</span>
+              <span class="nav-label nav-label--full">Twill Basket</span>
+            </a>
+            <a href="#willow-berry-basket" class="workshop-nav-item" data-workshop="willow-berry-basket">
+              <img src="/images/willow-berry-basket-1-4x5-v-1500.jpg" alt="" loading="lazy" />
+              <span class="nav-label nav-label--short">Willow</span>
+              <span class="nav-label nav-label--full">Willow Basket</span>
+            </a>
+          </nav>
+          <button type="button" class="workshop-nav-hint workshop-nav-hint--right" aria-label="Scroll to more workshops">→</button>
+        </div>
 
       <div class="workshop-detail-list">
         <article id="random-weave-bulrush" class="workshop-detail-card">
@@ -273,7 +306,7 @@
               </ul>
             </div>
 
-            <!-- Rhythm line rules: middot-separated, one line, never a comma. Drop "guided instruction" if it's derivable from total − break. Break: 15-min for tea and cake at ≤5h, 1-hour · includes tea and cake over 5h. Full rules + examples in _weekend-of-weaving-template.html. -->
+            <!-- Rhythm line rules: middot-separated, one line, never a comma. Drop "guided instruction" if it's derivable from total − break. Break: 15-min for light snacks and tea at ≤5h, 1-hour · includes light snacks and tea over 5h. Full rules + examples in _weekend-of-weaving-template.html. -->
             <div class="workshop-note">
               <h3 class="label">Workshop rhythm</h3>
               <p>4 hours · 1 hour guided instruction · open time to keep weaving</p>
@@ -350,7 +383,7 @@
 
             <div class="workshop-note">
               <h3 class="label">Workshop rhythm</h3>
-              <p>4 hours · 3 hours guided instruction · 15-minute break for tea and cake</p>
+              <p>4 hours · 3 hours guided instruction · 15-minute break for light snacks and tea</p>
             </div>
           </div>
         </article>
@@ -385,7 +418,7 @@
 
             <div class="workshop-note">
               <h3 class="label">Workshop rhythm</h3>
-              <p>4 hours · 3 hours guided instruction · 15-minute break for tea and cake</p>
+              <p>4 hours · 3 hours guided instruction · 15-minute break for light snacks and tea</p>
             </div>
           </div>
         </article>
@@ -399,7 +432,7 @@
             <p class="workshop-detail-level eyebrow-lesser">Beginner</p>
             <h2 class="card-title">Willow Berry Basket</h2>
 
-            <p class="workshop-detail-price">$155</p>
+            <p class="workshop-detail-price">$165</p>
             <div class="workshop-date-buttons" aria-label="Willow Berry Basket registration options">
               <a href="#" class="workshop-date-button"><span class="date-button-info"><span class="date-button-daydate"><span class="date-button-day">Sunday,</span> <span class="date-button-date">September 27</span></span> <span class="date-button-time">12 PM–8 PM</span></span> <span class="register-label">Register</span></a>
             </div>
@@ -419,10 +452,11 @@
 
             <div class="workshop-note">
               <h3 class="label">Workshop rhythm</h3>
-              <p>8 hours · 1-hour break · includes tea and cake</p>
+              <p>8 hours · 1-hour break · includes light snacks and tea</p>
             </div>
           </div>
         </article>
+      </div>
       </div>
       </div>
     </section>
@@ -488,4 +522,85 @@
       </div>
     </section>
   </main>
+
+  <script>
+    // Marks the current workshop's nav item active as it scrolls into view (IntersectionObserver, not a scroll listener) and drives the nav bar itself: the left/right peek-hint visibility and the click-to-scroll/auto-align behaviour below it.
+    document.addEventListener("DOMContentLoaded", function () {
+      var navBar = document.querySelector(".workshop-nav-bar");
+      var navItems = document.querySelectorAll(".workshop-nav-item");
+      var cards = document.querySelectorAll(".workshop-detail-card");
+      if (!navBar || !navItems.length || !cards.length) return;
+
+      var navItemsById = {};
+      navItems.forEach(function (item) {
+        navItemsById[item.dataset.workshop] = item;
+      });
+
+      // Left/right scroll hints: only shown once there's actually somewhere to scroll to on that side, via the bar's own scroll position — this is the one legitimate use of a scroll listener here (distinct from the active-item tracking below, which stays IntersectionObserver-only).
+      var hintLeft = document.querySelector(".workshop-nav-hint--left");
+      var hintRight = document.querySelector(".workshop-nav-hint--right");
+      if (hintLeft && hintRight) {
+        var updateHints = function () {
+          var maxScroll = navBar.scrollWidth - navBar.clientWidth;
+          var atStart = navBar.scrollLeft <= 4;
+          var atEnd = navBar.scrollLeft >= maxScroll - 4;
+          hintLeft.classList.toggle("is-visible", !atStart);
+          hintLeft.setAttribute("aria-hidden", atStart ? "true" : "false");
+          hintRight.classList.toggle("is-visible", !atEnd);
+          hintRight.setAttribute("aria-hidden", atEnd ? "true" : "false");
+        };
+
+        navBar.addEventListener("scroll", updateHints, { passive: true });
+        window.addEventListener("resize", updateHints);
+        updateHints();
+
+        hintLeft.addEventListener("click", function () {
+          navBar.scrollBy({ left: navBar.clientWidth * -0.8, behavior: "smooth" });
+        });
+        hintRight.addEventListener("click", function () {
+          navBar.scrollBy({ left: navBar.clientWidth * 0.8, behavior: "smooth" });
+        });
+      }
+
+      var barHeight = navBar.getBoundingClientRect().height;
+      var buffer = 16;
+
+      // Only scrolls the bar when the newly-active item isn't already fully in view (not on every change) — otherwise this would fight the user's own swipe through the thumbnails. When it does need to move, it aligns the item to the bar's own left edge, same side the peek hint points from.
+      function ensureActiveItemVisible(item) {
+        var itemRect = item.getBoundingClientRect();
+        var barRect = navBar.getBoundingClientRect();
+        var alreadyVisible = itemRect.left >= barRect.left && itemRect.right <= barRect.right;
+        if (alreadyVisible) return;
+        var targetScrollLeft = navBar.scrollLeft + (itemRect.left - barRect.left);
+        navBar.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          // A fast/instant jump (fling scroll, or clicking a nav item far down the list) can cross several cards' thresholds within a single batch — picking just the topmost intersecting one and updating once avoids firing the nav-bar alignment scroll multiple times in a row, each interrupting the last with a different target.
+          var intersecting = entries.filter(function (e) {
+            return e.isIntersecting;
+          });
+          if (!intersecting.length) return;
+          intersecting.sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+          var item = navItemsById[intersecting[0].target.id];
+          if (!item) return;
+          navItems.forEach(function (i) {
+            i.classList.remove("is-active");
+            i.removeAttribute("aria-current");
+          });
+          item.classList.add("is-active");
+          item.setAttribute("aria-current", "true");
+          ensureActiveItemVisible(item);
+        },
+        { rootMargin: "-" + (barHeight + buffer) + "px 0px -60% 0px", threshold: 0 }
+      );
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    });
+  </script>
 </body>

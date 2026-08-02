@@ -1,0 +1,223 @@
+/* THE WEAVE CONTINUES — the post-workshop resource page.
+
+   A long-form editorial reading page in the Bark / Paper / Ink system: Paper
+   ground, Cormorant display headings, Source Sans body, Bark Rust labels and
+   links, fine Quiet-Rule hairlines, and no boxes. The page carries
+   .weekend-page for the token overrides in main.css, plus .weave-page for the
+   rules below. It no longer uses an #id, so old-pages.css never touches it.
+
+   This file sorts after main.css and old-pages.css alphabetically, so its
+   class rules win their equal-specificity ties. */
+
+.weave-page {
+  background: var(--page);
+}
+
+/* Light page, no dark hero — nav to ink. Doubled class to beat main.css's
+   later `.weekend-page .site-nav a` cream default (same trick as about.css). */
+.weave-page.weekend-page .site-logo,
+.weave-page.weekend-page .site-nav a {
+  color: var(--ink);
+}
+
+/* _global.css puts a display-scale size on bare h1/h2/h3, so every heading
+   here sets its own size. */
+
+/* ── Section rhythm ─────────────────────────────────────────────────────── */
+.weave-page main {
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.wc-section {
+  padding-block: clamp(2.25rem, 4.5vw, 3.75rem);
+}
+
+/* A fine full-measure hairline opens every section after the intro, so the
+   page is structured by rules and alignment rather than boxes. */
+.wc-section + .wc-section > .content {
+  border-top: 1px solid var(--line);
+  padding-top: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+/* ── Intro ──────────────────────────────────────────────────────────────── */
+.wc-hero {
+  padding-block: clamp(1.5rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.wc-hero-h1 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(calc(var(--font-size) * 3), 8vw, calc(var(--font-size) * 5.2));
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.wc-lede {
+  max-width: 34rem;
+  color: var(--charcoal);
+  font-size: clamp(calc(var(--font-size) * 1), 1.6vw, calc(var(--font-size) * 1.16));
+  line-height: 1.55;
+}
+
+.wc-hero .wc-lede:first-of-type {
+  margin-top: 1.6rem;
+}
+
+/* ── On-this-page contents ──────────────────────────────────────────────
+   A wrapping row of text-links, not a boxed table of contents — an editorial
+   contents line under the intro. */
+.wc-contents {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.wc-contents .eyebrow {
+  margin-bottom: 0.9rem;
+}
+
+.wc-contents ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  max-width: 48rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wc-contents a {
+  font-family: var(--font-body);
+  font-size: calc(var(--font-size) * 0.9);
+}
+
+/* Jump targets land with a little breathing room below the (static) header. */
+.wc-title,
+.wc-hero-h1 {
+  scroll-margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Section titles ─────────────────────────────────────────────────────── */
+.wc-title {
+  max-width: 20ch;
+  font-size: clamp(calc(var(--font-size) * 1.9), 4.2vw, calc(var(--font-size) * 3.1));
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.wc-section > .content > .wc-title {
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ── Prose — one narrow measure; ~36rem lands just under 70 characters. ──── */
+.wc-prose {
+  max-width: 36rem;
+}
+
+.wc-prose p {
+  margin: 0 0 1rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.94);
+  line-height: 1.66;
+}
+
+.wc-prose h3 {
+  margin: 2.25rem 0 0.5rem;
+  font-size: calc(var(--font-size) * 1.5);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Sub-sub-headings (Butts of the Willow, Harvesting and Timing …) as small
+   Bark labels rather than more serif headings, so the willow section doesn't
+   sprout a dozen competing titles. */
+.wc-section .label {
+  display: block;
+  margin: 1.9rem 0 0.7rem;
+}
+
+.wc-groups > div > .label:first-child {
+  margin-top: 0;
+}
+
+/* ── Lists ──────────────────────────────────────────────────────────────── */
+
+/* Hairline rows — the connect list, the community link lists. One item per
+   row, a fine rule between, no bullets. */
+.wc-rows {
+  max-width: 40rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wc-rows li {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.9);
+  line-height: 1.5;
+}
+
+.wc-rows li:first-child {
+  border-top: 0;
+}
+
+.wc-rows strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Bulleted steps — harvest and preparation instructions, kept tight. */
+.wc-steps {
+  max-width: 36rem;
+  margin: 0.4rem 0 0;
+  padding-left: 1.15em;
+  color: var(--charcoal);
+}
+
+.wc-steps li {
+  margin: 0.45rem 0;
+  font-size: calc(var(--font-size) * 0.92);
+  line-height: 1.55;
+}
+
+.wc-steps strong {
+  color: var(--ink);
+}
+
+/* Grouped link columns (Reading & Watching, Community) can sit two-up on wide
+   screens so the long lists don't run the full height of the page. */
+.wc-groups {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 760px) {
+  .wc-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Links are left to the sitewide `.weekend-page a` rule (main.css) — Bark Rust
+   with a lighter hover — so inline links here match the index, weekend, and
+   about pages exactly. No page-level override. */
+
+/* ── Closing share note ─────────────────────────────────────────────────
+   A short, centered closing statement — the one place centered type is right,
+   per the guidelines' "final quote / rare closing statement" allowance. */
+.wc-close .content {
+  text-align: center;
+}
+
+.wc-close p {
+  max-width: 34rem;
+  margin: 0 auto;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 1.02);
+  line-height: 1.6;
+}

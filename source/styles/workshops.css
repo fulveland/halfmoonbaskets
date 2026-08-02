@@ -312,8 +312,8 @@
   font-size: calc(var(--font-size) * 0.78);
 }
 
-/* Price and group size: the two facts a host scans for. Set on a hairline so
-   they read as a specification rather than as more prose. */
+/* Group size: the fact a host scans for. Set on a hairline so it reads as a
+   specification rather than as more prose. */
 .host-page .hw-terms {
   display: flex;
   flex-wrap: wrap;
