@@ -2075,6 +2075,7 @@
   height: auto;
   aspect-ratio: 5 / 4;
   object-fit: cover;
+  object-position: var(--focus, center);
   border-radius: 2px;
 }
 
