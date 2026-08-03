@@ -737,7 +737,6 @@
   position: relative;
   width: 100vw;
   margin-inline: calc(50% - 50vw);
-  border-bottom: 1px solid var(--line);
 }
 
 .quick-info .content {
@@ -926,8 +925,6 @@
     position: relative;
     width: 100vw;
     margin-inline: calc(50% - 50vw);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
     background: var(--page);
     box-shadow: 0 16px 38px rgba(42, 31, 22, 0.065);
   }
@@ -1683,7 +1680,6 @@
 
 .schedule-section {
   padding-block: 4rem;
-  border-top: 1px solid var(--line);
   text-align: center;
 }
 
@@ -1719,10 +1715,9 @@
   text-align: left;
 }
 
-/* No fill/border box anymore — the page itself is the paper (matching the rest of the site's editorial pages), a top rule and the day heading do the separating instead of a grey panel. */
+/* No fill/border box anymore — the page itself is the paper (matching the rest of the site's editorial pages), spacing alone does the separating instead of a grey panel or rule. */
 .schedule-day {
   padding-top: calc(var(--font-size) * 1.1);
-  border-top: 1px solid var(--line);
 }
 
 .schedule-day:first-child {
@@ -1807,7 +1802,6 @@
   grid-auto-rows: minmax(5rem, auto);
   gap: 0.5rem;
   padding-top: 0.6rem;
-  border-top: 1px solid var(--line);
 }
 
 /* No grey fill — a thin Quiet Rule frame, the coloured material edge, and a soft warm-toned shadow (same rgba family as .gateway-hero-about-card's, scaled down for this chip's size) lift each card just slightly off the page instead. The hairline border gives it a closed boundary; the shadow adds a touch of depth without reading as a heavy panel. */
@@ -1856,27 +1850,30 @@
   letter-spacing: 0.1em;
 }
 
-/* Material colour key: willow, cattail, bulrush, willow bark, gathered/mixed. */
-.timeline-event[href="#bird-feeder"],
-.timeline-event[href="#wreath-making"],
-.timeline-event[href="#berry-boat"],
-.timeline-event[href="#butt-cheek-basket"],
-.timeline-event[href="#tiny-willow-bowl"],
-.timeline-event[href="#tiny-trug"],
-.timeline-event[href="#willow-berry-basket"] {
+/* Material colour key: willow, cattail, bulrush, willow bark, gathered/mixed.
+   Keyed off data-workshop rather than href — href now points straight to the
+   Luma registration page for events with a real booking link, so it can no
+   longer double as a stable identifier for this. */
+.timeline-event[data-workshop="bird-feeder"],
+.timeline-event[data-workshop="wreath-making"],
+.timeline-event[data-workshop="berry-boat"],
+.timeline-event[data-workshop="butt-cheek-basket"],
+.timeline-event[data-workshop="tiny-willow-bowl"],
+.timeline-event[data-workshop="tiny-trug"],
+.timeline-event[data-workshop="willow-berry-basket"] {
   border-left-color: var(--willow);
 }
 
-.timeline-event[href="#cattail-berry-basket"] {
+.timeline-event[data-workshop="cattail-berry-basket"] {
   border-left-color: var(--cattail);
 }
 
-.timeline-event[href="#random-weave-bulrush"] {
+.timeline-event[data-workshop="random-weave-bulrush"] {
   border-left-color: var(--bulrush);
 }
 
-.timeline-event[href="#random-weave-willow-bark"],
-.timeline-event[href="#twill-berry-basket-willow-bark"] {
+.timeline-event[data-workshop="random-weave-willow-bark"],
+.timeline-event[data-workshop="twill-berry-basket-willow-bark"] {
   border-left-color: var(--bark);
 }
 
@@ -1926,7 +1923,6 @@
   width: 100vw;
   margin-inline: calc(50% - 50vw);
   padding-block: 2.25rem;
-  border-bottom: 1px solid var(--line);
   background: transparent;
 }
 
@@ -1981,7 +1977,6 @@
 /* Top padding only reduced — the quieter .event-note-grid transition right above no longer needs as much clearance before this section's own heading; bottom stays as-is. */
 .workshop-detail-section {
   padding-block: clamp(3rem, 5vw, 4.5rem) calc(var(--font-size) * 4);
-  border-top: 1px solid var(--line);
   text-align: center;
 }
 
@@ -2264,7 +2259,6 @@
 
 .workshop-detail-card + .workshop-detail-card {
   padding-top: clamp(2.5rem, 4vw, 4rem);
-  border-top: 1px solid var(--line);
 }
 
 /* No photo yet for this workshop — let the copy run full-width instead of leaving a blank column. */
@@ -2354,7 +2348,7 @@
   background: var(--hero-gold);
 }
 
-/* Two sizes for all body copy in this card, not four — this used to step down at every level (lead question, then description, then Skills Learned, then the Rhythm note, each smaller than the last), which made everything past the first sentence read as fine print, including the practical details people actually need. One lead size (the true opening line, right after the price badge) and one body size shared by every other paragraph, Skills Learned, and the Rhythm note — the label styling on each block carries the hierarchy instead of font-size doing it too. max-width caps the measure at ~65 characters so the line length stays consistent regardless of the exact column width a given card's image ratio leaves it. */
+/* Two sizes for all body copy in this card, not four — this used to step down at every level (lead question, then description, then Skills Learned, then the Rhythm note, each smaller than the last), which made everything past the first sentence read as fine print, including the practical details people actually need. One larger size (now the price — see the note below) and one body size shared by every description paragraph, Skills Learned, and the Rhythm note — the label styling on each block carries the hierarchy instead of font-size doing it too. max-width caps the measure at ~65 characters so the line length stays consistent regardless of the exact column width a given card's image ratio leaves it. */
 /* > (not a descendant selector) so this only ever touches this card's own paragraphs — never leaks into the nested .workshop-note/.skills-list boxes. :not() excludes the price badge, which is also a direct-child <p> but has its own sizing via .eyebrow-lesser. */
 .workshop-detail-copy > p:not(.workshop-detail-level) {
   max-width: 34rem;
@@ -2365,7 +2359,7 @@
   line-height: 1.6;
 }
 
-/* The price badge is always the first <p>, so the true opening description line is the second — the one lead size, larger than the shared body size above, inviting you in before the rest reads at one consistent size. */
+/* Enlarges the second direct-child <p>. A level eyebrow (e.g. "Gentle Beginner") now sits first and the price second, so on the workshop pages this second <p> IS the price — the rule reads as "enlarge the price," and every description paragraph stays at the one body size above. (It predates the eyebrow, back when the price was the first <p> and the second <p> was the opening description line — hence the old wording here.) The retreat/offering cards render the price as a bordered block rather than a <p>, so there this would fall on the first description paragraph instead; .nourish-page pins it back to body size in weave-and-nourish.css so those descriptions stay uniform too. */
 .workshop-detail-copy > p:nth-of-type(2) {
   margin-bottom: calc(var(--font-size) * 0.4);
   font-size: 1.35rem;
@@ -2483,7 +2477,6 @@
 /* More separation before this than before — coming straight off the workshop list with the same three-column formatting as Policies right after it made the whole lower half of the page read as one dense block. */
 .grid-section {
   padding-block: clamp(4rem, 7vw, 7rem);
-  border-top: 1px solid var(--line);
 }
 
 /* INFO GRID — a row of divided info blocks (what to bring, location, policies, children & youth, etc.), reused across the practical/details/policy sections on every event + gateway page. Apply directly to whatever element lays out the grid — the outer section (paired with .grid-section) or a nested div, doesn't matter. */
@@ -2528,7 +2521,6 @@
 
 .policies-section {
   padding-block: 3rem 4rem;
-  border-top: 1px solid var(--line);
 }
 
 /* Scaled down from the shared poster-size heading (_global.css/main.css, shared with .visitor-info-intro h2 on the gateway page) — full poster scale here would start another major visual chapter right after the workshop list, rather than reading as a closing section. */
@@ -2538,10 +2530,6 @@
 }
 
 /* BOTTOM CTA */
-
-.bottom-cta {
-  border-top: 1px solid var(--line);
-}
 
 /* justify-content: center + a fixed gap (rather than space-between across the full-bleed width) keeps the text block and button reading as one bound-together unit regardless of viewport width, instead of getting pulled apart toward opposite edges on wide screens. Top padding is deliberately less than bottom — .policies-section right above already carries its own 4rem of bottom padding, so a full 2.5rem on top of that read as an oversized gap before the heading. */
 .bottom-cta .content {
@@ -2803,14 +2791,6 @@
   border-bottom: 0;
 }
 
-.november-event-page .workshop-detail-section {
-  border-top: 0;
-}
-
-.november-event-page .workshop-detail-card + .workshop-detail-card {
-  border-top: 0;
-}
-
 /* Kept, but quieter — internal content dividers (description/skills and description/rhythm), not section boundaries. Workshop Rhythm shares .skills-list's exact rule now, so it gets the same quieter treatment here too. */
 .november-event-page .skills-list,
 .november-event-page .workshop-note {
@@ -2987,7 +2967,6 @@
 
 .cal-season {
   padding-block: clamp(2.5rem, 5vw, 4rem);
-  border-top: 1px solid var(--line);
 }
 
 .cal-season--quiet {
@@ -3031,12 +3010,7 @@
   align-items: baseline;
   gap: 1.5rem;
   padding-block: 1.25rem;
-  border-top: 1px solid var(--line);
   cursor: pointer;
-}
-
-.cal-row:last-child {
-  border-bottom: 1px solid var(--line);
 }
 
 .cal-when {
@@ -3123,7 +3097,6 @@
 
 .cal-close {
   padding-block: clamp(2.5rem, 5vw, 4rem);
-  border-top: 1px solid var(--line);
 }
 
 .cal-close-inner {

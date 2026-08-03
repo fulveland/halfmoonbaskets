@@ -32,10 +32,9 @@
   padding-block: clamp(2.25rem, 4.5vw, 3.75rem);
 }
 
-/* A fine full-measure hairline opens every section after the intro, so the
-   page is structured by rules and alignment rather than boxes. */
+/* Spacing alone opens every section after the intro, so the page is
+   structured by alignment rather than boxes or full-width rules. */
 .wc-section + .wc-section > .content {
-  border-top: 1px solid var(--line);
   padding-top: clamp(2.25rem, 4.5vw, 3.5rem);
 }
 

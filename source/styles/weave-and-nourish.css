@@ -1,0 +1,314 @@
+/* WEAVE & NOURISH RETREAT (weave-and-nourish-october-2026.html)
+   Reuses the event-page language — .event-hero, .quick-info,
+   .workshop-detail-card, .info-grid, .bottom-cta, .gateway-button — so the
+   retreat page sits in the same Bark / Paper / Ink system as the Red Deer
+   pages. Scoped to .nourish-page. Only the retreat-specific pieces below
+   (pricing tiers, hosts, weekend flow) are new. Sorts after main.css
+   alphabetically, so any override here wins an equal-specificity tie. */
+
+/* Vertical rhythm for the retreat's own sections, matching the event-page
+   sections' spacing-divided cadence. */
+.nourish-page .nourish-intro,
+.nourish-page .nourish-included,
+.nourish-page .nourish-hosts,
+.nourish-page .nourish-flow {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+.nourish-page .nourish-intro .section-intro {
+  max-width: 46rem;
+  margin-top: 1.25rem;
+  color: color-mix(in srgb, var(--charcoal) 92%, transparent);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+}
+
+/* PRICING TIERS — the three weekend rooms as hairline-divided rows inside the
+   weekend card, not boxes, matching the card's own flat language. */
+.nourish-page .retreat-tiers {
+  margin: 0 0 0.65rem;
+  border-top: 1px solid var(--line);
+}
+
+.nourish-page .retreat-tier {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.nourish-page .retreat-tier-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.nourish-page .retreat-tier-price {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.nourish-page .retreat-tier-reg {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--charcoal) 70%, transparent);
+}
+
+.nourish-page .retreat-tier-note {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+}
+
+.nourish-page .retreat-price-fineprint {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--charcoal) 70%, transparent);
+}
+
+/* WHAT'S INCLUDED — six items in the shared 3-column .info-grid. The grid's
+   own rule only clears the border-right on the very last item; with two rows
+   we also clear it at the end of the first row so a hairline doesn't dangle
+   into the gap. */
+@media (min-width: 901px) {
+  .nourish-page .nourish-included .info-grid > *:nth-child(3n) {
+    padding-right: 0;
+    border-right: 0;
+  }
+}
+
+/* HOSTS — two columns on desktop, stacked on mobile. */
+.nourish-page .nourish-hosts-grid,
+.nourish-page .nourish-flow-days {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.nourish-page .nourish-hosts-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .nourish-page .nourish-hosts-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.nourish-page .nourish-host-role {
+  margin: 0.2rem 0 0.9rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--hero-gold);
+}
+
+.nourish-page .nourish-host-role a {
+  color: inherit;
+}
+
+.nourish-page .nourish-host p {
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+/* WEEKEND FLOW — three quiet day columns. */
+.nourish-page .nourish-flow-days {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .nourish-page .nourish-flow-days {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.nourish-page .nourish-flow-day {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.nourish-page .nourish-flow-day p {
+  margin-top: 0.5rem;
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+/* The shared workshop-card style gives the SECOND paragraph a larger "lead" size,
+   assuming the first <p> is the price badge. On these retreat cards the price is a
+   bordered block, not a <p>, so that lead size would land on the second description
+   paragraph and make the two read at different sizes. Keep both at the one body size. */
+.nourish-page .workshop-detail-copy > p:nth-of-type(2) {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: calc(var(--font-size) * 0.83);
+}
+
+/* A quiet aside under the What to Bring list. */
+.nourish-page .nourish-note-line {
+  margin-top: 0.9rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--charcoal) 75%, transparent);
+}
+
+/* SENSE-OF-PLACE GALLERY — a band of atmospheric photos. */
+.nourish-page .nourish-gallery,
+.nourish-page .nourish-faq {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+.nourish-page .nourish-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.5rem, 1.1vw, 0.9rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.nourish-page .nourish-gallery-grid figure {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.nourish-page .nourish-gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nourish-page .nourish-gallery-caption {
+  margin-top: 1rem;
+  font-style: italic;
+  color: color-mix(in srgb, var(--charcoal) 75%, transparent);
+}
+
+@media (max-width: 700px) {
+  .nourish-page .nourish-gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* TESTIMONIAL — a single centred pulled quote. */
+.nourish-page .nourish-testimonial {
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+  text-align: center;
+}
+
+.nourish-page .nourish-testimonial blockquote {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.32;
+  color: var(--ink);
+}
+
+.nourish-page .nourish-testimonial cite {
+  display: block;
+  margin-top: 1.5rem;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hero-gold);
+}
+
+/* Rotator: all quotes share one grid cell so the block sizes to the tallest
+   and cross-fades in place. Without JS, the .is-active quote in the markup
+   stays visible. */
+.nourish-page .nourish-quote-rotator {
+  display: grid;
+}
+
+.nourish-page .nourish-quote {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.nourish-page .nourish-quote.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nourish-page .nourish-quote-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+
+.nourish-page .nourish-quote-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--hero-gold);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nourish-page .nourish-quote-dot.is-active {
+  background: var(--hero-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nourish-page .nourish-quote {
+    transition: none;
+  }
+}
+
+/* FAQ — a hairline-divided accordion. */
+.nourish-page .nourish-faq-list {
+  max-width: 46rem;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.nourish-page .nourish-faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.nourish-page .nourish-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.nourish-page .nourish-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.nourish-page .nourish-faq summary::after {
+  content: "+";
+  color: var(--hero-gold);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.nourish-page .nourish-faq details[open] summary::after {
+  content: "\2013";
+}
+
+.nourish-page .nourish-faq details p {
+  margin: 0 0 1.1rem;
+  color: var(--charcoal);
+  line-height: 1.6;
+  max-width: 42rem;
+}
