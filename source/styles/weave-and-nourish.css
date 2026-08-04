@@ -312,3 +312,182 @@
   line-height: 1.6;
   max-width: 42rem;
 }
+
+/* FEATURE IMAGE — the one full-bleed photograph on the page, sitting between
+   the intro and the gallery: Roni's food, the weaving, and the forest in one
+   frame. The only edge-to-edge element, so it needs no .content wrapper. */
+.nourish-page .nourish-feature {
+  margin: clamp(1rem, 2vw, 2rem) 0 0;
+}
+
+.nourish-page .nourish-feature img {
+  display: block;
+  width: 100%;
+  height: clamp(320px, 52vh, 620px);
+  object-fit: cover;
+}
+
+/* WAYS TO JOIN — the retreat's own offers, lifted out of the sub-$200
+   .workshop-detail-card component. Each offer is a full-width editorial block:
+   narrative and detail on the left, a quiet booking panel on the right,
+   divided by a single fine rule rather than a boxed card. */
+.nourish-page .nourish-offers {
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+.nourish-page .nourish-offers .section-intro {
+  max-width: 46rem;
+  margin-top: 1.25rem;
+  color: var(--charcoal);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+}
+
+/* One offer per block, separated by generous space and a hairline. */
+.nourish-page .nourish-offer {
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  padding-top: clamp(2.75rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.nourish-page .nourish-offer-title {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 3.4vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Narrative left, booking right — asymmetric, text below the heading. */
+.nourish-page .nourish-offer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+@media (min-width: 880px) {
+  .nourish-page .nourish-offer-grid {
+    grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 1fr);
+    gap: clamp(2.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+}
+
+.nourish-page .nourish-offer-main > p {
+  max-width: 38rem;
+  color: var(--charcoal);
+  line-height: 1.62;
+}
+
+.nourish-page .nourish-offer-main > p + p {
+  margin-top: 1.1rem;
+}
+
+/* Skills + about, two quiet columns. */
+.nourish-page .nourish-offer-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 560px) {
+  .nourish-page .nourish-offer-detail {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.nourish-page .nourish-offer-detail .label {
+  margin-bottom: 0.65rem;
+}
+
+.nourish-page .nourish-skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nourish-page .nourish-skill-list li {
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--line);
+  color: var(--charcoal);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.nourish-page .nourish-skill-list li:first-child {
+  border-top: 0;
+}
+
+.nourish-page .about-block p {
+  color: var(--charcoal);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.nourish-page .nourish-hour-line {
+  line-height: 1.75;
+}
+
+/* Booking panel — a calm aside, set off by a fine rule on desktop and gently
+   sticky so it stays with the reader through the longer weekend narrative. */
+@media (min-width: 880px) {
+  .nourish-page .nourish-offer-book {
+    padding-left: clamp(2rem, 3vw, 3rem);
+    border-left: 1px solid var(--line);
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.nourish-page .nourish-offer-book .eyebrow-lesser {
+  margin: 0 0 0.4rem;
+}
+
+.nourish-page .nourish-offer-when {
+  margin: 0.95rem 0 1rem;
+  color: var(--charcoal);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.nourish-page .nourish-offer-book .retreat-price-fineprint {
+  margin: 0.9rem 0 0;
+}
+
+/* Register — the one committing action per offer, so it earns a filled button.
+   Scoped through the panel so the <a> wins the .weekend-page a specificity tie
+   (same guard the .gateway-button rule in main.css documents). */
+.nourish-page .nourish-offer-book .gateway-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 0.25rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--hero-gold);
+  border: 1px solid var(--hero-gold);
+  border-radius: var(--radius);
+  color: var(--page);
+  font-family: var(--font-body);
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.nourish-page .nourish-offer-book .gateway-button:hover {
+  background: var(--bark-hover);
+  border-color: var(--bark-hover);
+  color: var(--page);
+  transform: translateY(-1px);
+}
