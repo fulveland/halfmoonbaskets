@@ -104,7 +104,8 @@
 }
 
 /* The shared poster-heading rule (.visitor-info-intro/.policies-section h2, above) is close enough for most headings that use it, but the handoff's Location heading is meaningfully smaller — its own distinct clamp(), not the shared one. */
-.gateway-page .visitor-info-intro h2 {
+.gateway-page .visitor-info-intro h2,
+.gateway-page .independent-time-lead h2 {
   font-size: clamp(38px, 4vw, 60px);
   line-height: 1.02;
   letter-spacing: -0.025em;
@@ -358,7 +359,8 @@
   width: min(44%, 26rem);
 }
 
-.gateway-hero-about-card .about-weekend-lede {
+.gateway-hero-about-card .about-weekend-lede,
+.independent-time-closecard .independent-time-close {
   font-size: clamp(20px, 1.6vw, 26px);
   line-height: 1.23;
 }
@@ -1334,7 +1336,8 @@
   mix-blend-mode: multiply;
 }
 
-.visitor-info-intro-copy > p {
+.visitor-info-intro-copy > p,
+.independent-time-sub {
   margin: 0 0 1.1rem;
   color: color-mix(in srgb, var(--charcoal) 85%, transparent);
   line-height: 1.6;
@@ -1439,12 +1442,14 @@
     display: grid;
   }
 
-  .visitor-info-columns h3 {
+  .visitor-info-columns h3,
+  .independent-time-body article h3 {
     margin-bottom: 0.6rem;
   }
 
   .visitor-info-columns p,
-  .visitor-info-columns li {
+  .visitor-info-columns li,
+  .independent-time-body article p {
     color: color-mix(in srgb, var(--charcoal) 80%, transparent);
     font-size: 0.92rem;
     line-height: 1.5;
@@ -1493,6 +1498,112 @@
 }
 
 /* NEWSLETTER + CLOSING QUOTE (gateway only) — real Buttondown integration, same action/field-name/popup pattern as source/pages/email.html's working form. */
+/* "What to expect during independent time" — desktop counterpart to the mobile accordion group of the same name. The .visitor-info-columns grid above is a fixed 8-item layout, so this longer note lives in its own full-width block rather than a 9th grid cell. Hidden on mobile, where the accordion copy shows it. Its own editorial photo composition (not borrowed from the hero or gallery): an asymmetric portrait-plus-landscape pair, bottom-aligned, with the closing line held in a Paper card that overlaps both photos. One intentional overlay, per the "image overlays for specific desktop compositions" allowance. Square corners, object-fit cover, no shadows. */
+.independent-time { display: none; }
+@media (min-width: 640px) {
+  .independent-time {
+    display: block;
+    border-top: 1px solid var(--line);
+    margin-top: 3rem;
+    padding-top: 3rem;
+  }
+  .independent-time-lead { max-width: 37rem; }
+  .independent-time-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 3rem;
+    margin-top: 3rem;
+  }
+
+  .independent-time-composition {
+    position: relative;
+    margin-top: 3.5rem;
+  }
+  .independent-time-photo {
+    margin: 0;
+    overflow: hidden;
+    background: var(--pale-ground);
+    display: block;
+  }
+  .independent-time-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* tablet: the landscape is the base, the portrait overlaps its lower-left corner */
+  .independent-time-photo--landscape {
+    width: 76%;
+    margin-left: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .independent-time-photo--portrait {
+    position: absolute;
+    left: 0;
+    bottom: 1.75rem;
+    width: 43%;
+    aspect-ratio: 3 / 4;
+    z-index: 2;
+  }
+  /* placement only; Paper fill, padding and soft shadow come from the shared .gateway-overlay-card. */
+  /* Overlaps across the whole tablet range too (not just >=1024) - centred low over the seam, narrower so it sits on the photos rather than beside them. */
+  .independent-time-closecard {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2.5rem;
+    width: min(24rem, 64%);
+    margin: 0;
+    z-index: 3;
+  }
+  .independent-time-closecard .independent-time-close { margin: 0; }
+}
+@media (min-width: 1024px) {
+  .independent-time-body { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* desktop: photos overlap side-on, taller ratios, the card bridges the seam */
+  .independent-time-composition {
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+  }
+  .independent-time-photo--landscape {
+    width: 72%;
+    margin-left: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .independent-time-photo--portrait {
+    top: 15%;
+    bottom: auto;
+    width: 36%;
+    aspect-ratio: 4 / 5;
+  }
+  .independent-time-closecard {
+    position: absolute;
+    left: 33%;
+    bottom: 2.25rem;
+    transform: translateX(-50%);
+    width: min(25rem, 44%);
+    margin: 0;
+  }
+}
+@media (min-width: 1280px) {
+  /* wide: the landscape runs cinematic and the portrait rises above and below it */
+  .independent-time-composition { padding-bottom: 4rem; }
+  .independent-time-photo--landscape {
+    width: 70%;
+    aspect-ratio: 16 / 9;
+  }
+  .independent-time-photo--portrait {
+    top: 6%;
+    width: 34%;
+    aspect-ratio: 4 / 5;
+  }
+  .independent-time-closecard {
+    left: 32%;
+    bottom: 2.75rem;
+    width: min(26rem, 42%);
+  }
+}
+
 .newsletter-section {
   padding: clamp(4rem, 6vw, 6.5rem) 0 clamp(3.5rem, 5vw, 5rem);
 }
