@@ -3071,7 +3071,8 @@
 
 .cal-hero-figure {
   margin: 0;
-  aspect-ratio: 4 / 5;
+  /* Group hero: landscape, and the crop widens as the page grows so everyone stays in frame. */
+  aspect-ratio: 16 / 9;
 }
 
 .cal-hero-figure img {
@@ -3079,6 +3080,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 40%;
   filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
 }
 
@@ -3237,13 +3239,19 @@
   line-height: 1.6;
 }
 
+@media (max-width: 1200px) {
+  .cal-hero-figure {
+    aspect-ratio: 3 / 2;
+  }
+}
+
 @media (max-width: 900px) {
   .cal-hero-inner {
     grid-template-columns: 1fr;
   }
 
   .cal-hero-figure {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 4 / 3;
   }
 }
 
