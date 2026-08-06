@@ -3245,7 +3245,22 @@
   }
 }
 
-@media (max-width: 900px) {
+/* Smaller desktop + tablet (incl. iPad): keep the photo beside the text instead of
+   dropping below it, by switching to a closer, vertical crop that suits the narrower
+   column. Text column widens, image column narrows to carry the portrait. */
+@media (min-width: 620px) and (max-width: 1080px) {
+  .cal-hero-inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .cal-hero-figure {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* Phone: stack, and go wide again so the whole group shows. */
+@media (max-width: 619px) {
   .cal-hero-inner {
     grid-template-columns: 1fr;
   }

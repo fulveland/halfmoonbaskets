@@ -1,3 +1,17 @@
+<title>Half Moon Baskets — Willow Basket Weaving in Alberta</title>
+<meta name="description" content="Willow basket weaving workshops, weekends, and retreats across Alberta, taught by Freyja Ulveland of Half Moon Baskets. See what's coming up, or sign up to hear about new dates first." />
+<link rel="canonical" href="https://www.halfmoonbaskets.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Half Moon Baskets" />
+<meta property="og:description" content="Workshops, weekends, and retreats across Alberta. Some are mine, some I co-host, and some are hosted by other people who have invited me to teach." />
+<meta property="og:url" content="https://www.halfmoonbaskets.com/" />
+<meta property="og:image" content="https://www.halfmoonbaskets.com/images/heros/index-hero.webp" />
+<meta property="og:image:width" content="2560" />
+<meta property="og:image:height" content="1709" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Half Moon Baskets" />
+<meta name="twitter:description" content="Workshops, weekends, and retreats across Alberta. Some are mine, some I co-host, and some are hosted by other people who have invited me to teach." />
+<meta name="twitter:image" content="https://www.halfmoonbaskets.com/images/heros/index-hero.webp" />
 </head>
 <body id="index">
 <header class="site-header site-header--overlay">
@@ -56,8 +70,17 @@
           </div>
 
           <figure class="cal-hero-figure">
-            <img src="/images/heros/calendar-hero.webp" alt="A workshop group gathered around a table of finished willow baskets" />
+            <img src="/images/heros/calendar-hero.webp" alt="A Half Moon Baskets workshop gathering" />
           </figure>
+          <script>
+            // Show a different calendar-hero photo on each page load (16 in /images/heros/).
+            (function () {
+              var img = document.querySelector('.cal-hero-figure img');
+              if (!img) return;
+              var i = Math.floor(Math.random() * 16);
+              img.src = '/images/heros/' + (i === 0 ? 'calendar-hero' : 'calendar-hero-' + (i + 1)) + '.webp';
+            })();
+          </script>
         </div>
       </section>
 
