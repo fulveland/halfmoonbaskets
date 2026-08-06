@@ -1,0 +1,660 @@
+/* VOLUNTEER HOSTS (volunteer-hosts.html)
+   Reuses the weekend-of-weaving language — .section-title, .eyebrow, .label,
+   .about-weekend-lede, .schedule-days, .info-grid, .skills-list,
+   .workshop-note, .bottom-cta, .gateway-button, .closing-quote — so the
+   volunteer page sits in the same Bark / Paper / Ink system as the event
+   pages. Scoped to .volunteer-page. Only the pieces below are new, and they
+   are layout and rhythm only: hairline rows, a numbered step sequence, and
+   the name-tag swatches. Sorts after main.css alphabetically (v > m), so any
+   override here wins an equal-specificity tie. */
+
+/* Same specificity note as about.css: main.css re-asserts cream nav links at
+   .weekend-page scope and this file loads after it, but the doubled class is
+   kept for parity with the other light-background pages. */
+.volunteer-page.weekend-page .site-logo,
+.volunteer-page.weekend-page .site-nav a {
+  color: var(--ink);
+}
+
+/* Match the refined type the gateway and retreat pages use, rather than the
+   _global.css defaults. */
+.volunteer-page .eyebrow {
+  color: var(--hero-gold);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.2em;
+}
+
+.volunteer-page .label {
+  color: var(--hero-gold);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.volunteer-page .section-intro {
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+}
+
+/* Every heading and intro on this page is left aligned. .section-intro is
+   centred by default in _global.css; a reference page reads top to bottom, so
+   it stays in the left column with everything else. */
+.volunteer-page .vh-intro-left {
+  max-width: 38rem;
+  margin-inline: 0;
+  margin-top: 1.1rem;
+}
+
+/* Gutters. The event pages carry photographs edge to edge and use the sitewide
+   --page-pad; this page is all type, so it takes the wider --wide-pad the
+   quick-info and bottom-cta blocks use, which lands nearer the 5–7vw desktop
+   gutter in the guidelines. */
+.volunteer-page .content.wide {
+  padding-inline: var(--wide-pad);
+}
+
+/* Measure caps. --wide is 1480px, which is right for a photo-led event page
+   and far too wide for reading. Each block below is capped so no line runs
+   much past 70 characters, per the body-copy rule. */
+.volunteer-page .vh-two-col,
+.volunteer-page .vh-info-grid {
+  max-width: 68rem;
+}
+
+
+
+/* HERO — no photograph, so the type carries it. Extra space above the fold
+   since the nav sits on paper rather than over an image. */
+.volunteer-page .vh-hero {
+  padding-block: clamp(4rem, 8vw, 8rem) clamp(2.5rem, 4vw, 4rem);
+}
+
+.volunteer-page .vh-hero .section-title {
+  margin-top: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.volunteer-page .vh-hero .about-weekend-lede {
+  max-width: 34rem;
+}
+
+/* QUICK LINKS — an index for the return visit. This page is long and gets
+   reread on the morning of a workshop, usually for one specific thing, so the
+   row sits under the hero rather than making anyone scroll for it. Plain text
+   links in a hairline band, not a sticky bar: the site has no sticky chrome
+   and this does not need to follow anyone down the page. */
+.volunteer-page .vh-jump {
+  padding-block: 0.9rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .vh-jump .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.75rem;
+}
+
+.volunteer-page .vh-jump a {
+  color: var(--hero-gold);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.15rem;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.volunteer-page .vh-jump a:hover,
+.volunteer-page .vh-jump a:focus-visible {
+  border-bottom-color: var(--bark-hover);
+  color: var(--bark-hover);
+}
+
+/* The band sits directly under the hero, so the hero loses its lower gap. */
+.volunteer-page .vh-hero {
+  padding-bottom: clamp(2rem, 3vw, 3rem);
+}
+
+/* Landing from a jump link should not tuck the heading against the top edge. */
+.volunteer-page {
+  scroll-behavior: smooth;
+}
+
+.volunteer-page section[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+@media print {
+  .volunteer-page .vh-jump { display: none; }
+}
+
+/* Section rhythm. Not every gap identical: prose sections sit tighter than
+   the blocks that carry lists or a grid. */
+.volunteer-page .grid-section {
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.volunteer-page .vh-prose {
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.volunteer-page .section-title + .vh-measure,
+.volunteer-page .section-title + .vh-two-col,
+.volunteer-page .section-title + .vh-steps {
+  margin-top: 1.75rem;
+}
+
+/* A single reading measure, per the 32–38rem body rule. */
+.volunteer-page .vh-measure {
+  max-width: 36rem;
+}
+
+.volunteer-page .vh-measure p {
+  margin: 0 0 1.15rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.88);
+  line-height: 1.62;
+}
+
+.volunteer-page .vh-measure p:last-child {
+  margin-bottom: 0;
+}
+
+.volunteer-page .vh-measure .label {
+  display: block;
+  margin: 2rem 0 0.6rem;
+}
+
+.volunteer-page .vh-measure > .label:first-child {
+  margin-top: 0;
+}
+
+/* A .vh-measure that follows an intro paragraph needs its own gap; without it
+   the first rust label sits straight under the lede and reads as part of it. */
+.volunteer-page .vh-intro-left + .vh-measure {
+  margin-top: 2.25rem;
+}
+
+/* An aside carried by a short rust rule rather than a panel. */
+.volunteer-page .vh-aside {
+  margin-top: 1.6rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--hero-gold);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.45rem);
+  line-height: 1.35;
+}
+
+.volunteer-page .vh-measure p.vh-aside {
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.45rem);
+}
+
+/* IN SHORT — the seven things worth knowing, as hairline rows rather than a
+   tinted box. The hairlines do the grouping the panel used to. */
+.volunteer-page .vh-short {
+  padding-block: clamp(2rem, 3.5vw, 3rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .vh-short-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.volunteer-page .vh-short-list li {
+  display: flex;
+  gap: 0.9rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.86);
+  line-height: 1.5;
+}
+
+.volunteer-page .vh-short-list li::before {
+  content: "";
+  flex: 0 0 1.35rem;
+  height: 1px;
+  margin-top: 0.85em;
+  background: var(--hero-gold);
+}
+
+.volunteer-page .vh-short-list li:last-child {
+  border-bottom: 0;
+}
+
+.volunteer-page .vh-short-list strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+@media (min-width: 820px) {
+  .volunteer-page .vh-short-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
+  }
+}
+
+/* TWO COLUMNS — yours to tend / what you needn't worry about. A single fine
+   vertical rule, not two cards. The left column is wider because it carries
+   more; matching widths would make the two read as equally weighted, and they
+   are not. */
+.volunteer-page .vh-two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+}
+
+.volunteer-page .vh-two-col .skills-list {
+  margin-top: 0.75rem;
+  padding-top: 0.85rem;
+}
+
+@media (min-width: 860px) {
+  .volunteer-page .vh-two-col {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 3.5rem;
+  }
+
+  .volunteer-page .vh-two-col > article:first-child {
+    padding-right: 3.5rem;
+    border-right: 1px solid var(--line);
+  }
+}
+
+/* SCHEDULE — reuses .schedule-days / .schedule-day / .accent-heading from
+   main.css, with plain hairline rows in place of the .timeline gantt. Six days
+   across two weekends is a list to read, not a grid to scan. */
+.volunteer-page .vh-schedule {
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+  text-align: left;
+  border-top: 1px solid var(--line);
+}
+
+.volunteer-page .vh-schedule .schedule-note {
+  max-width: 38rem;
+  margin-inline: 0;
+  margin-top: 1.1rem;
+  margin-bottom: 2.5rem;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: calc(var(--font-size) * 0.88);
+}
+
+.volunteer-page .schedule-days {
+  gap: 2.5rem;
+}
+
+/* YOUR CODE — the one block on the page a host comes back for, so the code is
+   set at display scale and given room. Hairlines rather than a tinted panel,
+   like everything else here. */
+
+
+
+
+
+.volunteer-page .vh-code-value {
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* USING YOUR CODE — two screenshots of the Luma flow. Square corners and no
+   shadow, with the faint Bark Rust edge the guidelines allow, since a
+   screenshot on a pale background needs its boundary defined against the page.
+   Capped narrow: these are a reminder of where to click, not a gallery. */
+.vh-howto {
+  max-width: 44rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.vh-howto-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vh-howto figure {
+  margin: 0;
+}
+
+.vh-howto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--hero-gold) 40%, transparent);
+}
+
+.vh-howto figcaption {
+  margin-top: 0.7rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.8);
+  line-height: 1.5;
+}
+
+.vh-howto figcaption .vh-step-num {
+  margin-right: 0.5rem;
+  line-height: inherit;
+}
+
+.vh-howto figcaption strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+@media (min-width: 640px) {
+  .vh-howto-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* TIMELINE — the same component the event pages use (.timeline,
+   .timeline-hours, .timeline-events, .timeline-event, .schedule-legend), with
+   the same --start / --span / --lane / --v-col coordinates, so a volunteer sees
+   the overlaps exactly as a participant does and cannot pick two sessions that
+   run at the same time. The cards are divs rather than links here: on this page
+   they are information about what needs covering, not a way to register. */
+.volunteer-page .vh-weekend-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  margin: 2.5rem 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .schedule-days + .vh-weekend-head {
+  margin-top: 3.5rem;
+}
+
+.volunteer-page .vh-weekend-code {
+  margin: 0;
+}
+
+.volunteer-page .vh-code-key {
+  margin-right: 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.volunteer-page .vh-weekend-label {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.3rem + 0.6vw, 2rem);
+  letter-spacing: -0.015em;
+}
+
+.volunteer-page .vh-schedule-caveat {
+  margin-top: -1.5rem;
+}
+
+/* A filled session keeps its link so the page never dead-ends, but it stops
+   inviting the click. The coupon is what actually enforces it: the code will
+   not apply on a session that already has its host. To make one genuinely
+   unclickable, swap its <a href> for a <span> in the markup. */
+.volunteer-page .timeline-event.vh-filled:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+/* The host line replaces the level tag in this slot. .timeline-event span is an
+   unqualified element selector in main.css, so it has to be overridden by class
+   rather than simply not used. Rust because it is the ask. */
+.volunteer-page .timeline-event .vh-tl-need {
+  color: var(--hero-gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* FILLED — a covered session stays on the schedule rather than disappearing,
+   so the shape of the weekend still reads and nobody wonders what happens in
+   the gap. It drops to Quiet Rule on the material edge and loses the rust, so
+   the only saturated marks left in the block are the sessions still open. */
+.volunteer-page .timeline-event.vh-filled {
+  border-left-color: var(--quiet-rule);
+  box-shadow: none;
+  opacity: 0.55;
+}
+
+.volunteer-page .timeline-event.vh-filled time,
+.volunteer-page .timeline-event.vh-filled strong {
+  color: var(--ink-soft);
+}
+
+.volunteer-page .timeline-event.vh-filled .vh-tl-need {
+  color: var(--ink-soft);
+}
+
+/* STEPS — a numbered sequence. Nothing in main.css does this, so it is new,
+   and it is built the same way as everything else here: hairline rows with the
+   numeral as a rust label. No circles, no counters, no cards. */
+.volunteer-page .vh-steps {
+  max-width: 42rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.volunteer-page .vh-steps li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.5rem 1rem;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .vh-step-num {
+  color: var(--hero-gold);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+}
+
+.volunteer-page .vh-step-body {
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.88);
+  line-height: 1.6;
+}
+
+.volunteer-page .vh-step-body strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.volunteer-page .vh-spread {
+  margin-top: 2.25rem;
+}
+
+.volunteer-page .vh-spread .label {
+  margin-bottom: 0.5rem;
+}
+
+/* NAME TAGS — the one place a colour other than the palette appears, because
+   here the colour is the information rather than decoration: these are the
+   actual name-tag colours a host has to recognise across a room. Kept to a
+   small swatch beside the word, never as a fill or a panel. */
+.volunteer-page .vh-tag-list {
+  max-width: 42rem;
+  margin: 1.75rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.volunteer-page .vh-tag-list > div {
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .vh-tag-list dt {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: calc(var(--font-size) * 1.05);
+  letter-spacing: -0.01em;
+}
+
+.volunteer-page .vh-tag-list dd {
+  margin: 0.3rem 0 0 1.6rem;
+  color: var(--charcoal);
+  font-size: calc(var(--font-size) * 0.82);
+  line-height: 1.55;
+}
+
+.volunteer-page .vh-swatch {
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid rgba(21, 23, 25, 0.12);
+  border-radius: 50%;
+}
+
+.volunteer-page .vh-swatch--green { background: #6e8f52; }
+.volunteer-page .vh-swatch--yellow { background: #d9ae52; }
+.volunteer-page .vh-swatch--red { background: #a6503a; }
+
+/* WAIVER — set apart by hairlines above and below rather than a tinted panel,
+   so it reads as the most carefully worded section on the page without reading
+   as a warning notice. */
+.volunteer-page .vh-waiver {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.volunteer-page .vh-say {
+  margin: 0.75rem 0 1.4rem;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.volunteer-page .vh-say li {
+  padding-block: 0.8rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.3rem);
+  line-height: 1.4;
+}
+
+/* The dash bullets from .skills-list, with the dash swapped for a multiply
+   sign, since this list is the one place on the page that is genuinely a
+   do-not. */
+.volunteer-page .vh-dont li::before {
+  content: "\00d7";
+}
+
+/* PRACTICAL DETAILS — .info-grid handles the three rule-divided columns; only
+   the list styling below is added, matching .skills-list's dash bullets. */
+.volunteer-page .vh-info-grid {
+  margin-top: 1.75rem;
+}
+
+.volunteer-page .vh-info-grid ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.volunteer-page .vh-info-grid li {
+  position: relative;
+  margin-bottom: 0.45rem;
+  padding-left: 1.1rem;
+}
+
+.volunteer-page .vh-info-grid li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--hero-gold);
+}
+
+@media (max-width: 760px) {
+  .volunteer-page .vh-info-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .volunteer-page .vh-info-grid > * {
+    padding-right: 0;
+    padding-block: 1.4rem;
+    border-right: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .volunteer-page .vh-info-grid > *:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.volunteer-page .vh-fine {
+  max-width: 36rem;
+  margin: 1.5rem 0 0;
+  color: var(--ink-soft);
+  font-size: calc(var(--font-size) * 0.8);
+  line-height: 1.55;
+}
+
+/* PRINT — hosts print this and put it on the table. */
+@media print {
+  .volunteer-page .site-header,
+  .volunteer-page .bottom-cta,
+  .volunteer-page .closing-quote {
+    display: none;
+  }
+
+  .volunteer-page .grid-section,
+  .volunteer-page .vh-prose,
+  .volunteer-page .vh-schedule {
+    padding-block: 1rem;
+    break-inside: avoid;
+  }
+
+  .volunteer-page .vh-hero {
+    padding-block: 0 1rem;
+  }
+}
+
+/* The closing block is a thank-you rather than an action, so it loses the
+   filled button and centres on its own. Everything a host needs to do is in
+   the schedule directly above it. */
+.volunteer-page .bottom-cta .content {
+  justify-content: flex-start;
+  padding-block: 2.5rem 3rem;
+}
+
+.volunteer-page .bottom-cta p {
+  max-width: 36rem;
+}

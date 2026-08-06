@@ -1499,6 +1499,11 @@
 
 /* NEWSLETTER + CLOSING QUOTE (gateway only) — real Buttondown integration, same action/field-name/popup pattern as source/pages/email.html's working form. */
 /* "What to expect during independent time" — desktop counterpart to the mobile accordion group of the same name. The .visitor-info-columns grid above is a fixed 8-item layout, so this longer note lives in its own full-width block rather than a 9th grid cell. Hidden on mobile, where the accordion copy shows it. Its own editorial photo composition (not borrowed from the hero or gallery): an asymmetric portrait-plus-landscape pair, bottom-aligned, with the closing line held in a Paper card that overlaps both photos. One intentional overlay, per the "image overlays for specific desktop compositions" allowance. Square corners, object-fit cover, no shadows. */
+.independent-time-section { scroll-margin-top: clamp(1rem, 4vw, 2.5rem); }
+/* Sits flush under the location accordion above it: no gap, and the group's own
+   top border is dropped so the Policies bottom border is the single divider. */
+.independent-time-accordion { margin-top: 0; }
+.independent-time-accordion .visitor-info-group { border-top: 0; }
 .independent-time { display: none; }
 @media (min-width: 640px) {
   .independent-time {
