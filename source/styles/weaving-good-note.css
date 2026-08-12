@@ -1,0 +1,199 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Good Note Harvest Festival — collaborative willow weave.
+   A festival day, not a workshop: hero + quick facts, "everyone adds a rod",
+   then a masonry collage of last year's build (Martina the goat) with a short
+   video. Scoped to .good-note-page. Loads after main.css alphabetically, so it
+   wins equal-specificity ties.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Left-align the section intros (otherwise .section-intro falls back to a
+   centred 34rem paragraph on this page). */
+.good-note-page .grid-section > .content > .section-intro,
+.good-note-page .good-note-collage-section > .content > .section-intro {
+  max-width: 42rem;
+  margin: 0.75rem 0 0;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+  text-align: left;
+}
+
+/* Editorial prose blocks (replacing the boxed grids in the weave + festival
+   sections). Comfortable measure, clear space under the title. */
+.good-note-page .good-note-copy {
+  max-width: 42rem;
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.good-note-page .good-note-copy p {
+  margin: 0 0 1.1rem;
+  color: var(--ink);
+  font-size: clamp(1.08rem, 1rem + 0.25vw, 1.25rem);
+  line-height: 1.62;
+}
+
+.good-note-page .good-note-copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* A quiet practical note, set off by a fine rule rather than a box. */
+.good-note-page .good-note-note {
+  max-width: 42rem;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: color-mix(in srgb, var(--charcoal) 76%, transparent);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.good-note-page .good-note-note strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+/* "Everyone adds a rod" with the festival poster set beside it. */
+.good-note-page .good-note-weave-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+/* Poster in the left column, text in the right (copy stays first in the DOM
+   for reading order). */
+.good-note-page .good-note-weave-copy {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* The festival's own poster, framed lightly and kept modest in size. */
+.good-note-page .good-note-poster {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 38px rgba(42, 31, 22, 0.08);
+}
+
+.good-note-page .good-note-poster--aside {
+  max-width: 24rem;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.good-note-page .good-note-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.good-note-page .good-note-poster figcaption {
+  padding: 0.55rem 0.8rem 0.65rem;
+  background: var(--page);
+  color: color-mix(in srgb, var(--charcoal) 72%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.good-note-page .good-note-poster figcaption a {
+  color: var(--bark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Stack the poster under the text on narrower screens ──────────────────── */
+@media (max-width: 52rem) {
+  .good-note-page .good-note-weave-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reset explicit placement so they stack in DOM order (text, then poster). */
+  .good-note-page .good-note-weave-copy,
+  .good-note-page .good-note-poster--aside {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .good-note-page .good-note-poster--aside {
+    max-width: 26rem;
+    justify-self: start;
+    margin-top: 1.75rem;
+  }
+}
+
+/* Outlined companion to the solid gateway button, for the hero's second link. */
+.good-note-page .gateway-button--ghost {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--bark) 55%, transparent);
+  color: var(--bark);
+}
+
+.good-note-page .gateway-button--ghost:hover {
+  background: color-mix(in srgb, var(--hero-gold) 18%, transparent);
+  border-color: var(--bark);
+  color: var(--bark);
+  transform: translateY(-1px);
+}
+
+/* ── The collage ─────────────────────────────────────────────────────────── */
+.good-note-page .good-note-collage-section {
+  padding-block: clamp(4rem, 7vw, 7rem);
+}
+
+/* Masonry via CSS columns: mixed portrait/landscape photos keep their own
+   shape, no cropping. The video (portrait) leads, top-left. */
+.good-note-page .good-note-collage {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  column-count: 3;
+  column-gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+
+.good-note-page .collage-item {
+  margin: 0 0 clamp(0.6rem, 1.2vw, 1rem);
+  break-inside: avoid;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.good-note-page .collage-item img,
+.good-note-page .collage-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(0.05) saturate(0.99) contrast(1.03);
+}
+
+.good-note-page .collage-video {
+  position: relative;
+  background: var(--ink);
+}
+
+.good-note-page .collage-video video {
+  filter: none;
+}
+
+.good-note-page .collage-item figcaption {
+  padding: 0.6rem 0.75rem 0.7rem;
+  color: color-mix(in srgb, var(--charcoal) 78%, transparent);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* ── Tablet: two columns ─────────────────────────────────────────────────── */
+@media (max-width: 60rem) {
+  .good-note-page .good-note-collage {
+    column-count: 2;
+  }
+}
+
+/* ── Phone: single column ────────────────────────────────────────────────── */
+@media (max-width: 38rem) {
+  .good-note-page .good-note-collage {
+    column-count: 1;
+  }
+}
