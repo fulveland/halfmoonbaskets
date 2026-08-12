@@ -1,0 +1,226 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Weaving in the Edmonton Highlands
+   A dates-first winter series: three standalone full-day workshops, months
+   apart. The date menu is the centrepiece — a clear "pick your day" of three
+   cards — with fuller descriptions further down. Scoped to the page so it
+   never touches the November weekend or the retreat pages.
+   Loads after main.css alphabetically, so it wins on specificity ties.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* The #dates intro. Without a page-scoped rule, .section-intro falls back to a
+   centred 34rem paragraph and drifts to the middle of the column. Pin it left,
+   flush under the eyebrow and title. */
+.edmonton-highlands-page #dates > .content > .section-intro {
+  max-width: 40rem;
+  margin: 0.75rem 0 0;
+  color: color-mix(in srgb, var(--charcoal) 85%, transparent);
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  line-height: 1.58;
+  text-align: left;
+}
+
+/* The date menu — the primary chooser ───────────────────────────────────── */
+.edmonton-highlands-page .date-menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.6vw, 2.25rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  text-align: left;
+}
+
+.edmonton-highlands-page .date-menu-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--page);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 38px rgba(42, 31, 22, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.edmonton-highlands-page .date-menu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 46px rgba(42, 31, 22, 0.09);
+}
+
+.edmonton-highlands-page .date-menu-figure {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.edmonton-highlands-page .date-menu-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.08) saturate(0.98) brightness(0.98) contrast(1.05);
+}
+
+/* The two basket photos sit low in their portrait frames; pull the crop
+   downward so the basket lands centred in the card rather than clipped.
+   The Moons & Stars photo (3rd) keeps the default centre. */
+.edmonton-highlands-page .date-menu-card:nth-child(1) .date-menu-figure img,
+.edmonton-highlands-page .date-menu-card:nth-child(2) .date-menu-figure img {
+  object-position: center 82%;
+}
+
+.edmonton-highlands-page .date-menu-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+/* Date line: month + big day, weekday to the right */
+.edmonton-highlands-page .date-menu-when {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+}
+
+.edmonton-highlands-page .date-menu-month {
+  color: var(--hero-gold);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.edmonton-highlands-page .date-menu-day {
+  color: var(--ink);
+  font-size: 2.3rem;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.edmonton-highlands-page .date-menu-weekday {
+  margin-left: auto;
+  align-self: center;
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.edmonton-highlands-page .date-menu-title {
+  margin: 0.95rem 0 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+/* Level · price · time */
+.edmonton-highlands-page .date-menu-meta {
+  margin: 0.4rem 0 0;
+  color: color-mix(in srgb, var(--charcoal) 82%, transparent);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+}
+
+.edmonton-highlands-page .date-menu-meta strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.edmonton-highlands-page .date-menu-teaser {
+  margin: 0.8rem 0 1.2rem;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.edmonton-highlands-page .date-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: auto;
+}
+
+/* Full-width register button — same gold as the site's primary CTAs */
+.edmonton-highlands-page .date-menu-register {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  width: 100%;
+  min-height: 46px;
+  padding: 0.8rem 1.25rem;
+  background: var(--hero-gold);
+  border: 1px solid var(--hero-gold);
+  border-radius: var(--radius);
+  color: var(--page);
+  font-family: var(--font-body);
+  font-weight: 650;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.edmonton-highlands-page .date-menu-register:hover {
+  background: var(--bark-hover);
+  border-color: var(--bark-hover);
+  color: var(--page);
+  transform: translateY(-1px);
+}
+
+.edmonton-highlands-page .date-menu-more {
+  align-self: center;
+  color: color-mix(in srgb, var(--charcoal) 72%, transparent);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.edmonton-highlands-page .date-menu-more:hover {
+  color: var(--ink);
+  border-bottom-color: color-mix(in srgb, var(--hero-gold) 60%, transparent);
+}
+
+/* Give the detail cards a little breathing room to land on when linked to */
+.edmonton-highlands-page .workshop-detail-card {
+  scroll-margin-top: 90px;
+}
+
+/* Flatten the description type. The shared stylesheet enlarges the first
+   paragraph to a 1.35rem "lead" line, which — stacked with the label, the
+   title, and the normal paragraph — reads as too many sizes for these short
+   write-ups. Hold every description paragraph at one body size instead. */
+.edmonton-highlands-page .workshop-detail-copy > p:not(.workshop-detail-level) {
+  max-width: 34rem;
+  margin-bottom: 0.9rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.edmonton-highlands-page .workshop-detail-copy > p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* ── Tablet: two across, third drops to a full-width row ─────────────────── */
+@media (max-width: 62rem) {
+  .edmonton-highlands-page .date-menu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Phone: single column ────────────────────────────────────────────────── */
+@media (max-width: 40rem) {
+  .edmonton-highlands-page .date-menu {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .edmonton-highlands-page .date-menu-figure {
+    aspect-ratio: 16 / 9;
+  }
+}
