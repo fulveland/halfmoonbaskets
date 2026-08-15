@@ -11,40 +11,45 @@
 
 @font-face {
   font-family: "garamond";
-  src: url("/fonts/garamond/Regular.woff2") format("woff2-variations");
+  /* format("woff2") not "woff2-variations" — Safari's recognition of the
+     "-variations" format hint is inconsistent, and with only one source
+     per rule here (no fallback to skip to), an unrecognized hint means
+     Safari drops the whole source and silently falls back to its own
+     default serif instead. */
+  src: url("/fonts/garamond/Regular.woff2") format("woff2");
   font-weight: 400 800;
 }
 
 @font-face {
   font-family: "garamond-it";
-  src: url("/fonts/garamond/Italic.woff2") format("woff2-variations");
+  src: url("/fonts/garamond/Italic.woff2") format("woff2");
   font-weight: 400 800;
 }
 
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("/fonts/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("/fonts/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.woff2") format("woff2");
   font-weight: 300 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("/fonts/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("/fonts/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.woff2") format("woff2");
   font-weight: 300 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Source Sans 3";
-  src: url("/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("/fonts/Source_Sans_3/SourceSans3-VariableFont_wght.woff2") format("woff2");
   font-weight: 200 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Source Sans 3";
-  src: url("/fonts/Source_Sans_3/SourceSans3-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  src: url("/fonts/Source_Sans_3/SourceSans3-Italic-VariableFont_wght.woff2") format("woff2");
   font-weight: 200 900;
   font-style: italic;
 }
