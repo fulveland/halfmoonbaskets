@@ -1993,6 +1993,18 @@
   border-left-color: var(--bark);
 }
 
+/* WAITLIST — data-status="waitlist" marks one specific sold-out session
+   (not the whole workshop; other dates for the same workshop stay full
+   strength). Dimmed rather than hidden or struck through — the link still
+   works (Luma shows its own waitlist there), and a session can sell back
+   in. After the [data-workshop] colour rules above so it wins the tie on
+   source order. The button's visible text is swapped from "Register" to
+   "Waitlist" directly in the HTML for that one <a>. */
+.workshop-date-buttons .workshop-date-button[data-status="waitlist"],
+.timeline-event[data-status="waitlist"] {
+  opacity: 0.55;
+}
+
 .schedule-legend {
   display: flex;
   flex-wrap: wrap;
