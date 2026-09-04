@@ -40,10 +40,11 @@ splitTopLevel = (str, sep)->
   parts
 
 # "id{key:value,key:value}" -> [id, {key: value, ...}]. Values that look
-# numeric become numbers; everything else stays a string.
-parseWorkshopRef = (ref)->
+# numeric become numbers; everything else stays a string. Shared by the
+# WORKSHOPS marker and the INCLUDE marker, so both take the same overrides.
+parseRef = (ref)->
   match = ref.trim().match /^([a-z0-9-]+)(?:\{(.*)\})?$/
-  throw new Error "Malformed workshop reference: \"#{ref}\"" unless match
+  throw new Error "Malformed reference: \"#{ref}\"" unless match
   id = match[1]
   overrides = {}
   if match[2]
@@ -86,7 +87,7 @@ renderAllOfferings = (data)->
 renderCustomWorkshops = (byId, list)->
   refs = splitTopLevel list, ","
   cards = refs.map (ref)->
-    [id, overrides] = parseWorkshopRef ref
+    [id, overrides] = parseRef ref
     base = byId[id]
     throw new Error "Unknown workshop id \"#{id}\" — check source/data/workshops.json" unless base
     renderOffering Object.assign({}, base, overrides), showDuration: true
@@ -96,6 +97,61 @@ renderCustomWorkshops = (byId, list)->
   #{offerings}
       </div>
   """
+
+# ── Shared partials (source/partials/*.html) ──────────────────────────────
+# A block of markup written once and pulled into as many pages as need it:
+#
+#   <!-- INCLUDE: site-header -->
+#   <!-- INCLUDE: wc-care, wc-connect, wc-materials -->
+#
+# Same shape as the WORKSHOPS marker above — a comma-separated list of ids,
+# each optionally followed by {key:value} overrides. An id is a filename in
+# source/partials/ without the .html. The expanded block is re-indented to
+# match the marker's own indentation, so it lands tidily whatever the depth
+# of the page around it. Partials may contain markers of their own.
+#
+# Overrides fill the {{placeholders}} in a partial; anything left unfilled
+# becomes an empty string. site-header takes the only two in use:
+#
+#   {overlay:yes}    the transparent header that sits over a hero image
+#   {current:about}  marks that nav link as the current page
+#                    (calendar, about, or email)
+
+renderPartial = (id, overrides)->
+  file = "source/partials/#{id}.html"
+  try
+    html = read file
+  catch error
+    throw new Error "Unknown partial \"#{id}\" — no such file #{file}"
+  html = html.replace /\s+$/, ""
+  html = html.replace /\{\{overlay\}\}/g, ->
+    if overrides.overlay then " site-header--overlay" else ""
+  html = html.replace /\{\{current-(\w+)\}\}/g, (match, page)->
+    if overrides.current is page then " aria-current=\"page\"" else ""
+  html.replace /\{\{(\w[\w-]*)\}\}/g, (match, key)->
+    if overrides[key]? then String overrides[key] else ""
+
+# Expands one marker: renders each id in the list and re-indents the result
+# to sit at `indent`, the whitespace the marker itself was found at.
+renderPartials = (indent, list)->
+  blocks = splitTopLevel(list, ",").map (ref)->
+    [id, overrides] = parseRef ref
+    renderPartial id, overrides
+  lines = blocks.join("\n\n").split "\n"
+  lines.map((line)-> if line.trim() then indent + line else line).join "\n"
+
+# Partials can include other partials, so keep expanding until none are
+# left. The cap is only there to turn an accidental loop into a clear
+# error instead of a hang.
+INCLUDE_MARKER = /^([ \t]*)<!-- INCLUDE:\s*(.+?)\s*-->[ \t]*$/gm
+
+expandIncludes = (content)->
+  for pass in [1..6]
+    INCLUDE_MARKER.lastIndex = 0
+    return content unless INCLUDE_MARKER.test content
+    content = content.replace INCLUDE_MARKER, (match, indent, list)->
+      renderPartials indent, list
+  throw new Error "INCLUDE markers still unresolved after 6 passes — a partial probably includes itself"
 
 task "start", "Build, watch, and serve.", ()->
   invoke "build"
@@ -119,6 +175,7 @@ task "build", "Compile everything", ()->
       ".html": "/index.html"
       "/index/": "/" # fixes /index/index.html
     content = template.replace "PAGE CONTENT GOES HERE", content
+    content = expandIncludes content
     content = content.replace "<!-- WORKSHOP OFFERINGS -->", allOfferings
     content = content.replace /<!-- WORKSHOPS:\s*(.+?)\s*-->/g, (match, list)->
       renderCustomWorkshops byId, list
