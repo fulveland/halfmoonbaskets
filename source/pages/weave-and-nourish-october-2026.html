@@ -417,9 +417,10 @@
         <h2>More weaving,<br />when it's ready</h2>
         <div class="newsletter-divider" aria-hidden="true"></div>
         <div>
-          <form class="newsletter-form" action="https://buttondown.com/api/emails/embed-subscribe/halfmoonbaskets" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/halfmoonbaskets', 'popupwindow')">
-            <input type="email" name="email" placeholder="Email address" id="bd-email" required />
+          <form class="newsletter-form" action="https://buttondown.com/api/emails/embed-subscribe/halfmoonbaskets" method="post">
+            <input type="email" name="email" aria-label="Email address" placeholder="Email address" id="bd-email" required />
             <button type="submit">Join the list</button>
+            <input type="hidden" name="embed" value="1" />
           </form>
           <p class="newsletter-caption">No weekly noise. Just new workshops, seasonal offerings, and useful things for weavers.</p>
         </div>
