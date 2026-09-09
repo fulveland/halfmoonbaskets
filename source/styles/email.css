@@ -60,8 +60,23 @@
   color: rgba(255, 255, 255, 0.595);
 }
 
+/* Written as longhands rather than the `font:` shorthand (was
+   `font: 100 4em / 0.5 garamond`) so the size can carry a min() without any
+   shorthand-parsing risk.
+
+   At a flat 4em, "Half Moon Baskets" cleared the banner column by only a few
+   percent, and only where Garamond itself resolved. Every fallback serif is
+   wider, so on a machine without Garamond the heading tipped onto a second
+   line — and line-height 0.5 made those two lines overlap each other. It is
+   now held to a single line, with the size also capped against the viewport
+   so it shrinks to fit instead of wrapping. 7.5vw leaves room for a fallback
+   face about 12% wider than the widest one on hand (Georgia/Palatino). */
 #email h1 {
-  font: 100 4em / 0.5 garamond;
+  font-family: garamond;
+  font-weight: 100;
+  font-size: min(4em, 7.5vw);
+  line-height: 0.5;
+  white-space: nowrap;
   /* The site-wide h1,h2,h3 rule sets color: var(--ink), which would render this near-invisible against the near-black background — restore the inherited cream. */
   color: inherit;
 }
