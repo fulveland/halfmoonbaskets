@@ -28,11 +28,11 @@
           "maxPeople": 20
         },
         {
-          "id": "berry-boat",
-          "name": "Berry Boat",
+          "id": "gathering-tray",
+          "name": "Gathering Tray",
           "image": "/images/willow-berry-boat-1-4x5-v-1500.jpg",
-          "alt": "A shallow woven willow berry boat",
-          "description": "A boat of willow knows many voyages: into the brambles for berries, onto the table for crackers, a shelf for small treasures. Using a simple wooden jig you will weave a shallow tray of your own. All tools and materials provided.",
+          "alt": "A shallow woven willow gathering tray",
+          "description": "A tray of willow finds many uses: into the brambles for berries, onto the table for crackers, a shelf for small treasures. Using a simple wooden jig you will weave a shallow tray of your own. All tools and materials provided.",
           "note": null,
           "length": "5 hours",
           "price": 145,
