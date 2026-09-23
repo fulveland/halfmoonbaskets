@@ -7,6 +7,11 @@ CLAUDE.md
 docs
 test-images
 
+# Full-resolution camera masters. Kept out of source/ so the build never ships
+# them, and out of git so the repo stays small. The web-sized copy under
+# source/images/ is the one the site uses.
+originals
+
 # Safety net: no image should ever live loose at repo root — real assets live under source/.
 /*.png
 /*.jpg
